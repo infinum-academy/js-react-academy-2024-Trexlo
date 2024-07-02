@@ -12,6 +12,9 @@ let mockReviews = [
         rating: 4
     }
 ]
+
+let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
 const movieAverageRating = document.getElementById("average-rating");
 const reviewContainer = document.getElementById("review-container");
 const reviewForm = document.getElementById("review-form");
@@ -30,7 +33,8 @@ function createReviewElement(review) {
     reviewButton.classList.add('review-button');
     reviewButton.textContent = "Remove";
     reviewButton.onclick = () => {
-        mockReviews = mockReviews.filter(r=> r !=review);
+        reviews = reviews.filter(r=> r !=review);
+        localStorage.setItem("reviews", JSON.stringify(reviews));
         reviewElement.remove();
         calculateAverageRating();
     }
@@ -51,20 +55,25 @@ reviewForm.onsubmit = (ev)=>{
         content: content,
         rating: parseInt(rating),
     };
-    mockReviews.push(newReview)
+    reviews.push(newReview)
+    localStorage.setItem("reviews", JSON.stringify(reviews));
     calculateAverageRating();
     reviewContainer.appendChild(createReviewElement(newReview));
 }
 function calculateAverageRating(){
-    if(mockReviews.length>0){
-        movieAverageRating.textContent = ((mockReviews.reduce((sum, r)=> r.rating + sum, 0)/mockReviews.length)).toFixed(1) + " / 5";
+    if(reviews.length>0){
+        movieAverageRating.textContent = ((reviews.reduce((sum, r)=> r.rating + sum, 0)/reviews.length)).toFixed(1) + " / 5";
     }else{
         movieAverageRating.textContent = "0 / 5";
     }
 }
 function loadMockReviews(){
-    console.log(mockReviews);
     calculateAverageRating();
     mockReviews.forEach(review => reviewContainer.appendChild(createReviewElement(review)));
 }
-loadMockReviews();
+
+function loadReviews(){
+    calculateAverageRating();
+    reviews.forEach(review => reviewContainer.appendChild(createReviewElement(review)));
+}
+loadReviews();
