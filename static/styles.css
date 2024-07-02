@@ -63,6 +63,11 @@ body{
     text-align: center;
 }
 
+#review-container{
+    list-style: none;
+    padding: 0;
+}
+
 .review-post{
     border-radius: 20px;
     padding: 20px 20px;
