@@ -54,15 +54,16 @@ body{
 #review-rating-input{
     width: 150px;
 }
-#review-post-button{
+
+.review-button{
     all: unset;
     background-color: white;
+    color: black;
     width: fit-content;
     border-radius: 20px;
     padding: 10px 20px;
     text-align: center;
 }
-
 #review-container{
     list-style: none;
     padding: 0;
