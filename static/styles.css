@@ -89,3 +89,28 @@ body{
         width: unset;
     }
 }
+
+.checked{
+    filter: none;
+}
+
+.unchecked{
+    filter: grayscale();
+}
+
+.stars-rating{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    height: 25px;
+    margin-bottom: 10px;
+}
+.stars-rating span{
+    color: white;
+    margin-right: 5px;
+}
+.stars-rating img{
+    height: 100%;
+    margin-right: 5px;
+}
