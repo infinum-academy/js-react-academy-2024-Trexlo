@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TV shows APP</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="star.png" type="image/x-icon">
 </head>
 <body>
     <div id="container">
@@ -21,20 +22,17 @@
             <input hidden type="number" min="0" max="5" name="" class="review-form-item" id="review-rating-input" placeholder="Add rating">
             <div class="stars-rating">
                 <span>Rating: </span>
-                <img star-num="1" src="star.png" class="unchecked" onclick="setRating(1)" onmouseenter="setCheckedStar(1, true)" onmouseleave="setCheckedStar(1, false)">
-                <img star-num="2" src="star.png" class="unchecked" onclick="setRating(2)" onmouseenter="setCheckedStar(2, true)" onmouseleave="setCheckedStar(2, false)">
-                <img star-num="3" src="star.png" class="unchecked" onclick="setRating(3)" onmouseenter="setCheckedStar(3, true)" onmouseleave="setCheckedStar(3, false)">
-                <img star-num="4" src="star.png" class="unchecked" onclick="setRating(4)" onmouseenter="setCheckedStar(4, true)" onmouseleave="setCheckedStar(4, false)">
-                <img star-num="5" src="star.png" class="unchecked" onclick="setRating(5)" onmouseenter="setCheckedStar(5, true)" onmouseleave="setCheckedStar(5, false)">
+                <div id="star-radio-group">
+                    <input type="radio" name="rating" value="5" id="" class="star-radio-button">
+                    <input type="radio" name="rating" value="4" id="" class="star-radio-button">
+                    <input type="radio" name="rating" value="3" id="" class="star-radio-button">
+                    <input type="radio" name="rating" value="2" id="" class="star-radio-button">
+                    <input type="radio" name="rating" value="1" id="" class="star-radio-button">
+                </div>
             </div>
             <button type="submit" class="review-button" id="review-post-button">Post</button>
         </form>
         <ul id="review-container">
-            <!-- <li class="review-post">
-                <p class="review-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea quo facere nostrum illo deserunt consectetur repudiandae praesentium doloremque cumque, inventore atque dolorum eveniet aut non nisi ipsam error voluptate doloribus?</p>
-                <p class="review-rating">0 / 5</p>
-                <button class="review-button" id="review-post-delete">Remove</button>
-            </li> -->
         </ul>
     </div> 
 </body>
