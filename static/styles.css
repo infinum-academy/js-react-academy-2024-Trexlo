@@ -146,3 +146,11 @@ body{
 .star-radio-button:checked ~ .star-radio-button {
     filter: none;
 }
+
+.star-radio-button:hover{
+    filter: none;
+}
+
+.star-radio-button:hover ~ .star-radio-button {
+    filter: none;
+}
