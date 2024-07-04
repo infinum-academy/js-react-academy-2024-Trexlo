@@ -1,0 +1,156 @@
+body{
+    background-color: #1f004d;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+
+*{
+    font-family: Arial, sans-serif;
+}
+
+.container-title{
+    color: white;
+}
+
+#container{
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+}
+
+#movie-info{
+    overflow: hidden;
+    border-radius: 20px;
+    background-color: white;
+}
+
+#movie-info img{
+    object-fit: contain;
+    width: 100%;
+}
+
+#movie-info h2{
+    color:indigo;
+    margin: 15px;
+    margin-top: 30px;
+}
+
+#movie-info p{
+    color: indigo;
+    margin: 15px;
+    margin-bottom: 30px;
+}
+
+.review-form-item{
+    border-radius: 10px;
+    padding:10px;
+    margin-bottom: 10px;
+
+}
+
+#review-form{
+    display: flex;
+    flex-direction: column;
+}
+
+#review-text-input{
+    height: 50px;
+}
+
+#review-rating-input{
+    width: 150px;
+}
+
+.review-button{
+    all: unset;
+    background-color: white;
+    color: black;
+    width: fit-content;
+    border-radius: 20px;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+#review-container{
+    list-style: none;
+    padding: 0;
+}
+
+.review-post{
+    border-radius: 20px;
+    padding: 20px 20px;
+    background-color: #371587;
+    margin-top: 20px;
+    color: white;
+}
+
+@media only screen and (max-width: 600px) {
+    #container{
+        width: 100%;
+        margin: 0;
+    }
+    #review-rating-input{
+        width: unset;
+    }
+    #review-post-button{   
+        width: unset;
+    }
+}
+
+.checked{
+    filter: none;
+}
+
+.unchecked{
+    filter: grayscale();
+}
+
+.stars-rating{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    height: 25px;
+    margin-bottom: 10px;
+}
+
+.stars-rating span{
+    color: white;
+    margin-right: 5px;
+}
+.stars-rating img{
+    height: 100%;
+    margin-right: 5px;
+}
+
+#star-radio-group{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.star-radio-button {
+    appearance: none;
+    background-image: url("star.png");
+    filter: grayscale();
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+}
+
+.star-radio-button:checked{
+    filter: none;
+}
+
+.star-radio-button:checked ~ .star-radio-button {
+    filter: none;
+}
+
+.star-radio-button:hover{
+    filter: none;
+}
+
+.star-radio-button:hover ~ .star-radio-button {
+    filter: none;
+}

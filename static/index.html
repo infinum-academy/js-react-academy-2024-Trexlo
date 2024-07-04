@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV shows APP</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="star.png" type="image/x-icon">
+</head>
+<body>
+    <div id="container">
+        <h1 class="container-title">TV shows APP</h1>
+        <div id="movie-info" class="movie-card">
+            <img src="https://e1.pxfuel.com/desktop-wallpaper/31/210/desktop-wallpaper-8-breaking-bad-heisenberg.jpg" alt="">
+            <h2>Breaking Bad</h2>
+            <p>A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student in order to secure his family's future.</p>
+            <p id="average-rating">0 / 5</p>
+        </div>
+        <h1 class="container-title">Reviews</h1>
+        <form id = "review-form" action="">
+            <textarea name="" class="review-form-item" id="review-text-input" placeholder="Add review"></textarea>
+            <input hidden type="number" min="0" max="5" name="" class="review-form-item" id="review-rating-input" placeholder="Add rating">
+            <div class="stars-rating">
+                <span>Rating: </span>
+                <div id="star-radio-group">
+                    <input type="radio" name="rating" value="5" id="" class="star-radio-button">
+                    <input type="radio" name="rating" value="4" id="" class="star-radio-button">
+                    <input type="radio" name="rating" value="3" id="" class="star-radio-button">
+                    <input type="radio" name="rating" value="2" id="" class="star-radio-button">
+                    <input type="radio" name="rating" value="1" id="" class="star-radio-button">
+                </div>
+            </div>
+            <button type="submit" class="review-button" id="review-post-button">Post</button>
+        </form>
+        <ul id="review-container">
+        </ul>
+    </div> 
+</body>
+<script src="index.js"></script>
+</html>
