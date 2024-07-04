@@ -61,7 +61,6 @@ reviewForm.onsubmit = (ev)=>{
     const content = reviewFormText.value.trim();
     const reviewFormData =new FormData(reviewForm);
     const rating = reviewFormData.get("rating");
-    console.log(rating);
     if(!content || !rating){
         return;
     }
