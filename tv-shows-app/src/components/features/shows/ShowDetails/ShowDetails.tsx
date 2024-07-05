@@ -4,7 +4,7 @@ import { Flex, Heading, Image, Text } from "@chakra-ui/react";
 
 export const ShowDetails = (showData: IShow) =>{
     return (
-        <Card overflow={"hidden"} rounded={20} backgroundColor={"indigo"} color={"white"}>
+        <Card overflow={"hidden"} rounded={20} backgroundColor={"white"} color={"indigo"}>
             <Image alt="Show image" src={showData.imageUrl || "https://fakeimg.pl/600x400?text=Show+Image"}></Image>
             <CardBody>
                 <Stack mt='6' spacing='4'>
