@@ -4,24 +4,25 @@ import styles from "./page.module.css";
 import { IShow } from "@/typings/Show.type";
 import { Flex, Heading } from "@chakra-ui/react";
 import { ShowReviewSection } from "@/components/features/shows/ShowReviewSection/ShowReviewSection";
-import { useState } from "react";
+import { createRef, useRef, useState } from "react";
 
 
 
 export default function Home() {
 
-  
   const mockShowDetails: IShow = {
     averageRating: undefined,
     description: "A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student in order to secure his family's future.",
     imageUrl: "https://e1.pxfuel.com/desktop-wallpaper/31/210/desktop-wallpaper-8-breaking-bad-heisenberg.jpg",
     title: "Breaking Bad"
   }
+  
   const [showDetails, setShowDetails] = useState(mockShowDetails);
 
-  function updateRating(rating:number){
-    showDetails.averageRating = rating;
-    setShowDetails({...showDetails});
+  const updateRating = (rating:number) => {
+    const newShowDetails = showDetails;
+    newShowDetails.averageRating = rating;
+    setShowDetails({...newShowDetails});
   }
 
   return (

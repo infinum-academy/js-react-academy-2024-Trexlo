@@ -37,20 +37,20 @@ export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
     const removeReview = (review:IReview) => {
         const newReviews = reviews.filter(r => r != review);    
         setReviews(newReviews); 
-        updateRating(reviews.reduce((sum, r)=> r.rating + sum, 0)/reviews.length);
+        updateRating(newReviews.reduce((sum, r)=> r.rating + sum, 0)/newReviews.length);
         saveReviewsToLocalStorage(newReviews);
     }
 
     const addReview = (review:IReview) => {
         const newReviews = [review, ...reviews];
         setReviews(newReviews);     
-        updateRating(reviews.reduce((sum, r)=> r.rating + sum, 0)/reviews.length);
+        updateRating(newReviews.reduce((sum, r)=> r.rating + sum, 0)/newReviews.length);
         saveReviewsToLocalStorage(newReviews);
     }
 
     return (
         <Flex flexDir={"column"} gap={10}>
-            <ReviewForm addReview={addReview}></ReviewForm>
+            <ReviewForm addShowReview ={addReview}></ReviewForm>
             <ReviewList reviews={reviews} removeReview = {removeReview}></ReviewList>
         </Flex>
     );

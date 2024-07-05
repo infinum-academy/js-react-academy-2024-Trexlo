@@ -3,10 +3,10 @@ import { Button, Flex, FormControl, Input, Textarea } from "@chakra-ui/react";
 import { FormEvent } from "react";
 
 interface IReviewFormProps{
-    addReview: (review: IReview) => void
+    addShowReview : (review: IReview) => void
 }
 
-export const ReviewForm = ({addReview}: IReviewFormProps) => { 
+export const ReviewForm = ({addShowReview }: IReviewFormProps) => { 
     const formSubmitHandler = (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const commentInput = document.getElementById('comment-input') as HTMLInputElement;
@@ -23,7 +23,7 @@ export const ReviewForm = ({addReview}: IReviewFormProps) => {
             comment: comment,
             rating: parseInt(rating),
         };
-        addReview(newReview);
+        addShowReview (newReview);
     } 
 
     return (
