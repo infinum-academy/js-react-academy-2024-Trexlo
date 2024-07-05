@@ -5,36 +5,38 @@ import { useState } from "react";
 
 interface IStarRatingProps {
     label: string | undefined;
-    onChange: (value: number)=>void;
-    value: number | undefined;
+    onChange: (value: number, temporary: boolean)=>void;
+    value: number;
 }
 
 export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
-    const [oldValue, setOldValue] = useState(0);
-    const [currentValue, setCurrentValue] = useState(0);
+
+    const [oldValue, setOldValue] = useState(value);
+
     const changeValue = (val: number) => {
-        setCurrentValue(val);
+        onChange(val, false);
         setOldValue(val);
-        onChange(val);
     }
+
     const onHoverHandler = (val: number, hovering:boolean)=>{
         if(hovering){
-            setCurrentValue(val);
+            onChange(val, true);
         }else {
-            setCurrentValue(oldValue);
+            onChange(oldValue, true);
         }
     }
+    
     return (
         <Flex alignItems={"center"} gap={1}>
             {
                 label && 
                 <>
                     <Text color={"white"}>{label}</Text>
-                    <StarIcon color={(currentValue>=1)?"yellow":"white"} onClick={()=>{changeValue(1)}} onMouseEnter={()=>{onHoverHandler(1,true)}} onMouseLeave={()=>{onHoverHandler(1,false)}}></StarIcon>
-                    <StarIcon color={(currentValue>=2)?"yellow":"white"} onClick={()=>{changeValue(2)}} onMouseEnter={()=>{onHoverHandler(2,true)}} onMouseLeave={()=>{onHoverHandler(2,false)}}></StarIcon>
-                    <StarIcon color={(currentValue>=3)?"yellow":"white"} onClick={()=>{changeValue(3)}} onMouseEnter={()=>{onHoverHandler(3,true)}} onMouseLeave={()=>{onHoverHandler(3,false)}}></StarIcon>
-                    <StarIcon color={(currentValue>=4)?"yellow":"white"} onClick={()=>{changeValue(4)}} onMouseEnter={()=>{onHoverHandler(4,true)}} onMouseLeave={()=>{onHoverHandler(4,false)}}></StarIcon>
-                    <StarIcon color={(currentValue>=5)?"yellow":"white"} onClick={()=>{changeValue(5)}} onMouseEnter={()=>{onHoverHandler(5,true)}} onMouseLeave={()=>{onHoverHandler(5,false)}}></StarIcon>
+                    <StarIcon color={(value>=1)?"yellow":"white"} onClick={()=>{changeValue(1)}} onMouseEnter={()=>{onHoverHandler(1,true)}} onMouseLeave={()=>{onHoverHandler(1,false)}}></StarIcon>
+                    <StarIcon color={(value>=2)?"yellow":"white"} onClick={()=>{changeValue(2)}} onMouseEnter={()=>{onHoverHandler(2,true)}} onMouseLeave={()=>{onHoverHandler(2,false)}}></StarIcon>
+                    <StarIcon color={(value>=3)?"yellow":"white"} onClick={()=>{changeValue(3)}} onMouseEnter={()=>{onHoverHandler(3,true)}} onMouseLeave={()=>{onHoverHandler(3,false)}}></StarIcon>
+                    <StarIcon color={(value>=4)?"yellow":"white"} onClick={()=>{changeValue(4)}} onMouseEnter={()=>{onHoverHandler(4,true)}} onMouseLeave={()=>{onHoverHandler(4,false)}}></StarIcon>
+                    <StarIcon color={(value>=5)?"yellow":"white"} onClick={()=>{changeValue(5)}} onMouseEnter={()=>{onHoverHandler(5,true)}} onMouseLeave={()=>{onHoverHandler(5,false)}}></StarIcon>
                 </>
             }
             {
