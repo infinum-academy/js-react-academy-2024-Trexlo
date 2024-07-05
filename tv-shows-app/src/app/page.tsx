@@ -1,6 +1,7 @@
 import { ShowDetails } from "@/components/features/shows/ShowDetails/ShowDetails";
 import styles from "./page.module.css";
 import { IShow } from "@/typings/Show.type";
+import { Flex, Heading } from "@chakra-ui/react";
 
 export default function Home() {
   const mockShowDetails: IShow = {
@@ -11,7 +12,10 @@ export default function Home() {
   }
   return (
     <main className={styles.main}>
-      <ShowDetails {...mockShowDetails}></ShowDetails>
+      <Flex w={["100%", "100%", "65%"]} gap={3} flexDirection={"column"}>
+        <Heading color={"white"} marginTop={3}>TV shows APP</Heading>
+        <ShowDetails {...mockShowDetails}></ShowDetails>
+      </Flex>
     </main>
   );
 }
