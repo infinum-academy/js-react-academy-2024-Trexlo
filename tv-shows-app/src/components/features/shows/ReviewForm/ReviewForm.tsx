@@ -18,7 +18,7 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
             return;
         }
         const newReview: IReview = {
-            avatar: "https://fakeimg.pl/30x30?text=:)",
+            avatar: "https://fakeimg.pl/100x100/d4d4d4/000000?text=:-))))",
             email: "mail@mail.com",
             comment: comment,
             rating: parseInt(rating),
@@ -37,7 +37,7 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
                     <Textarea id="comment-input" backgroundColor={"white"} placeholder='Add comment' required></Textarea>
                     <Input hidden width={["100%","100%","200px"]} id="rating-input" backgroundColor={"white"} placeholder='Add rating' type="number" min={1} max={5} required></Input>
                     <StarRating label="Rating:" onChange={starRatingChange} value={undefined} ></StarRating>
-                    <Button width={["100%","100%","fit-content"]} type="submit">Post</Button>
+                    <Button width={["100%","100%","fit-content"]} rounded={20} type="submit">Post</Button>
                 </Flex>
             </FormControl>
         </form>

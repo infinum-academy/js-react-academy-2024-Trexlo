@@ -28,9 +28,9 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Flex w={["100%", "100%", "65%"]} gap={3} flexDirection={"column"}>
-        <Heading color={"white"} marginTop={3}>TV shows APP</Heading>
+        <Heading size={"md"} color={"white"} marginTop={3}>TV shows APP</Heading>
         <ShowDetails show = {showDetails}></ShowDetails>
-        <Heading color={"white"} marginTop={3}>Reviews</Heading>
+        <Heading size={"md"} color={"white"} marginTop={3}>Reviews</Heading>
         <ShowReviewSection updateRating={updateRating}></ShowReviewSection>
       </Flex>
     </main>

@@ -24,7 +24,7 @@ export const ReviewItem = ({review, removeReview}: IReviewProps) => {
             <Text>{review.comment}</Text>
             <Text>{review.rating} / 5</Text>
             <StarRating label={undefined} onChange={()=>{}} value={review.rating}></StarRating>
-            <Button w={["100%", "100%", "fit-content"]} backgroundColor={"white"} color={"indigo"} onClick={onClickHandler}>Delete</Button>
+            <Button w={["100%", "100%", "fit-content"]} backgroundColor={"white"} color={"indigo"} rounded={20} onClick={onClickHandler}>Remove</Button>
         </Flex>
     );
 }
