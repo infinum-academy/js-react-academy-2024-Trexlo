@@ -1,38 +1,17 @@
 'use client';
 import { IReview } from "@/typings/Review.type";
 import { ReviewList } from "../../review/ReviewList/ReviewList";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ReviewForm } from "../ReviewForm/ReviewForm";
 import { Flex } from "@chakra-ui/react";
 
 interface IShowReviewSectionProps{
     updateRating: (rating:number) => void;
 }
-    
-var mockReviews: IReview[]=[
-    {
-        avatar: "https://fakeimg.pl/100x100?text=:)",
-        comment: "Some comment",
-        email: "email@email.com",
-        rating: 3
-    },
-    {
-        avatar: "https://fakeimg.pl/30x30?text=:)",
-        comment: "Some comment 2 ",
-        email: "email@email.com",
-        rating: 1
-    },
-    {
-        avatar: "https://fakeimg.pl/50x50?text=:)",
-        comment: "Some comment 5",
-        email: "email@email.com",
-        rating: 5
-    }
-]
 
 export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
 
-    const [reviews, setReviews] = useState(mockReviews);
+    const [reviews, setReviews] = useState([] as IReview[]);
 
     const loadReviewsFromLocalStorage = ():IReview[] => {
         const reviewsString = localStorage.getItem('reviews');
@@ -47,7 +26,12 @@ export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
     }, []);
 
     const saveReviewsToLocalStorage = (reviews:IReview[])=>{
-        localStorage.setItem('reviews', JSON.stringify(reviews));
+        if(reviews.length != 0){
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+        }else {
+            localStorage.removeItem('reviews');
+        }
+        
     };
 
     const removeReview = (review:IReview) => {
