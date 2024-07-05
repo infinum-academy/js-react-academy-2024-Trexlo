@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 import { ReviewForm } from "../ReviewForm/ReviewForm";
 import { Flex } from "@chakra-ui/react";
 
-export const ShowReviewSection = () =>{
+interface IShowReviewSectionProps{
+    updateRating: (rating:number) => void;
+}
 
+export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
     
     var mockReviews: IReview[]=[
         {
@@ -30,6 +33,9 @@ export const ShowReviewSection = () =>{
     ]
     
     const [reviews, setReviews] = useState(mockReviews);
+    useEffect(()=>{
+        updateRating(reviews.reduce((sum, r)=> r.rating + sum, 0)/reviews.length);
+    }, [reviews, updateRating]);
     
     const removeReview = (review:IReview) => {
         const newReviews = reviews.filter(r => r != review);    
@@ -41,7 +47,7 @@ export const ShowReviewSection = () =>{
     }
 
     return (
-        <Flex flexDir={"column"}>
+        <Flex flexDir={"column"} gap={10}>
             <ReviewForm addReview={addReview}></ReviewForm>
             <ReviewList reviews={reviews} removeReview = {removeReview}></ReviewList>
         </Flex>
