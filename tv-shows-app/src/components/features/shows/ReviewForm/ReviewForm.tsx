@@ -8,26 +8,37 @@ interface IReviewFormProps{
 }
 
 export const ReviewForm = ({addShowReview }: IReviewFormProps) => { 
+
     const [starRatingValue, setStarRatingValue] = useState(0);
+
     const commentInput = document.getElementById('comment-input') as HTMLInputElement;
     const ratingInput = document.getElementById('rating-input') as HTMLInputElement;
+
+    const resetForm = ()=>{
+        commentInput.value = "";
+        ratingInput.value = "";
+        setStarRatingValue(0);
+    }
+
     const formSubmitHandler = (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
         const comment = commentInput.value.trim();
         const rating = ratingInput.value;
+
         if(!comment || !rating){
             return;
         }
+
         const newReview: IReview = {
             avatar: "https://fakeimg.pl/100x100/d4d4d4/000000?text=:-))))",
             email: "mail@mail.com",
             comment: comment,
             rating: parseInt(rating),
         };
+
         addShowReview (newReview);
-        commentInput.value = "";
-        ratingInput.value = "";
-        setStarRatingValue(0);
+        resetForm();
     } 
 
     const starRatingChange = (value: number) => {

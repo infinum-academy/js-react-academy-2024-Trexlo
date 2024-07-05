@@ -35,7 +35,6 @@ export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
         }else {
             localStorage.removeItem('reviews');
         }
-        
     };
 
     const removeReview = (review:IReview) => {
