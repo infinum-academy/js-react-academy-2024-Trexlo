@@ -1,5 +1,6 @@
 import { IReview } from "@/typings/Review.type";
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
+import { StarRating } from "../../shows/StarRating/StarRating";
 
 interface IReviewProps {
     review: IReview;
@@ -22,6 +23,7 @@ export const ReviewItem = ({review, removeReview}: IReviewProps) => {
             </Flex>
             <Text>{review.comment}</Text>
             <Text>{review.rating} / 5</Text>
+            <StarRating label={undefined} onChange={()=>{}} value={review.rating}></StarRating>
             <Button w={["100%", "100%", "fit-content"]} backgroundColor={"white"} color={"indigo"} onClick={onClickHandler}>Delete</Button>
         </Flex>
     );
