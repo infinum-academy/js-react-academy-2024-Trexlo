@@ -2,7 +2,7 @@ import { ShowDetails } from "@/components/features/shows/ShowDetails/ShowDetails
 import styles from "./page.module.css";
 import { IShow } from "@/typings/Show.type";
 import { Flex, Heading } from "@chakra-ui/react";
-import { ReviewListContainer } from "@/components/features/review/ReviewListContainer/ReviewListContainer";
+import { ShowReviewSection } from "@/components/features/shows/ShowReviewSection/ShowReviewSection";
 
 
 
@@ -18,7 +18,7 @@ export default function Home() {
       <Flex w={["100%", "100%", "65%"]} gap={3} flexDirection={"column"}>
         <Heading color={"white"} marginTop={3}>TV shows APP</Heading>
         <ShowDetails {...mockShowDetails}></ShowDetails>
-        <ReviewListContainer></ReviewListContainer>
+        <ShowReviewSection></ShowReviewSection>
       </Flex>
     </main>
   );

@@ -1,9 +1,11 @@
 'use client';
 import { IReview } from "@/typings/Review.type";
-import { ReviewList } from "../ReviewList/ReviewList";
+import { ReviewList } from "../../review/ReviewList/ReviewList";
 import { useEffect, useState } from "react";
+import { ReviewForm } from "../ReviewForm/ReviewForm";
+import { Flex } from "@chakra-ui/react";
 
-export const ReviewListContainer = () =>{
+export const ShowReviewSection = () =>{
 
     
     var mockReviews: IReview[]=[
@@ -34,7 +36,14 @@ export const ReviewListContainer = () =>{
         setReviews(newReviews); 
     }
 
+    const addReview = (review:IReview) => {
+        setReviews([review, ...reviews]);     
+    }
+
     return (
-        <ReviewList reviews={reviews} removeReview = {removeReview}></ReviewList>
+        <Flex flexDir={"column"}>
+            <ReviewForm addReview={addReview}></ReviewForm>
+            <ReviewList reviews={reviews} removeReview = {removeReview}></ReviewList>
+        </Flex>
     );
 }
