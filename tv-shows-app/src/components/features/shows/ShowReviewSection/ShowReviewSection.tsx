@@ -13,17 +13,21 @@ export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
 
     const [reviews, setReviews] = useState([] as IReview[]);
 
-    const loadReviewsFromLocalStorage = ():IReview[] => {
+    const loadReviewsFromLocalStorage = () => {
         const reviewsString = localStorage.getItem('reviews');
         if(!reviewsString){
             return [];
         }
         return JSON.parse(reviewsString) as IReview[];
     }
-
+    
     useEffect(()=>{
         setReviews(loadReviewsFromLocalStorage);
     }, []);
+
+    useEffect(()=>{
+        updateRating(reviews.reduce((sum, r)=> r.rating + sum, 0)/reviews.length)
+    }, [reviews])
 
     const saveReviewsToLocalStorage = (reviews:IReview[])=>{
         if(reviews.length != 0){
@@ -37,14 +41,12 @@ export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
     const removeReview = (review:IReview) => {
         const newReviews = reviews.filter(r => r != review);    
         setReviews(newReviews); 
-        updateRating(newReviews.reduce((sum, r)=> r.rating + sum, 0)/newReviews.length);
         saveReviewsToLocalStorage(newReviews);
     }
 
     const addReview = (review:IReview) => {
         const newReviews = [review, ...reviews];
         setReviews(newReviews);     
-        updateRating(newReviews.reduce((sum, r)=> r.rating + sum, 0)/newReviews.length);
         saveReviewsToLocalStorage(newReviews);
     }
 

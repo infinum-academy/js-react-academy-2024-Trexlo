@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 import { IShow } from "@/typings/Show.type";
 import { Flex, Heading } from "@chakra-ui/react";
 import { ShowReviewSection } from "@/components/features/shows/ShowReviewSection/ShowReviewSection";
-import { createRef, useRef, useState } from "react";
+import { createRef, useCallback, useRef, useState } from "react";
 
 
 
@@ -19,11 +19,11 @@ export default function Home() {
   
   const [showDetails, setShowDetails] = useState(mockShowDetails);
 
-  const updateRating = (rating:number) => {
-    const newShowDetails = showDetails;
+  const updateRating = useCallback((rating:number) => {
+    const newShowDetails = {...showDetails};
     newShowDetails.averageRating = rating;
-    setShowDetails({...newShowDetails});
-  }
+    setShowDetails(newShowDetails);
+  }, [showDetails]);
 
   return (
     <main className={styles.main}>
