@@ -1,9 +1,12 @@
+'use client';
 import { IReview } from "@/typings/Review.type";
 import { ReviewList } from "../ReviewList/ReviewList";
+import { useEffect, useState } from "react";
 
 export const ReviewListContainer = () =>{
 
-    const mockReviews: IReview[]=[
+    
+    var mockReviews: IReview[]=[
         {
             avatar: "https://fakeimg.pl/100x100?text=:)",
             comment: "Some comment",
@@ -23,10 +26,15 @@ export const ReviewListContainer = () =>{
             rating: 5
         }
     ]
-
     
+    const [reviews, setReviews] = useState(mockReviews);
+    
+    const removeReview = (review:IReview) => {
+        const newReviews = reviews.filter(r => r != review);    
+        setReviews(newReviews); 
+    }
 
     return (
-        <ReviewList reviews={mockReviews}></ReviewList>
+        <ReviewList reviews={reviews} removeReview = {removeReview}></ReviewList>
     );
 }

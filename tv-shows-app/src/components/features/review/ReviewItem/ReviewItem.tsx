@@ -1,11 +1,19 @@
 import { IReview } from "@/typings/Review.type";
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Button, Flex, Image, Text } from "@chakra-ui/react";
 
 interface IReviewProps {
-    review: IReview
+    review: IReview;
+    removeReview: (review: IReview)=>void;
 }
 
-export const ReviewItem = ({review}: IReviewProps) => {
+
+
+export const ReviewItem = ({review, removeReview}: IReviewProps) => {
+
+    const onClickHandler = () => {
+        removeReview(review);
+    }
+
     return (
         <Flex backgroundColor={"purple.900"} rounded={20} flexDirection={"column"} gap={3} padding={5}>
             <Flex height={10} alignItems={"center"} gap={3}>
@@ -14,6 +22,7 @@ export const ReviewItem = ({review}: IReviewProps) => {
             </Flex>
             <Text>{review.comment}</Text>
             <Text>{review.rating} / 5</Text>
+            <Button w={["100%", "100%", "fit-content"]} backgroundColor={"white"} color={"indigo"} onClick={onClickHandler}>Delete</Button>
         </Flex>
     );
 }
