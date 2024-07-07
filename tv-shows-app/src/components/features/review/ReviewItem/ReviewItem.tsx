@@ -7,8 +7,6 @@ interface IReviewProps {
     removeReview: (review: IReview)=>void;
 }
 
-
-
 export const ReviewItem = ({review, removeReview}: IReviewProps) => {
 
     const onClickHandler = () => {

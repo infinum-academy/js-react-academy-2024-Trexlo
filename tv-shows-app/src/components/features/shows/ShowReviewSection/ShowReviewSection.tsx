@@ -27,7 +27,7 @@ export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
 
     useEffect(()=>{
         updateRating(reviews.reduce((sum, r)=> r.rating + sum, 0)/reviews.length)
-    }, [reviews])
+    }, [reviews, updateRating])
 
     const saveReviewsToLocalStorage = (reviews:IReview[])=>{
         if(reviews.length != 0){

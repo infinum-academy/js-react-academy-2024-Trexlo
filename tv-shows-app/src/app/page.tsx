@@ -20,10 +20,17 @@ export default function Home() {
   const [showDetails, setShowDetails] = useState(mockShowDetails);
 
   const updateRating = useCallback((rating:number) => {
-    const newShowDetails = {...showDetails};
-    newShowDetails.averageRating = rating;
-    setShowDetails(newShowDetails);
-  }, [showDetails]);
+    setShowDetails((prevDetails) => ({
+      ...prevDetails,
+      averageRating: rating,
+    }));
+  }, []); 
+
+  // const updateRating = useCallback((rating:number) => {
+  //   const newShowDetails = {...showDetails};
+  //   newShowDetails.averageRating = rating;
+  //   setShowDetails(newShowDetails);
+  // }, [showDetails]);
 
   return (
     <main className={styles.main}>

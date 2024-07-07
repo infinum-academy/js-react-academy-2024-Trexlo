@@ -1,54 +1,98 @@
-import { Flex, Icon, Text } from "@chakra-ui/react"
+import { Box, Flex, HStack, RadioGroup, useRadio, useRadioGroup, UseRadioProps } from "@chakra-ui/react"
 
 import { StarIcon } from '@chakra-ui/icons'
-import { useState } from "react";
 
 interface IStarRatingProps {
     label: string | undefined;
-    onChange: (value: number, temporary: boolean)=>void;
+    onChange: (value: number | undefined, temporary: boolean)=>void;
     value: number;
 }
 
 export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
 
-    const [oldValue, setOldValue] = useState(value);
-
     const changeValue = (val: number) => {
         onChange(val, false);
-        setOldValue(val);
     }
 
     const onHoverHandler = (val: number, hovering:boolean)=>{
         if(hovering){
             onChange(val, true);
         }else {
-            onChange(oldValue, true);
+            onChange(undefined, true);
         }
     }
+    const { getRootProps, getRadioProps } = useRadioGroup({
+        name: 'framework',
+        defaultValue: '0',
+        onChange: (val) =>{changeValue(parseInt(val));},
+    })
     
+    const group = getRootProps()
     return (
         <Flex alignItems={"center"} gap={1}>
             {
-                label && 
-                <>
-                    <Text color={"white"}>{label}</Text>
-                    <StarIcon color={(value>=1)?"yellow":"white"} onClick={()=>{changeValue(1)}} onMouseEnter={()=>{onHoverHandler(1,true)}} onMouseLeave={()=>{onHoverHandler(1,false)}}></StarIcon>
-                    <StarIcon color={(value>=2)?"yellow":"white"} onClick={()=>{changeValue(2)}} onMouseEnter={()=>{onHoverHandler(2,true)}} onMouseLeave={()=>{onHoverHandler(2,false)}}></StarIcon>
-                    <StarIcon color={(value>=3)?"yellow":"white"} onClick={()=>{changeValue(3)}} onMouseEnter={()=>{onHoverHandler(3,true)}} onMouseLeave={()=>{onHoverHandler(3,false)}}></StarIcon>
-                    <StarIcon color={(value>=4)?"yellow":"white"} onClick={()=>{changeValue(4)}} onMouseEnter={()=>{onHoverHandler(4,true)}} onMouseLeave={()=>{onHoverHandler(4,false)}}></StarIcon>
-                    <StarIcon color={(value>=5)?"yellow":"white"} onClick={()=>{changeValue(5)}} onMouseEnter={()=>{onHoverHandler(5,true)}} onMouseLeave={()=>{onHoverHandler(5,false)}}></StarIcon>
-                </>
+                label &&
+                <RadioGroup id="rating-input" value={value.toString()} onFocus={()=>{changeValue(value || 1)}}>
+                    <HStack {...group}>
+                    {['1','2','3','4','5'].map((starInputValue) => {
+                        const radio = getRadioProps({ starInputValue })
+                        return (
+                            <StarRadioButton key={starInputValue} {...radio} value={starInputValue} onHoverHandler={onHoverHandler} changeValue={changeValue} currentValue={value}></StarRadioButton>
+                        )
+                    })}
+                    </HStack> 
+                </RadioGroup>
             }
             {
                 !label && value && 
                 <>
-                    <StarIcon color={(value>=1)?"yellow":"white"}></StarIcon>
-                    <StarIcon color={(value>=2)?"yellow":"white"}></StarIcon>
-                    <StarIcon color={(value>=3)?"yellow":"white"}></StarIcon>
-                    <StarIcon color={(value>=4)?"yellow":"white"}></StarIcon>
-                    <StarIcon color={(value>=5)?"yellow":"white"}></StarIcon>
+                    {[1,2,3,4,5].map(starValue => 
+                        <StarIcon key={starValue} color={(value>=starValue)?"yellow":"white"}></StarIcon>
+                    )}
                 </>
             }
         </Flex>
     )
 }
+
+interface StarRadioProps extends UseRadioProps {
+    currentValue: number;
+    changeValue: (value:number)=>void;
+    onHoverHandler: (val: number, hovering:boolean)=>void;
+}
+
+const StarRadioButton = (props: StarRadioProps) => {
+
+  const { getInputProps, getRadioProps } = useRadio(props);
+  const input = getInputProps();
+  const checkbox = getRadioProps();
+
+  return (
+    <Box as="label">
+      <input {...input} />
+      {props.value && (
+        <StarIcon
+            {...checkbox}
+            cursor="pointer"
+            color={
+                props.currentValue >= parseInt(props.value) ? "yellow" : "white"
+            }
+            _checked={{
+                color:"yellow"
+            }}
+            onMouseEnter={() => {
+                if (props.value) {
+                    props.onHoverHandler(parseInt(props.value), true);
+                }
+            }}
+            onMouseLeave={() => {
+                if (props.value) {
+                    props.onHoverHandler(parseInt(props.value), false);
+                }
+            }}
+        >
+        </StarIcon>
+      )}
+    </Box>
+  );
+};

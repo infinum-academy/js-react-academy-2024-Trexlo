@@ -41,9 +41,16 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
         resetForm();
     } 
 
-    const starRatingChange = (value: number) => {
-        setStarRatingValue(value);
-        ratingInput.value = value.toString();
+    const starRatingChange = (value: number | undefined, temporary: boolean) => {
+        if(value){
+            setStarRatingValue(value);
+            if(!temporary){
+                ratingInput.value = value.toString();
+            }
+        }else{
+            setStarRatingValue(parseInt(ratingInput.value));
+        }
+
     }
 
     return (
@@ -51,7 +58,6 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
             <FormControl> 
                 <Flex flexDirection={"column"} gap={5}>
                     <Textarea id="comment-input" backgroundColor={"white"} placeholder='Add comment' required></Textarea>
-                    <Input hidden width={["100%","100%","200px"]} id="rating-input" backgroundColor={"white"} placeholder='Add rating' type="number" min={1} max={5} required></Input>
                     <StarRating label="Rating:" onChange={starRatingChange} value={starRatingValue} ></StarRating>
                     <Button width={["100%","100%","fit-content"]} rounded={20} type="submit">Post</Button>
                 </Flex>
