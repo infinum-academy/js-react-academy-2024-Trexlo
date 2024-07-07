@@ -10,7 +10,6 @@ interface IShowReviewSectionProps{
 }
 
 export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
-
     const [reviews, setReviews] = useState([] as IReview[]);
 
     const loadReviewsFromLocalStorage = () => {
