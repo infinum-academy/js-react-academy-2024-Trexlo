@@ -32,7 +32,7 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
             avatar: "https://fakeimg.pl/100x100/d4d4d4/000000?text=:-))))",
             email: "mail@mail.com",
             comment: comment,
-            rating: parseInt(rating),
+            rating,
         };
 
         addShowReview (newReview);
