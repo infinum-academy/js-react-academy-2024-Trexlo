@@ -11,7 +11,13 @@ export const ReviewList = ({reviews ,removeReview}: IReviewListProps) => {
 
     return (
         <Flex flexDirection={"column"} gap={3} marginBottom={3} color={"white"}>
-            {reviews.map((review, index) => <ReviewItem key={index} review={review} removeReview={removeReview}></ReviewItem>)}
+            {reviews.map((review, index) =>
+                <ReviewItem
+                    key={index}
+                    review={review}
+                    removeReview={removeReview}
+                />
+            )}
         </Flex>
     );
 }
