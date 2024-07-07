@@ -19,16 +19,16 @@ export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
         }
         return JSON.parse(reviewsString) as IReview[];
     }
-    
+
+    const calculateAverageReviews = (reviews: IReview[]) => {
+        return reviews.reduce((sum, r)=> r.rating + sum, 0)/reviews.length
+    }
+
     useEffect(()=>{
         const loadedReviews = loadReviewsFromLocalStorage();
         setReviews(loadedReviews);
-        updateRating(loadedReviews.reduce((sum, r)=> r.rating + sum, 0)/loadedReviews.length);
-    }, []);
-
-    useEffect(()=>{
-        updateRating(reviews.reduce((sum, r)=> r.rating + sum, 0)/reviews.length)
-    }, [reviews, updateRating])
+        updateRating(calculateAverageReviews(loadedReviews));
+    }, [updateRating]);
 
     const saveReviewsToLocalStorage = (reviews:IReview[])=>{
         if(reviews.length != 0){
@@ -41,19 +41,21 @@ export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
     const removeReview = (review:IReview) => {
         const newReviews = reviews.filter(r => r != review);    
         setReviews(newReviews); 
+        updateRating(calculateAverageReviews(newReviews));
         saveReviewsToLocalStorage(newReviews);
     }
 
     const addReview = (review:IReview) => {
         const newReviews = [review, ...reviews];
         setReviews(newReviews);     
+        updateRating(calculateAverageReviews(newReviews));
         saveReviewsToLocalStorage(newReviews);
     }
 
     return (
         <Flex flexDir={"column"} gap={10}>
-            <ReviewForm addShowReview ={addReview}></ReviewForm>
-            <ReviewList reviews={reviews} removeReview = {removeReview}></ReviewList>
+            <ReviewForm addShowReview={addReview}></ReviewForm>
+            <ReviewList reviews={reviews} removeReview={removeReview}></ReviewList>
         </Flex>
     );
 }
