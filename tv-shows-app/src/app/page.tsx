@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 import { IShow } from "@/typings/Show.type";
 import { Flex, Heading } from "@chakra-ui/react";
 import { ShowReviewSection } from "@/components/features/shows/ShowReviewSection/ShowReviewSection";
-import { createRef, useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 
 
 

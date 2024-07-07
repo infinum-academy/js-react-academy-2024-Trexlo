@@ -8,7 +8,6 @@ interface IReviewFormProps{
 }
 
 export const ReviewForm = ({addShowReview }: IReviewFormProps) => { 
-
     const [starRatingValue, setStarRatingValue] = useState(0);
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
@@ -22,7 +21,7 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
 
     const formSubmitHandler = (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        
+
         setErrorMessage(((!comment)?"Comment cannot be empty. ":"") + ((!rating)?"Rating cannot be empty. ":""));
         if(!comment || !rating){
             return;

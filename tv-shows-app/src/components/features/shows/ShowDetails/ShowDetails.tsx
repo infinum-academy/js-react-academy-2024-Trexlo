@@ -1,7 +1,7 @@
 import { IShow } from "@/typings/Show.type";
-import { Card, CardHeader, CardBody, CardFooter, Stack } from '@chakra-ui/react'
-import { Flex, Heading, Image, Text } from "@chakra-ui/react";
-import { Ref, Reference, useRef } from "react";
+import { Card, CardBody, Stack } from '@chakra-ui/react'
+import { Heading, Image, Text } from "@chakra-ui/react";
+
 
 interface IShowDetailsProps{
     show:IShow;
