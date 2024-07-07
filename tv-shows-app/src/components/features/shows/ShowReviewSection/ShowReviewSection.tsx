@@ -21,7 +21,9 @@ export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
     }
     
     useEffect(()=>{
-        setReviews(loadReviewsFromLocalStorage);
+        const loadedReviews = loadReviewsFromLocalStorage();
+        setReviews(loadedReviews);
+        updateRating(loadedReviews.reduce((sum, r)=> r.rating + sum, 0)/loadedReviews.length);
     }, []);
 
     useEffect(()=>{
