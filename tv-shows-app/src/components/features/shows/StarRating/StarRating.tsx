@@ -34,11 +34,18 @@ export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
                 label &&
                 <RadioGroup id="rating-input" value={value.toString()} onFocus={()=>{changeValue(value || 1)}}>
                     <HStack {...group}>
-                    {['1','2','3','4','5'].map((starInputValue) => {
-                        const radio = getRadioProps({ starInputValue })
+                    {[...Array(5)].map((_, index) => {
+                        const radio = getRadioProps({ index })
                         return (
-                            <StarRadioButton key={starInputValue} {...radio} value={starInputValue} onHoverHandler={onHoverHandler} changeValue={changeValue} currentValue={value}></StarRadioButton>
-                        )
+                          <StarRadioButton
+                            key={index}
+                            {...radio}
+                            value={(index+1).toString()}
+                            onHoverHandler={onHoverHandler}
+                            changeValue={changeValue}
+                            currentValue={value}
+                          />
+                        );
                     })}
                     </HStack> 
                 </RadioGroup>
@@ -90,8 +97,7 @@ const StarRadioButton = (props: StarRadioProps) => {
                     props.onHoverHandler(parseInt(props.value), false);
                 }
             }}
-        >
-        </StarIcon>
+        />
       )}
     </Box>
   );
