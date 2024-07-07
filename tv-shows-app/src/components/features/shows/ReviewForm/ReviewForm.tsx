@@ -13,9 +13,8 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
 
 
     const resetForm = ()=>{
-        commentInput.value = "";
-        ratingInput.value = "";
-        setStarRatingValue(0);
+        setComment("");
+        setRating(0);
     }
 
     const formSubmitHandler = (event:FormEvent<HTMLFormElement>) => {
