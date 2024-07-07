@@ -63,7 +63,11 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
                         onChange={(event)=>{setComment(event.target.value)}}
                         required
                     />
-                    <StarRating label="Rating:" onChange={starRatingChange} value={starRatingValue} ></StarRating>
+                    <StarRating
+                        value={rating}
+                        onChange={(value) => setRating(value)}
+                        label="Rating:"
+                    />
                     <Button width={["100%","100%","fit-content"]} rounded={20} type="submit">Post</Button>
                 </Flex>
             </FormControl>
