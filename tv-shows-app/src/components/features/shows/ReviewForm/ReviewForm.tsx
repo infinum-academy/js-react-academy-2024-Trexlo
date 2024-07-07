@@ -11,8 +11,6 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
 
     const [starRatingValue, setStarRatingValue] = useState(0);
 
-    const commentInput = document.getElementById('comment-input') as HTMLInputElement;
-    const ratingInput = document.getElementById('rating-input') as HTMLInputElement;
 
     const resetForm = ()=>{
         commentInput.value = "";
