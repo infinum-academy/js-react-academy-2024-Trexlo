@@ -9,10 +9,6 @@ interface IReviewProps {
 
 export const ReviewItem = ({review, removeReview}: IReviewProps) => {
 
-    const onClickHandler = () => {
-        removeReview(review);
-    }
-
     return (
         <Flex backgroundColor={"purple.900"} rounded={20} flexDirection={"column"} gap={3} padding={5}>
             <Flex height={10} alignItems={"center"} gap={3}>
