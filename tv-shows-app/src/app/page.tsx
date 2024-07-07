@@ -9,7 +9,6 @@ import { createRef, useCallback, useRef, useState } from "react";
 
 
 export default function Home() {
-
   const mockShowDetails: IShow = {
     averageRating: undefined,
     description: "A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student in order to secure his family's future.",
