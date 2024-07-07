@@ -55,7 +55,14 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
         <form  onSubmit={formSubmitHandler}>
             <FormControl> 
                 <Flex flexDirection={"column"} gap={5}>
-                    <Textarea id="comment-input" backgroundColor={"white"} placeholder='Add comment' required></Textarea>
+                    <Textarea
+                        value={comment}
+                        onChange={(event)=>{setComment(event.target.value)}}
+                        backgroundColor={"white"}
+                        placeholder='Add comment'
+                        onChange={(event)=>{setComment(event.target.value)}}
+                        required
+                    />
                     <StarRating label="Rating:" onChange={starRatingChange} value={starRatingValue} ></StarRating>
                     <Button width={["100%","100%","fit-content"]} rounded={20} type="submit">Post</Button>
                 </Flex>
