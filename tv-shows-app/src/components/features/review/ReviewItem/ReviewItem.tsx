@@ -4,7 +4,7 @@ import { StarRating } from "../../shows/StarRating/StarRating";
 
 interface IReviewProps {
     review: IReview;
-    removeReview: (review: IReview)=>void;
+    removeReview: (review: IReview, action:'add' | 'remove') => void;
 }
 
 export const ReviewItem = ({review, removeReview}: IReviewProps) => {
@@ -37,7 +37,7 @@ export const ReviewItem = ({review, removeReview}: IReviewProps) => {
                 backgroundColor={"white"}
                 color={"indigo"}
                 rounded={20}
-                onClick={() => removeReview(review)}
+                onClick={() => removeReview(review, "remove")}
             >Remove</Button>
         </Flex>
     );

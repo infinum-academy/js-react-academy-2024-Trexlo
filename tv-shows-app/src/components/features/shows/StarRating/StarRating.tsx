@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, RadioGroup, useRadio, useRadioGroup, UseRadioProps } from "@chakra-ui/react"
+import { Box, Flex, FormLabel, HStack, RadioGroup, useRadio, useRadioGroup, UseRadioProps } from "@chakra-ui/react"
 
 import { StarIcon } from '@chakra-ui/icons'
 
@@ -21,6 +21,7 @@ export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
             onChange(undefined, true);
         }
     }
+    
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: 'framework',
         defaultValue: '0',
@@ -32,8 +33,12 @@ export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
         <Flex alignItems={"center"} gap={1}>
             {
                 label &&
-                <RadioGroup id="rating-input" value={value.toString()} onFocus={()=>{changeValue(value || 1)}}>
+                <RadioGroup 
+                    value={value.toString()} 
+                    onFocus={() => changeValue(value || 1)}
+                    >
                     <HStack {...group}>
+                    <FormLabel margin={0} color={"white"}>{label}</FormLabel>
                     {[...Array(5)].map((_, index) => {
                         const radio = getRadioProps({ index })
                         return (

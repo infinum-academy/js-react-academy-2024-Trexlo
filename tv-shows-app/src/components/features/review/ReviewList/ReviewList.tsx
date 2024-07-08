@@ -4,7 +4,7 @@ import { ReviewItem } from "../ReviewItem/ReviewItem";
 
 interface IReviewListProps{
     reviews: IReview[];
-    removeReview: (review: IReview)=>void
+    removeReview: (review: IReview, action:'add' | 'remove')=>void
 }
 
 export const ReviewList = ({reviews ,removeReview}: IReviewListProps) => {

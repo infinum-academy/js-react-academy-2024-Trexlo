@@ -25,12 +25,6 @@ export default function Home() {
     }));
   }, []); 
 
-  // const updateRating = useCallback((rating:number) => {
-  //   const newShowDetails = {...showDetails};
-  //   newShowDetails.averageRating = rating;
-  //   setShowDetails(newShowDetails);
-  // }, [showDetails]);
-
   return (
     <main className={styles.main}>
       <Flex 

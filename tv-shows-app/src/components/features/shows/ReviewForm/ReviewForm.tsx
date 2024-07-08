@@ -4,10 +4,10 @@ import { FormEvent, useState } from "react";
 import { StarRating } from "../StarRating/StarRating";
 
 interface IReviewFormProps{
-    addShowReview : (review: IReview) => void
+    addShowReview : (review: IReview, action: 'add' | 'remove') => void
 }
 
-export const ReviewForm = ({addShowReview }: IReviewFormProps) => { 
+export const ReviewForm = ({addShowReview}: IReviewFormProps) => { 
     const [starRatingValue, setStarRatingValue] = useState(0);
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
@@ -22,7 +22,11 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
     const formSubmitHandler = (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        setErrorMessage(((!comment)?"Comment cannot be empty. ":"") + ((!rating)?"Rating cannot be empty. ":""));
+        setErrorMessage(
+            ((!comment)?"Comment cannot be empty. ":"") +
+            ((!rating)?"Rating cannot be empty. ":"")
+        );
+
         if(!comment || !rating){
             return;
         }
@@ -34,7 +38,7 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
             rating,
         };
 
-        addShowReview (newReview);
+        addShowReview (newReview, 'add');
         resetForm();
     } 
 
@@ -47,7 +51,6 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
         }else{
             setStarRatingValue(rating);
         }
-
     }
 
     return (
@@ -56,7 +59,7 @@ export const ReviewForm = ({addShowReview }: IReviewFormProps) => {
                 <Flex flexDirection={"column"} gap={5}>
                     <Textarea
                         value={comment}
-                        onChange={(event)=>{setComment(event.target.value)}}
+                        onChange={(event)=> setComment(event.target.value)}
                         backgroundColor={"white"}
                         placeholder='Add comment'
                         required

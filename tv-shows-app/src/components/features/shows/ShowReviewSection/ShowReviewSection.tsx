@@ -38,15 +38,17 @@ export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
         }
     };
 
-    const removeReview = (review:IReview) => {
-        const newReviews = reviews.filter(r => r != review);    
-        setReviews(newReviews); 
-        updateRating(calculateAverageReviews(newReviews));
-        saveReviewsToLocalStorage(newReviews);
-    }
+    const handleReviews = (review: IReview, action: 'add' | 'remove') => {
+        let newReviews:IReview[] = [];
+        console.log("handluing");
+        
+        if(action == 'add'){
+            newReviews = [review, ...reviews];
+        }
+        if(action == 'remove'){
+            newReviews = reviews.filter(r => r != review);    
+        }
 
-    const addReview = (review:IReview) => {
-        const newReviews = [review, ...reviews];
         setReviews(newReviews);     
         updateRating(calculateAverageReviews(newReviews));
         saveReviewsToLocalStorage(newReviews);
@@ -54,8 +56,8 @@ export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
 
     return (
         <Flex flexDir={"column"} gap={10}>
-            <ReviewForm addShowReview={addReview}></ReviewForm>
-            <ReviewList reviews={reviews} removeReview={removeReview}></ReviewList>
+            <ReviewForm addShowReview={handleReviews}></ReviewForm>
+            <ReviewList reviews={reviews} removeReview={handleReviews}></ReviewList>
         </Flex>
     );
 }
