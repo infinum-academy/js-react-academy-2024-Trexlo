@@ -2,7 +2,7 @@
 import { ShowDetails } from "@/components/features/shows/ShowDetails/ShowDetails";
 import styles from "../../page.module.css";
 import { IShow } from "@/typings/Show.type";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex, Heading, Skeleton, Text } from "@chakra-ui/react";
 import { ShowReviewSection } from "@/components/features/shows/ShowReviewSection/ShowReviewSection";
 import { useCallback, useState } from "react";
 import useSWR from 'swr';
@@ -25,36 +25,29 @@ export default function Home() {
   }, []); 
 
 	if (error) {
-		return <div>Ups...something went wrong</div>;
+		return <Text>An error occurred</Text>;
 	}
-
-	if (isLoading || !data || data == {} as IShow) {
-		return <div>Loading....</div>;
-	}
-
-
   return (
     <main className={styles.main}>
       <Flex flexDirection={["column","column", "row"]}>
-      <SidebarNavigation activeLink="/shows"></SidebarNavigation>
-      <Flex 
-        w={["100%", "100%", "65%"]} 
-        gap={3} 
-        flexDirection={"column"}
-      >
-        <Heading 
-          size={"md"} 
-          color={"white"} 
-          marginTop={3}
-        >TV shows APP</Heading>
-        <ShowDetails show = {show}></ShowDetails>
-        <Heading 
-          size={"md"} 
-          color={"white"} 
-          marginTop={3}
-        >Reviews</Heading>
-        <ShowReviewSection updateRating={updateRating}></ShowReviewSection>
-      </Flex>
+        <SidebarNavigation activeLink=""></SidebarNavigation>
+        <Flex 
+          w={["100%", "100%", "65vw"]} 
+          gap={3} 
+          flexDirection={"column"}
+        >
+          <Skeleton isLoaded={!isLoading}>
+            <ShowDetails show = {show}></ShowDetails>
+          </Skeleton>
+          <Heading 
+            size={"md"} 
+            color={"white"} 
+            marginTop={3}
+          >Reviews</Heading>
+          <Skeleton isLoaded={!isLoading}>
+            <ShowReviewSection updateRating={updateRating}></ShowReviewSection>
+          </Skeleton>
+        </Flex>
       </Flex>
     </main>
 

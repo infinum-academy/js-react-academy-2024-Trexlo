@@ -1,14 +1,8 @@
 'use client';
-import { ShowDetails } from "@/components/features/shows/ShowDetails/ShowDetails";
 import styles from "../../page.module.css";
-import { IShow } from "@/typings/Show.type";
-import { Flex, Heading } from "@chakra-ui/react";
-import { ShowReviewSection } from "@/components/features/shows/ShowReviewSection/ShowReviewSection";
-import { useCallback, useState } from "react";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
 import { SidebarNavigation } from "@/components/shared/SidebarNavigation/SidebarNavigation";
-import { ShowCard } from "@/components/shared/shows/ShowCard/ShowCard";
 import { getTopShows } from "@/fetchers/show";
-
 import useSWR from 'swr';
 import { ShowsList } from "@/components/shared/shows/ShowsList/ShowsList";
 
@@ -19,13 +13,28 @@ export default function Home() {
 	const shows = data?.shows || [] ;
 
 	if (error) {
-		return <div>Ups...something went wrong</div>;
+		return <Text>An error occurred</Text>;
 	}
 
 	if (isLoading || !data) {
-		return <div>Loading....</div>;
+		return (
+      <main className={styles.main}>
+        <Flex flexDirection={["column","column", "row"]}>
+        <SidebarNavigation activeLink="/shows/top-rated"></SidebarNavigation>
+          <Flex justifyItems={"center"} width={"100%"}>
+            <Spinner
+              thickness='4px'
+              speed='0.65s'
+              emptyColor='gray.200'
+              color='blue.500'
+              size='xl'
+              margin={"auto"}
+            />
+          </Flex>
+        </Flex>
+      </main>
+    );
 	}
-
   
   return (
     <main className={styles.main}>
