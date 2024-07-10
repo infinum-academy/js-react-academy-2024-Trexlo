@@ -37,6 +37,14 @@ describe('ReviewItem', () => {
         }
     });
 
+    it('should have correct comment', () => {
+        render(<ReviewItem review={mockReview} removeReview={()=>{}}/>)
+        
+        const comment = screen.getByText(mockReview.comment);
+
+        expect(comment).toBeInTheDocument();
+    });
+
     it('should have delete button', () => {
         render(<ReviewItem review={mockReview} removeReview={()=>{}}/>)
 

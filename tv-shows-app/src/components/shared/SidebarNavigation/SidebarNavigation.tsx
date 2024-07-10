@@ -31,10 +31,20 @@ export const SidebarNavigation = ({activeLink}: ISidebarNavigationProps) => {
               >TV shows APP</Heading>
                 {
                   links.map((link, index) =>
-                    <Button key={index} as={NextLink} href={link.url} variant={(activeLink == link.url)?"solid":"link"}>{link.content}</Button>
+                    <Button 
+                      key={index} 
+                      as={NextLink} 
+                      href={link.url} 
+                      variant={(activeLink == link.url)?"solid":"link"}
+                    >{link.content}</Button>
                   )
                 }
-              <Button ml={["auto","auto","initial"]} mt={["initial","initial","auto"]} as={NextLink} href={'/logout'} variant={"link"}>Log out</Button>
+              <Button 
+                ml={["auto","auto","initial"]} 
+                mt={["initial","initial","auto"]} 
+                as={NextLink} href={'/logout'} 
+                variant={"link"}
+              >Log out</Button>
             </Flex>
         </Flex>
     )

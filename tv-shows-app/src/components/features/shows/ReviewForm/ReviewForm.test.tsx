@@ -20,6 +20,7 @@ describe('ReviewForm', () => {
         input.forEach(i => expect(i).toBeInTheDocument());
         expect(input.length).toBe(5);
     });
+
     it('should have rendered button', () => {
         render(<ReviewForm addShowReview={()=>{}}/>)
 
@@ -27,6 +28,4 @@ describe('ReviewForm', () => {
 
         expect(button).toBeInTheDocument();
     });
-
-    
 })  

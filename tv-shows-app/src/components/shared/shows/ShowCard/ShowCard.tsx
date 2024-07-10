@@ -14,7 +14,10 @@ export const ShowCard = ({show}: IShowCardProps) => {
             <CardBody>
                 <Stack mt='0' spacing='2'>
                     <Heading size={"md"}>{show.title}</Heading>
-                    <Flex gap={1} alignItems={"center"}><StarIcon color={"indigo"}/><Text>{(show.average_rating && (show.average_rating.toFixed(1) + " / 5")) || "No ratings"}</Text></Flex>
+                    <Flex gap={1} alignItems={"center"}>
+                        <StarIcon color={"indigo"}/>
+                        <Text>{(show.average_rating && (show.average_rating.toFixed(1) + " / 5")) || "No ratings"}</Text>
+                    </Flex>
                 </Stack>
             </CardBody>
         </Card>
