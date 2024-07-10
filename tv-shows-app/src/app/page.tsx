@@ -10,10 +10,12 @@ import { useCallback, useState } from "react";
 
 export default function Home() {
   const mockShowDetails: IShow = {
-    averageRating: undefined,
+    average_rating: undefined,
     description: "A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student in order to secure his family's future.",
-    imageUrl: "https://e1.pxfuel.com/desktop-wallpaper/31/210/desktop-wallpaper-8-breaking-bad-heisenberg.jpg",
-    title: "Breaking Bad"
+    image_url: "https://e1.pxfuel.com/desktop-wallpaper/31/210/desktop-wallpaper-8-breaking-bad-heisenberg.jpg",
+    title: "Breaking Bad",
+    id:"0",
+    no_of_reviews:0
   }
   
   const [showDetails, setShowDetails] = useState(mockShowDetails);
