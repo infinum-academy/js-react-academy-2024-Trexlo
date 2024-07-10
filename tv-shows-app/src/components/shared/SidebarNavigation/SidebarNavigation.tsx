@@ -1,4 +1,4 @@
-import { Button, Flex } from "@chakra-ui/react"
+import { Box, Button, Flex } from "@chakra-ui/react"
 import NextLink from 'next/link';
 
 interface ISidebarNavigationProps {
@@ -19,15 +19,18 @@ export const SidebarNavigation = ({activeLink}: ISidebarNavigationProps) => {
           content:"My profile",
           url:"/account"
         },
-      ]
+      ];
+
     return (
-        <Flex alignItems={"center"} gap={3} w={["100%", "100%", "auto"]} h={["100px","100px","100vh"]} position={"relative"} padding={5} flexDirection={["row","row","column"]} height={"100%"}>
-            {
+        <Flex alignItems={"stretch"} justifyContent={"center"} minW={"fit-content"} w={["100%", "100%", "30vh"]} h={["100px","100px","100vh"]} position={"relative"}>
+            <Flex alignItems={"center"} h={["100px","100px","100vh"]} zIndex={2} bgColor={"#1f004d"} gap={3} position={"fixed"} padding={5} flexDirection={["row","row","column"]}>
+              {
                 links.map((link, index) =>
-                    <Button key={index} as={NextLink} href={link.url} variant={(activeLink == link.url)?"solid":"link"}>{link.content}</Button>
+                  <Button key={index} as={NextLink} href={link.url} variant={(activeLink == link.url)?"solid":"link"}>{link.content}</Button>
                 )
-            }
-            <Button ml={["auto","auto","initial"]} mt={["initial","initial","auto"]} as={NextLink} href={'/logout'} variant={"link"}>Log out</Button>
+              }
+              <Button ml={["auto","auto","initial"]} mt={["initial","initial","auto"]} as={NextLink} href={'/logout'} variant={"link"}>Log out</Button>
+            </Flex>
         </Flex>
     )
 }

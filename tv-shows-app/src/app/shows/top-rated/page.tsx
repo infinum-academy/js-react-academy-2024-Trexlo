@@ -10,6 +10,7 @@ import { ShowCard } from "@/components/shared/shows/ShowCard/ShowCard";
 import { getTopShows } from "@/fetchers/show";
 
 import useSWR from 'swr';
+import { ShowsList } from "@/components/shared/shows/ShowsList/ShowsList";
 
 export default function Home() {
  
@@ -28,20 +29,9 @@ export default function Home() {
   
   return (
     <main className={styles.main}>
-      <Flex flexDirection={[null,"column", "row"]}>
+      <Flex flexDirection={["column","column", "row"]}>
         <SidebarNavigation activeLink="/shows/top-rated"></SidebarNavigation>
-        <Flex 
-          w={["100%", "100%", "100%"]} 
-          gap={3} 
-          flexDirection={"row"}
-          flexWrap={"wrap"}
-        >
-          {
-            shows.map((show, index) => 
-              <ShowCard show={show} key={index}/>
-            )
-          }
-        </Flex>
+        <ShowsList shows={shows}/>
       </Flex>
     </main>
 

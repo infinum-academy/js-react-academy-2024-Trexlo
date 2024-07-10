@@ -1,4 +1,3 @@
-
 import { IShow } from '@/typings/Show.type';
 import {render, screen} from '@testing-library/react'
 import { ShowsList } from './ShowsList';
@@ -18,7 +17,5 @@ describe('ShowList', () => {
             const title = screen.getByText(show.title);
             expect(title).toBeInTheDocument();
         });
-    })
-
-   
+    });
 })  
