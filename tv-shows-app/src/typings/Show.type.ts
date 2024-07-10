@@ -1,6 +1,8 @@
 export interface IShow {
-    title: string;
+    id: string;
+    average_rating: number | undefined | null;
     description: string;
-    averageRating: number | undefined | null;
-    imageUrl: string | undefined | null;
+    image_url: string | undefined | null;
+    no_of_reviews: number | null;
+    title: string;
 }
