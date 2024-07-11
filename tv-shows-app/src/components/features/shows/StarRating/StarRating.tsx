@@ -37,7 +37,7 @@ export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
                     value={value.toString()} 
                     onFocus={() => changeValue(value || 1)}
                     >
-                    <HStack {...group}>
+                    <HStack>
                     <FormLabel margin={0} color={"white"}>{label}</FormLabel>
                     {[...Array(5)].map((_, index) => {
                         const radio = getRadioProps({ index })
