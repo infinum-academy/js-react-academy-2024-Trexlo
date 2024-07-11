@@ -1,41 +1,39 @@
+"use client"    
+import { navigationItems } from "@/app/data/navigation-items";
 import { Button, Flex, Heading } from "@chakra-ui/react"
 import NextLink from 'next/link';
+import { usePathname } from "next/navigation";
 
-interface ISidebarNavigationProps {
-    activeLink: string;
-}
-
-export const SidebarNavigation = ({activeLink}: ISidebarNavigationProps) => {
-    const links: ISidebarElement[] = [
-        {
-          content:"All shows",
-          url:"/shows"
-        },
-        {
-          content:"Top rated",
-          url:"/shows/top-rated"
-        },
-        {
-          content:"My profile",
-          url:"/account"
-        },
-    ];
-
+export const SidebarNavigation = () => {
+    const pathname = usePathname();
+    
     return (
-        <Flex alignItems={"stretch"} justifyContent={"center"} minW={"fit-content"} w={["100%", "100%", "30vh"]} h={["100px","100px","100vh"]} position={"relative"}>
-            <Flex alignItems={"center"} h={["100px","100px","100vh"]} zIndex={2} bgColor={"#1f004d"} gap={3} position={"fixed"} padding={5} flexDirection={["row","row","column"]}>
+        <Flex alignItems={"stretch"} 
+              justifyContent={"center"} 
+              minW={"fit-content"} 
+              w={["100%", "100%", "30vh"]} 
+              h={["100px","100px","100vh"]} 
+              position={"relative"}
+            >
+            <Flex color={"white"} 
+                  alignItems={"center"} 
+                  h={["100px","100px","100vh"]} 
+                  zIndex={2} bgColor={"#1f004d"} 
+                  gap={3} 
+                  position={"fixed"} 
+                  padding={5} 
+                  flexDirection={["row","row","column"]}>
               <Heading 
                 display={["none","none", "block"]}
-                size={"md"} 
-                color={"white"} 
+                size={"md"}  
               >TV shows APP</Heading>
                 {
-                  links.map((link, index) =>
+                  navigationItems.map((link, index) =>
                     <Button 
                       key={index} 
                       as={NextLink} 
                       href={link.url} 
-                      variant={(activeLink == link.url)?"solid":"link"}
+                      variant={(pathname == link.url)?"solid":"link"}
                     >{link.content}</Button>
                   )
                 }

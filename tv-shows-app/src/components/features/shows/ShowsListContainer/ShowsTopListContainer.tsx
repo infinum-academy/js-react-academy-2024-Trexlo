@@ -1,7 +1,5 @@
 'use client';
-import styles from "../../../../app/page.module.css";
 import { Flex, Spinner, Text } from "@chakra-ui/react";
-import { SidebarNavigation } from "@/components/shared/SidebarNavigation/SidebarNavigation";
 import useSWR from 'swr';
 import { ShowsList } from "@/components/shared/shows/ShowsList/ShowsList";
 import { getTopShows } from "@/fetchers/show";
@@ -17,9 +15,6 @@ export const ShowsTopListContainer = () => {
 
 	if (isLoading || !data) {
 		return (
-      <main className={styles.main}>
-        <Flex flexDirection={["column","column", "row"]}>
-          <SidebarNavigation activeLink='/shows/top-rated'></SidebarNavigation>
           <Flex justifyItems={"center"} width={"100%"}>
             <Spinner
               thickness='4px'
@@ -30,18 +25,10 @@ export const ShowsTopListContainer = () => {
               margin={"auto"}
             />
           </Flex>
-        </Flex>
-      </main>
     );
 	}
 
   return (
-    <main className={styles.main}>
-      <Flex flexDirection={["column","column", "row"]}>
-        <SidebarNavigation activeLink="/shows/top-rated"></SidebarNavigation>
-        <ShowsList shows={shows}/>
-      </Flex>
-    </main>
-
+    <ShowsList shows={shows}/>
   );
 }
