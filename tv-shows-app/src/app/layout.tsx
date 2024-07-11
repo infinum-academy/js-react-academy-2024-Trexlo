@@ -22,7 +22,7 @@ export default function RootLayout({
         <main className={styles.main}>
           <Providers>
             <Flex flexDirection={["column","column", "row"]}>
-            <SidebarNavigation/>
+              <SidebarNavigation/>
               {children}
             </Flex>
           </Providers>
