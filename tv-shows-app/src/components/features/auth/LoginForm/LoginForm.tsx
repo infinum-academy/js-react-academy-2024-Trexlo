@@ -4,6 +4,7 @@ import { loginMutator, mutator, registerMutator } from "@/fetchers/mutators";
 import { ILogInFormInputs, IRegisterFormInputs } from "@/typings/Auth.type";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { Button, Flex, FormControl, FormErrorMessage, FormHelperText, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Form, useForm } from "react-hook-form";
 import useSWRMutation from "swr/mutation";
@@ -12,6 +13,7 @@ import useSWRMutation from "swr/mutation";
 
 export const LoginForm = () => {
     const {register, handleSubmit} = useForm<ILogInFormInputs>();
+    const router = useRouter();
     const {trigger} = useSWRMutation(apiPaths.login, loginMutator, {
         onSuccess: (data)=>{
             const client = data.headers.get('client');
@@ -30,6 +32,7 @@ export const LoginForm = () => {
             if(expiry){
                 sessionStorage.setItem('expiry', expiry);
             }
+            router.push('/shows');
         },
         onError(err, key, config) {
             setError(err.message);
