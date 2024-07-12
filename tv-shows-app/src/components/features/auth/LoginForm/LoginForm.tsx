@@ -1,7 +1,7 @@
 'use client'
 import { apiPaths } from "@/app/data/api-paths";
-import { mutator, registerMutator } from "@/fetchers/mutators";
-import { IRegisterFormInputs } from "@/typings/Auth.type";
+import { loginMutator, mutator, registerMutator } from "@/fetchers/mutators";
+import { ILogInFormInputs, IRegisterFormInputs } from "@/typings/Auth.type";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { Button, Flex, FormControl, FormErrorMessage, FormHelperText, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useState } from "react";
@@ -10,22 +10,33 @@ import useSWRMutation from "swr/mutation";
 
 
 
-export const RegistrationForm = () => {
-    const {register, handleSubmit} = useForm<IRegisterFormInputs>();
-    const {trigger} = useSWRMutation(apiPaths.registration, registerMutator, {
+export const LoginForm = () => {
+    const {register, handleSubmit} = useForm<ILogInFormInputs>();
+    const {trigger} = useSWRMutation(apiPaths.login, loginMutator, {
         onSuccess: (data)=>{
-            console.log(data);
+            const client = data.headers.get('client');
+            if(client){
+                sessionStorage.setItem('client', client);
+            }
+            const accessToken = data.headers.get('access-token');
+            if(accessToken){
+                sessionStorage.setItem('access-token', accessToken);
+            }
+            const uid = data.headers.get('uid');
+            if(uid){
+                sessionStorage.setItem('uid', uid);
+            }
+            const expiry = data.headers.get('expiry');
+            if(expiry){
+                sessionStorage.setItem('expiry', expiry);
+            }
         },
         onError(err, key, config) {
             setError(err.message);
         },
     });
     const [error, setError] = useState("");
-    const onRegister = async (data: IRegisterFormInputs) => {
-        if(data.password != data.repeatPassword){
-            setError("Passwords do not match");
-            return;
-        }
+    const onRegister = async (data: ILogInFormInputs) => {
         await trigger(data);
     };
 
@@ -43,16 +54,9 @@ export const RegistrationForm = () => {
                         <LockIcon color='white' />
                     </InputLeftElement>
                     <Input type='password' isRequired={true} {...register('password')} placeholder='Password' />
-                    <FormHelperText>At least 8 characters</FormHelperText>
-                </InputGroup>
-                <InputGroup>
-                    <InputLeftElement pointerEvents='none'>
-                        <LockIcon color='white' />
-                    </InputLeftElement>
-                    <Input type='password' isRequired={true} {...register('repeatPassword')} placeholder='Confirm password' />
                 </InputGroup>
                 <FormErrorMessage>{error}</FormErrorMessage>
-                <Button type="submit">SIGN UP</Button>
+                <Button type="submit">LOG IN</Button>
             </FormControl>
         </Flex>
     )

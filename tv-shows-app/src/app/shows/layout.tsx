@@ -9,7 +9,7 @@ export default function AuthLayout({
 }>) {
   return (
     <>
-      <AuthRedirect condition="isLoggedIn" to="/shows"/>
+      <AuthRedirect condition="isLoggedOut" to="/login"/>
       {children}
     </>
   );
