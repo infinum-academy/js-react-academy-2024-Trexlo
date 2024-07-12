@@ -1,14 +1,17 @@
-import { Box, Flex, FormLabel, HStack, RadioGroup, useRadio, useRadioGroup, UseRadioProps } from "@chakra-ui/react"
+import {chakra, Box, Flex, FormLabel, HStack, Radio, RadioGroup, useRadio, useRadioGroup, UseRadioProps } from "@chakra-ui/react"
 
 import { StarIcon } from '@chakra-ui/icons'
+import { UseFormRegister } from "react-hook-form";
+import { IReviewFormInputs } from "../ReviewForm/ReviewForm";
 
 interface IStarRatingProps {
+    register: UseFormRegister<IReviewFormInputs>;
     label: string | undefined;
     onChange: (value: number | undefined, temporary: boolean)=>void;
     value: number;
 }
 
-export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
+export const StarRating = ({label, onChange, value, register}: IStarRatingProps) => {
 
     const changeValue = (val: number) => {
         onChange(val, false);
@@ -21,35 +24,40 @@ export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
             onChange(undefined, true);
         }
     }
-    
-    const { getRootProps, getRadioProps } = useRadioGroup({
-        name: 'framework',
-        defaultValue: '0',
-        onChange: (val) =>{changeValue(parseInt(val));},
-    })
-    
-    const group = getRootProps()
+
     return (
         <Flex alignItems={"center"} gap={1}>
             {
                 label &&
-                <RadioGroup 
-                    value={value.toString()} 
-                    onFocus={() => changeValue(value || 1)}
-                    >
+                <RadioGroup>
                     <HStack>
                     <FormLabel margin={0} color={"white"}>{label}</FormLabel>
-                    {[...Array(5)].map((_, index) => {
-                        const radio = getRadioProps({ index })
+                    {[1,2,3,4,5].map((number, index) => {
                         return (
-                          <StarRadioButton
-                            key={index}
-                            {...radio}
-                            value={(index+1).toString()}
-                            onHoverHandler={onHoverHandler}
-                            changeValue={changeValue}
-                            currentValue={value}
-                          />
+                          <StarIcon
+                            as={chakra.input}
+                            type="radio"
+                            {...register("rating")}
+                            key={number}
+                            value={number.toString()}
+                            cursor="pointer"
+                            color={
+                                value >= (number) ? "yellow" : "white"
+                            }
+                            _checked={{
+                                color:"yellow"
+                            }}
+                            onClick={() => {
+                                changeValue((number));
+                            }}
+                            onMouseEnter={() => {
+                                onHoverHandler((number), true);
+                                
+                            }}
+                            onMouseLeave={() => {
+                                onHoverHandler((number), false);
+                            }}
+                          ></StarIcon>
                         );
                     })}
                     </HStack> 

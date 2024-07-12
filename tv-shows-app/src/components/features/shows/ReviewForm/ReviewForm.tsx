@@ -2,40 +2,41 @@ import { IReview } from "@/typings/Review.type";
 import { Button, Flex, FormControl, FormErrorMessage, Input, Textarea } from "@chakra-ui/react";
 import { FormEvent, useState } from "react";
 import { StarRating } from "../StarRating/StarRating";
+import { useForm } from "react-hook-form";
 
 interface IReviewFormProps{
     addShowReview : (review: IReview, action: 'add' | 'remove') => void
 }
+export interface IReviewFormInputs{
+    comment: string;
+    rating: number;
+}
 
 export const ReviewForm = ({addShowReview}: IReviewFormProps) => { 
     const [starRatingValue, setStarRatingValue] = useState(0);
-    const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
+    const {register, handleSubmit} = useForm<IReviewFormInputs>();
     const [errorMessage, setErrorMessage] = useState("");
 
     const resetForm = ()=>{
-        setComment("");
-        setRating(0);
         setStarRatingValue(0);
     }
 
-    const formSubmitHandler = (event:FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
+    const formSubmitHandler = (data: IReviewFormInputs) => {
         setErrorMessage(
-            ((!comment)?"Comment cannot be empty. ":"") +
-            ((!rating)?"Rating cannot be empty. ":"")
+            ((!data.comment)?"Comment cannot be empty. ":"") +
+            ((!data.rating)?"Rating cannot be empty. ":"")
         );
 
-        if(!comment || !rating){
+        if(!data.comment || !data.rating){
             return;
         }
 
         const newReview: IReview = {
             avatar: "https://fakeimg.pl/100x100/d4d4d4/000000?text=:-))))",
             email: "mail@mail.com",
-            comment,
-            rating,
+            comment: data.comment,
+            rating: data.rating,
         };
 
         addShowReview (newReview, 'add');
@@ -54,17 +55,17 @@ export const ReviewForm = ({addShowReview}: IReviewFormProps) => {
     }
 
     return (
-        <form  onSubmit={formSubmitHandler}>
+        <form  onSubmit={handleSubmit(formSubmitHandler)}>
             <FormControl isInvalid={errorMessage != ""}> 
                 <Flex flexDirection={"column"} gap={5}>
                     <Textarea
-                        value={comment}
-                        onChange={(event)=> setComment(event.target.value)}
+                        {...register('comment')}
                         backgroundColor={"white"}
                         placeholder='Add comment'
                         required
                     />
                     <StarRating
+                        register={register}
                         value={starRatingValue}
                         onChange={starRatingChange}
                         label="Rating:"
