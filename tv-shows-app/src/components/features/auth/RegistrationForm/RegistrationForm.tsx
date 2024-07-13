@@ -29,7 +29,7 @@ export const RegistrationForm = () => {
             setError(err.message);
         },
     });
-    
+
     const onRegister = async (data: IRegisterFormInputs) => {
         if(data.password.length<8){
             setPasswordError("Password must have at least 8 characters");
