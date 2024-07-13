@@ -4,11 +4,11 @@ import { PasswordInput } from "@/components/shared/PasswordInput/PasswordInput";
 import { mutator, registerMutator } from "@/fetchers/mutators";
 import { IRegisterFormInputs } from "@/typings/Auth.type";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
-import { Button, Flex, FormControl, FormErrorMessage, FormHelperText, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormErrorMessage, FormHelperText, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { Form, useForm } from "react-hook-form";
 import useSWRMutation from "swr/mutation";
-
+import NextLink from "next/link";
 
 
 export const RegistrationForm = () => {
@@ -41,27 +41,29 @@ export const RegistrationForm = () => {
     };
 
     return (
-        <Flex color={"white"} as={"form"} flexDir={"column"} onSubmit={handleSubmit(onRegister)}>
-            <FormControl isInvalid={error!="" }>
+        <Flex color={"white"} as={"form"} alignItems={"center"} flexDir={"column"} padding={5} gap={3} onSubmit={handleSubmit(onRegister)}>
+            <FormControl as={Flex} flexDir={"column"} alignItems={"center"} gap={5} isInvalid={error!="" }>
                 <InputGroup>
                     <InputLeftElement pointerEvents='none'>
                         <EmailIcon color='white' />
                     </InputLeftElement>
-                    <Input type='email' isRequired={true} {...register('email')} placeholder='Email' />
+                    <Input type='email' isRequired={true} {...register('email')} placeholder='Email' _placeholder={{ color: 'inherit' }}  />
                 </InputGroup>
                 <FormControl isInvalid={passwordError!="" }>
                     <InputGroup flexDir={"column"}>
-                        <PasswordInput type='password' isRequired={true} isInvalid={passwordError!=""}  {...register('password')} placeholder='Password' />
-                        <FormHelperText>At least 8 characters</FormHelperText>
+                        <PasswordInput type='password' isRequired={true} isInvalid={passwordError!=""}  {...register('password')} placeholder='Password' _placeholder={{ color: 'inherit' }} />
+                        <FormHelperText marginTop={0} mb={2} color={"whitesmoke"}>At least 8 characters</FormHelperText>
                     </InputGroup>
                     <InputGroup>
-                        <PasswordInput type='password' isRequired={true} isInvalid={passwordError!=""}  {...register('repeatPassword')} placeholder='Confirm password' />
+                        <PasswordInput type='password' isRequired={true} isInvalid={passwordError!=""}  {...register('repeatPassword')} placeholder='Confirm password' _placeholder={{ color: 'inherit' }} />
                     </InputGroup>
                     <FormErrorMessage>{passwordError}</FormErrorMessage>
                 </FormControl>
                 <FormErrorMessage>{error}</FormErrorMessage>
-                <Button isLoading={isSubmitting} loadingText="Signing up" type="submit">SIGN UP</Button>
+                <Button w={"50%"} isLoading={isSubmitting} loadingText="Signing up" type="submit">SIGN UP</Button>
             </FormControl>
+            <Text>Already have an account? <Text as={NextLink} href={"/login"} fontWeight={"bold"} >Log in</Text></Text>
+
         </Flex>
     )
 }

@@ -4,12 +4,12 @@ import { PasswordInput } from "@/components/shared/PasswordInput/PasswordInput";
 import { loginMutator, mutator, registerMutator } from "@/fetchers/mutators";
 import { ILogInFormInputs, IRegisterFormInputs } from "@/typings/Auth.type";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
-import { Button, Flex, FormControl, FormErrorMessage, FormHelperText, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormErrorMessage, FormHelperText, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Form, useForm } from "react-hook-form";
 import useSWRMutation from "swr/mutation";
-
+import NextLink from "next/link";
 
 
 export const LoginForm = () => {
@@ -49,17 +49,18 @@ export const LoginForm = () => {
     };
 
     return (
-        <Flex color={"white"} as={"form"} flexDir={"column"} onSubmit={handleSubmit(onRegister)}>
-            <FormControl isInvalid={error!=""}>
+        <Flex color={"white"} as={"form"} width={"100%"} height={"100%"} padding={5} flexDir={"column"} onSubmit={handleSubmit(onRegister)}>
+            <FormControl alignItems={"center"} as={Flex} flexDir={"column"} gap={5} isInvalid={error!=""} >
                 <InputGroup>
                     <InputLeftElement pointerEvents='none'>
                         <EmailIcon color='white' />
                     </InputLeftElement>
-                    <Input type='email' isRequired={true} {...register('email')} placeholder='Email' />
+                    <Input type='email' isRequired={true} {...register('email')} placeholder='Email' _placeholder={{ color: 'inherit' }} />
                 </InputGroup>
-                <PasswordInput isRequired={true} {...register('password')} placeholder='Password' />
+                <PasswordInput isRequired={true} {...register('password')} placeholder='Password' _placeholder={{ color: 'inherit' }} />
                 <FormErrorMessage>{error}</FormErrorMessage>
-                <Button isLoading={isSubmitting} loadingText="Logging in" type="submit">LOG IN</Button>
+                <Button w={"50%"} isLoading={isSubmitting} loadingText="Logging in" type="submit">LOG IN</Button>
+                <Text>{"Don't"} have an account? <Text as={NextLink} href={"/register"} fontWeight={"bold"} >Register</Text></Text>
             </FormControl>
         </Flex>
     )

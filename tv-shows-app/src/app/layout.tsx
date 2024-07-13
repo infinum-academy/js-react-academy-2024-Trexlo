@@ -21,10 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <main className={styles.main}>
           <Providers>
-            <Flex flexDirection={["column","column", "row"]}>
-              <SidebarNavigation/>
               {children}
-            </Flex>
           </Providers>
         </main>
       </body>
