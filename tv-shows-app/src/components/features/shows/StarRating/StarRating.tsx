@@ -1,4 +1,4 @@
-import {chakra, Box, Flex, FormLabel, HStack, Radio, RadioGroup, useRadio, useRadioGroup, UseRadioProps } from "@chakra-ui/react"
+import { Box, Flex, FormLabel, HStack, RadioGroup, useRadio, useRadioGroup, UseRadioProps } from "@chakra-ui/react"
 
 import { StarIcon } from '@chakra-ui/icons'
 import { UseFormRegister } from "react-hook-form";
@@ -15,6 +15,7 @@ export const StarRating = ({label, onChange, value, register}: IStarRatingProps)
 
     const changeValue = (val: number) => {
         onChange(val, false);
+        register('rating', {value: val});
     }
 
     const onHoverHandler = (val: number, hovering:boolean)=>{
@@ -24,40 +25,36 @@ export const StarRating = ({label, onChange, value, register}: IStarRatingProps)
             onChange(undefined, true);
         }
     }
-
+    
+    const { getRootProps, getRadioProps } = useRadioGroup({
+        name: 'framework',
+        defaultValue: '0',
+        onChange: (val) =>{changeValue(parseInt(val));},
+    })
+    
+    const group = getRootProps()
     return (
         <Flex alignItems={"center"} gap={1}>
             {
                 label &&
-                <RadioGroup>
+                <RadioGroup 
+                    value={value.toString()}  
+                    onFocus={() => changeValue(value || 1)}
+                    >
                     <HStack>
                     <FormLabel margin={0} color={"white"}>{label}</FormLabel>
-                    {[1,2,3,4,5].map((number, index) => {
+                    {[...Array(5)].map((_, index) => {
+                        const radio = getRadioProps({ index })
                         return (
-                          <StarIcon
-                            as={chakra.input}
-                            type="radio"
-                            {...register("rating")}
-                            key={number}
-                            value={number.toString()}
-                            cursor="pointer"
-                            color={
-                                value >= (number) ? "yellow" : "white"
-                            }
-                            _checked={{
-                                color:"yellow"
-                            }}
-                            onClick={() => {
-                                changeValue((number));
-                            }}
-                            onMouseEnter={() => {
-                                onHoverHandler((number), true);
-                                
-                            }}
-                            onMouseLeave={() => {
-                                onHoverHandler((number), false);
-                            }}
-                          ></StarIcon>
+                          <StarRadioButton
+                            key={index}
+                            {...radio}
+                            register={register}
+                            value={(index+1).toString()}
+                            onHoverHandler={onHoverHandler}
+                            changeValue={changeValue}
+                            currentValue={value}
+                          />
                         );
                     })}
                     </HStack> 
@@ -76,6 +73,7 @@ export const StarRating = ({label, onChange, value, register}: IStarRatingProps)
 }
 
 interface StarRadioProps extends UseRadioProps {
+    register: UseFormRegister<IReviewFormInputs>;
     currentValue: number;
     changeValue: (value:number)=>void;
     onHoverHandler: (val: number, hovering:boolean)=>void;

@@ -15,11 +15,12 @@ export interface IReviewFormInputs{
 export const ReviewForm = ({addShowReview}: IReviewFormProps) => { 
     const [starRatingValue, setStarRatingValue] = useState(0);
     const [rating, setRating] = useState(0);
-    const {register, handleSubmit} = useForm<IReviewFormInputs>();
+    const {register, handleSubmit, reset} = useForm<IReviewFormInputs>();
     const [errorMessage, setErrorMessage] = useState("");
 
     const resetForm = ()=>{
         setStarRatingValue(0);
+        reset();
     }
 
     const formSubmitHandler = (data: IReviewFormInputs) => {
