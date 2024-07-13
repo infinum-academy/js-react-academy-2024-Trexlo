@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useSWRMutation from "swr/mutation";
 import NextLink from "next/link";
+import { useUser } from "@/hooks/useUser";
 
 
 export const LoginForm = () => {
@@ -18,26 +19,26 @@ export const LoginForm = () => {
             isSubmitting
         }
     } = useForm<ILogInFormInputs>();
+    const [user, setUser] = useUser();
     const router = useRouter();
     const {trigger} = useSWRMutation(apiPaths.login, loginMutator, {
         onSuccess: (data)=>{
+
             const client = data.headers.get('client');
-            if(client){
-                sessionStorage.setItem('client', client);
-            }
             const accessToken = data.headers.get('access-token');
-            if(accessToken){
-                sessionStorage.setItem('access-token', accessToken);
-            }
             const uid = data.headers.get('uid');
-            if(uid){
-                sessionStorage.setItem('uid', uid);
-            }
             const expiry = data.headers.get('expiry');
-            if(expiry){
-                sessionStorage.setItem('expiry', expiry);
+            if(client && accessToken && uid && expiry){
+              setUser({
+                accessToken: accessToken,
+                client: client,
+                uid: uid,
+                expiry: expiry
+              });
+              router.push('/shows');
+            }else{
+              setError("User data not complete.");
             }
-            router.push('/shows');
         },
         onError(err, key, config) {
             setError(err.message);

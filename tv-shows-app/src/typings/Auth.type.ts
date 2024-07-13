@@ -19,3 +19,9 @@ export interface IRegisterOrLogInHeaders {
     expiry: number;
     uid: string;
 }
+export interface IAuthUser{
+    client: string;
+    accessToken: string;
+    expiry: string;
+    uid: string;
+}
