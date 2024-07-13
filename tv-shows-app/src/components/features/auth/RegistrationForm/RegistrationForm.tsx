@@ -11,7 +11,13 @@ import useSWRMutation from "swr/mutation";
 
 
 export const RegistrationForm = () => {
-    const {register, handleSubmit} = useForm<IRegisterFormInputs>();
+    const {register, handleSubmit,
+        formState:{
+            isSubmitting
+        }
+    } = useForm<IRegisterFormInputs>();
+    const [error, setError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
     const {trigger} = useSWRMutation(apiPaths.registration, registerMutator, {
         onSuccess: (data)=>{
             console.log(data);
@@ -20,39 +26,46 @@ export const RegistrationForm = () => {
             setError(err.message);
         },
     });
-    const [error, setError] = useState("");
     const onRegister = async (data: IRegisterFormInputs) => {
-        if(data.password != data.repeatPassword){
-            setError("Passwords do not match");
+        if(data.password.length<8){
+            setPasswordError("Password must have at least 8 characters");
             return;
         }
+        if(data.password != data.repeatPassword){
+            setPasswordError("Passwords do not match");
+            return;
+        }
+        setPasswordError("");
         await trigger(data);
     };
 
     return (
         <Flex color={"white"} as={"form"} flexDir={"column"} onSubmit={handleSubmit(onRegister)}>
-            <FormControl isInvalid={error!=""}>
+            <FormControl isInvalid={error!="" }>
                 <InputGroup>
                     <InputLeftElement pointerEvents='none'>
                         <EmailIcon color='white' />
                     </InputLeftElement>
                     <Input type='email' isRequired={true} {...register('email')} placeholder='Email' />
                 </InputGroup>
-                <InputGroup flexDir={"column"}>
-                    <InputLeftElement pointerEvents='none'>
-                        <LockIcon color='white' />
-                    </InputLeftElement>
-                    <Input type='password' isRequired={true} {...register('password')} placeholder='Password' />
-                    <FormHelperText>At least 8 characters</FormHelperText>
-                </InputGroup>
-                <InputGroup>
-                    <InputLeftElement pointerEvents='none'>
-                        <LockIcon color='white' />
-                    </InputLeftElement>
-                    <Input type='password' isRequired={true} {...register('repeatPassword')} placeholder='Confirm password' />
-                </InputGroup>
+                <FormControl isInvalid={passwordError!="" }>
+                    <InputGroup flexDir={"column"}>
+                        <InputLeftElement pointerEvents='none'>
+                            <LockIcon color='white' />
+                        </InputLeftElement>
+                        <Input type='password' isRequired={true} isInvalid={passwordError!=""}  {...register('password')} placeholder='Password' />
+                        <FormHelperText>At least 8 characters</FormHelperText>
+                    </InputGroup>
+                    <InputGroup>
+                        <InputLeftElement pointerEvents='none'>
+                            <LockIcon color='white' />
+                        </InputLeftElement>
+                        <Input type='password' isRequired={true} isInvalid={passwordError!=""}  {...register('repeatPassword')} placeholder='Confirm password' />
+                    </InputGroup>
+                    <FormErrorMessage>{passwordError}</FormErrorMessage>
+                </FormControl>
                 <FormErrorMessage>{error}</FormErrorMessage>
-                <Button type="submit">SIGN UP</Button>
+                <Button isLoading={isSubmitting} loadingText="Signing up" type="submit">SIGN UP</Button>
             </FormControl>
         </Flex>
     )

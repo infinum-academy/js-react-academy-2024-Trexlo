@@ -11,8 +11,8 @@ export const ShowCard = ({show}: IShowCardProps) => {
     return(
         <Card as={NextLink} href={`/shows/${show.id}`} width={300} overflow={"hidden"} rounded={20} backgroundColor={"white"} color={"indigo"}>
             <Image alt="Show image" src={show.image_url || "https://fakeimg.pl/600x400?text=Show+Image"}></Image>
-            <CardBody>
-                <Stack mt='0' spacing='2'>
+            <CardBody display={"flex"}>
+                <Stack alignSelf={"end"} mt='0' spacing='2'>
                     <Heading size={"md"}>{show.title}</Heading>
                     <Flex gap={1} alignItems={"center"}>
                         <StarIcon color={"indigo"}/>

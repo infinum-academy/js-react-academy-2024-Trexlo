@@ -49,7 +49,6 @@ export const StarRating = ({label, onChange, value, register}: IStarRatingProps)
                           <StarRadioButton
                             key={index}
                             {...radio}
-                            register={register}
                             value={(index+1).toString()}
                             onHoverHandler={onHoverHandler}
                             changeValue={changeValue}
@@ -73,7 +72,6 @@ export const StarRating = ({label, onChange, value, register}: IStarRatingProps)
 }
 
 interface StarRadioProps extends UseRadioProps {
-    register: UseFormRegister<IReviewFormInputs>;
     currentValue: number;
     changeValue: (value:number)=>void;
     onHoverHandler: (val: number, hovering:boolean)=>void;

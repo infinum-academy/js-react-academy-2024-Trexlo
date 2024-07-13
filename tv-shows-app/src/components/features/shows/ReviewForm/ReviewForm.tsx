@@ -15,7 +15,11 @@ export interface IReviewFormInputs{
 export const ReviewForm = ({addShowReview}: IReviewFormProps) => { 
     const [starRatingValue, setStarRatingValue] = useState(0);
     const [rating, setRating] = useState(0);
-    const {register, handleSubmit, reset} = useForm<IReviewFormInputs>();
+    const {register, handleSubmit, reset,
+        formState:{
+            isSubmitting
+        }
+    } = useForm<IReviewFormInputs>();
     const [errorMessage, setErrorMessage] = useState("");
 
     const resetForm = ()=>{
@@ -72,7 +76,7 @@ export const ReviewForm = ({addShowReview}: IReviewFormProps) => {
                         label="Rating:"
                     />
                     <FormErrorMessage>{errorMessage}</FormErrorMessage>
-                    <Button width={["100%","100%","fit-content"]} rounded={20} type="submit">Post</Button>
+                    <Button width={["100%","100%","fit-content"]} isLoading={isSubmitting} loadingText="Submitting" rounded={20} type="submit">Post</Button>
                 </Flex>
             </FormControl>
         </form>

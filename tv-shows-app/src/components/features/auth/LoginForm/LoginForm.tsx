@@ -12,7 +12,11 @@ import useSWRMutation from "swr/mutation";
 
 
 export const LoginForm = () => {
-    const {register, handleSubmit} = useForm<ILogInFormInputs>();
+    const {register, handleSubmit, 
+        formState:{ 
+            isSubmitting
+        }
+    } = useForm<ILogInFormInputs>();
     const router = useRouter();
     const {trigger} = useSWRMutation(apiPaths.login, loginMutator, {
         onSuccess: (data)=>{
@@ -59,7 +63,7 @@ export const LoginForm = () => {
                     <Input type='password' isRequired={true} {...register('password')} placeholder='Password' />
                 </InputGroup>
                 <FormErrorMessage>{error}</FormErrorMessage>
-                <Button type="submit">LOG IN</Button>
+                <Button isLoading={isSubmitting} loadingText="Logging in" type="submit">LOG IN</Button>
             </FormControl>
         </Flex>
     )
