@@ -1,6 +1,6 @@
 import { IReview } from "@/typings/Review.type";
-import { Button, Flex, FormControl, FormErrorMessage, Input, Textarea } from "@chakra-ui/react";
-import { FormEvent, useState } from "react";
+import { Button, Flex, FormControl, FormErrorMessage, Textarea } from "@chakra-ui/react";
+import { useState } from "react";
 import { StarRating } from "../StarRating/StarRating";
 import { useForm } from "react-hook-form";
 

@@ -40,7 +40,6 @@ export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
 
     const handleReviews = (review: IReview, action: 'add' | 'remove') => {
         let newReviews:IReview[] = [];
-        console.log("handluing");
         
         if(action == 'add'){
             newReviews = [review, ...reviews];

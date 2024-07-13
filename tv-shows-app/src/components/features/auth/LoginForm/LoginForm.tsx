@@ -1,13 +1,13 @@
 'use client'
 import { apiPaths } from "@/app/data/api-paths";
 import { PasswordInput } from "@/components/shared/PasswordInput/PasswordInput";
-import { loginMutator, mutator, registerMutator } from "@/fetchers/mutators";
-import { ILogInFormInputs, IRegisterFormInputs } from "@/typings/Auth.type";
-import { EmailIcon, LockIcon } from "@chakra-ui/icons";
-import { Button, Flex, FormControl, FormErrorMessage, FormHelperText, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react";
+import { loginMutator } from "@/fetchers/mutators";
+import { ILogInFormInputs } from "@/typings/Auth.type";
+import { EmailIcon } from "@chakra-ui/icons";
+import { Button, Flex, FormControl, FormErrorMessage, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useSWRMutation from "swr/mutation";
 import NextLink from "next/link";
 

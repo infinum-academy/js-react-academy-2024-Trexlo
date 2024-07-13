@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
-import { SidebarNavigation } from "@/components/shared/SidebarNavigation/SidebarNavigation";
 import styles from "./page.module.css"
-import { Flex } from "@chakra-ui/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

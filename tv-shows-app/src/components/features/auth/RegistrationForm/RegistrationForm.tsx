@@ -1,14 +1,15 @@
 'use client'
 import { apiPaths } from "@/app/data/api-paths";
 import { PasswordInput } from "@/components/shared/PasswordInput/PasswordInput";
-import { mutator, registerMutator } from "@/fetchers/mutators";
+import { registerMutator } from "@/fetchers/mutators";
 import { IRegisterFormInputs } from "@/typings/Auth.type";
-import { EmailIcon, LockIcon } from "@chakra-ui/icons";
+import { EmailIcon } from "@chakra-ui/icons";
 import { Button, Flex, FormControl, FormErrorMessage, FormHelperText, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useSWRMutation from "swr/mutation";
 import NextLink from "next/link";
+import { useRouter } from "next/navigation";
 
 
 export const RegistrationForm = () => {
@@ -17,16 +18,18 @@ export const RegistrationForm = () => {
             isSubmitting
         }
     } = useForm<IRegisterFormInputs>();
+    const router = useRouter();
     const [error, setError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const {trigger} = useSWRMutation(apiPaths.registration, registerMutator, {
         onSuccess: (data)=>{
-            console.log(data);
+            router.push('/login');
         },
         onError(err, key, config) {
             setError(err.message);
         },
     });
+    
     const onRegister = async (data: IRegisterFormInputs) => {
         if(data.password.length<8){
             setPasswordError("Password must have at least 8 characters");
