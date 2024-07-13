@@ -1,5 +1,6 @@
 'use client'
 import { apiPaths } from "@/app/data/api-paths";
+import { PasswordInput } from "@/components/shared/PasswordInput/PasswordInput";
 import { loginMutator, mutator, registerMutator } from "@/fetchers/mutators";
 import { ILogInFormInputs, IRegisterFormInputs } from "@/typings/Auth.type";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
@@ -56,12 +57,7 @@ export const LoginForm = () => {
                     </InputLeftElement>
                     <Input type='email' isRequired={true} {...register('email')} placeholder='Email' />
                 </InputGroup>
-                <InputGroup flexDir={"column"}>
-                    <InputLeftElement pointerEvents='none'>
-                        <LockIcon color='white' />
-                    </InputLeftElement>
-                    <Input type='password' isRequired={true} {...register('password')} placeholder='Password' />
-                </InputGroup>
+                <PasswordInput isRequired={true} {...register('password')} placeholder='Password' />
                 <FormErrorMessage>{error}</FormErrorMessage>
                 <Button isLoading={isSubmitting} loadingText="Logging in" type="submit">LOG IN</Button>
             </FormControl>

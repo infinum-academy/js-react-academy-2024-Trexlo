@@ -1,5 +1,6 @@
 'use client'
 import { apiPaths } from "@/app/data/api-paths";
+import { PasswordInput } from "@/components/shared/PasswordInput/PasswordInput";
 import { mutator, registerMutator } from "@/fetchers/mutators";
 import { IRegisterFormInputs } from "@/typings/Auth.type";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
@@ -50,17 +51,11 @@ export const RegistrationForm = () => {
                 </InputGroup>
                 <FormControl isInvalid={passwordError!="" }>
                     <InputGroup flexDir={"column"}>
-                        <InputLeftElement pointerEvents='none'>
-                            <LockIcon color='white' />
-                        </InputLeftElement>
-                        <Input type='password' isRequired={true} isInvalid={passwordError!=""}  {...register('password')} placeholder='Password' />
+                        <PasswordInput type='password' isRequired={true} isInvalid={passwordError!=""}  {...register('password')} placeholder='Password' />
                         <FormHelperText>At least 8 characters</FormHelperText>
                     </InputGroup>
                     <InputGroup>
-                        <InputLeftElement pointerEvents='none'>
-                            <LockIcon color='white' />
-                        </InputLeftElement>
-                        <Input type='password' isRequired={true} isInvalid={passwordError!=""}  {...register('repeatPassword')} placeholder='Confirm password' />
+                        <PasswordInput type='password' isRequired={true} isInvalid={passwordError!=""}  {...register('repeatPassword')} placeholder='Confirm password' />
                     </InputGroup>
                     <FormErrorMessage>{passwordError}</FormErrorMessage>
                 </FormControl>
