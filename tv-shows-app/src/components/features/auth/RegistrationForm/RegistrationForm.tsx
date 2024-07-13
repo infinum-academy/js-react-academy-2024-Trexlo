@@ -44,29 +44,67 @@ export const RegistrationForm = () => {
     };
 
     return (
-        <Flex color={"white"} as={"form"} alignItems={"center"} flexDir={"column"} padding={5} gap={3} onSubmit={handleSubmit(onRegister)}>
-            <FormControl as={Flex} flexDir={"column"} alignItems={"center"} gap={5} isInvalid={error!="" }>
-                <InputGroup>
-                    <InputLeftElement pointerEvents='none'>
-                        <EmailIcon color='white' />
-                    </InputLeftElement>
-                    <Input type='email' isRequired={true} {...register('email')} placeholder='Email' _placeholder={{ color: 'inherit' }}  />
-                </InputGroup>
-                <FormControl isInvalid={passwordError!="" }>
-                    <InputGroup flexDir={"column"}>
-                        <PasswordInput type='password' isRequired={true} isInvalid={passwordError!=""}  {...register('password')} placeholder='Password' _placeholder={{ color: 'inherit' }} />
-                        <FormHelperText marginTop={0} mb={2} color={"whitesmoke"}>At least 8 characters</FormHelperText>
-                    </InputGroup>
-                    <InputGroup>
-                        <PasswordInput type='password' isRequired={true} isInvalid={passwordError!=""}  {...register('repeatPassword')} placeholder='Confirm password' _placeholder={{ color: 'inherit' }} />
-                    </InputGroup>
-                    <FormErrorMessage>{passwordError}</FormErrorMessage>
-                </FormControl>
-                <FormErrorMessage>{error}</FormErrorMessage>
-                <Button w={"50%"} isLoading={isSubmitting} loadingText="Signing up" type="submit">SIGN UP</Button>
-            </FormControl>
-            <Text>Already have an account? <Text as={NextLink} href={"/login"} fontWeight={"bold"} >Log in</Text></Text>
-
-        </Flex>
-    )
+      <Flex
+        color={"white"}
+        as={"form"}
+        alignItems={"center"}
+        flexDir={"column"}
+        padding={5}
+        gap={3}
+        onSubmit={handleSubmit(onRegister)}
+      >
+        <FormControl
+          as={Flex}
+          flexDir={"column"}
+          alignItems={"center"}
+          gap={5}
+          isInvalid={error != ""}
+        >
+          <InputGroup>
+            <InputLeftElement pointerEvents="none">
+              <EmailIcon color="white" />
+            </InputLeftElement>
+            <Input
+              type="email"
+              isRequired={true}
+              {...register("email")}
+              placeholder="Email"
+              _placeholder={{ color: "inherit" }}
+            />
+          </InputGroup>
+          <FormControl isInvalid={passwordError != ""}>
+            <InputGroup flexDir={"column"}>
+              <PasswordInput
+                type="password"
+                isRequired={true}
+                isInvalid={passwordError != ""}
+                {...register("password")}
+                placeholder="Password"
+                _placeholder={{ color: "inherit" }}
+              />
+              <FormHelperText marginTop={0} mb={2} color={"whitesmoke"}>At least 8 characters</FormHelperText>
+            </InputGroup>
+            <InputGroup>
+              <PasswordInput
+                type="password"
+                isRequired={true}
+                isInvalid={passwordError != ""}
+                {...register("repeatPassword")}
+                placeholder="Confirm password"
+                _placeholder={{ color: "inherit" }}
+              />
+            </InputGroup>
+            <FormErrorMessage>{passwordError}</FormErrorMessage>
+          </FormControl>
+          <FormErrorMessage>{error}</FormErrorMessage>
+          <Button
+            w={"50%"}
+            isLoading={isSubmitting}
+            loadingText="Signing up"
+            type="submit"
+          >SIGN UP</Button>
+        </FormControl>
+        <Text>Already have an account? <Text as={NextLink} href={"/login"} fontWeight={"bold"}>Log in</Text></Text>
+      </Flex>
+    );
 }
