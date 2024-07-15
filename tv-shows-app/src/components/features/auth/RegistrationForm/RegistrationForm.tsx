@@ -13,33 +13,39 @@ import { useRouter } from "next/navigation";
 
 
 export const RegistrationForm = () => {
-    const {register, handleSubmit,
+    const {register, handleSubmit, setError, clearErrors,
         formState:{
-            isSubmitting
+            isSubmitting,
+            errors,
         }
     } = useForm<IRegisterFormInputs>();
     const router = useRouter();
-    const [error, setError] = useState("");
-    const [passwordError, setPasswordError] = useState("");
+    
     const {trigger} = useSWRMutation(apiPaths.registration, registerMutator, {
         onSuccess: (data)=>{
             router.push('/login');
         },
         onError(err, key, config) {
-            setError(err.message);
+            setError("root",{type: "validate", message: err.message});
         },
     });
 
     const onRegister = async (data: IRegisterFormInputs) => {
         if(data.password.length<8){
-            setPasswordError("Password must have at least 8 characters");
+            setError('password',{
+              type: "validate",
+              message: "Password must have at least 8 characters",
+            });
             return;
         }
         if(data.password != data.repeatPassword){
-            setPasswordError("Passwords do not match");
+            setError('repeatPassword',{
+              type: "validate",
+              message: "Passwords do not match",
+            });
             return;
         }
-        setPasswordError("");
+        clearErrors(['password','repeatPassword']);
         await trigger(data);
     };
 
@@ -58,7 +64,7 @@ export const RegistrationForm = () => {
           flexDir={"column"}
           alignItems={"center"}
           gap={5}
-          isInvalid={error != ""}
+          isInvalid={errors.root && errors.root.message != ""}
         >
           <InputGroup>
             <InputLeftElement pointerEvents="none">
@@ -72,12 +78,15 @@ export const RegistrationForm = () => {
               _placeholder={{ color: "inherit" }}
             />
           </InputGroup>
-          <FormControl isInvalid={passwordError != ""}>
+          <FormControl isInvalid={
+               (errors.password && errors.password.message != "")
+            || (errors.repeatPassword && errors.repeatPassword.message != "")
+          }>
             <InputGroup flexDir={"column"}>
               <PasswordInput
                 type="password"
                 isRequired={true}
-                isInvalid={passwordError != ""}
+                isInvalid={errors.password && errors.password.message != ""}
                 {...register("password")}
                 placeholder="Password"
                 _placeholder={{ color: "inherit" }}
@@ -88,19 +97,19 @@ export const RegistrationForm = () => {
               <PasswordInput
                 type="password"
                 isRequired={true}
-                isInvalid={passwordError != ""}
+                isInvalid={errors.repeatPassword && errors.repeatPassword.message != ""}
                 {...register("repeatPassword")}
                 placeholder="Confirm password"
                 _placeholder={{ color: "inherit" }}
               />
             </InputGroup>
-            <FormErrorMessage>{passwordError}</FormErrorMessage>
+            <FormErrorMessage>{errors.password?.message} {errors.repeatPassword?.message}</FormErrorMessage>
           </FormControl>
-          <FormErrorMessage>{error}</FormErrorMessage>
+          <FormErrorMessage>{errors.root?.message}</FormErrorMessage>
           <Button
             w={"50%"}
             isLoading={isSubmitting}
-            loadingText="Signing up"
+            loadingText="Signing up"  
             type="submit"
           >SIGN UP</Button>
         </FormControl>

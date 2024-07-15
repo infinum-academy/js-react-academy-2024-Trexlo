@@ -14,9 +14,10 @@ import { useUser } from "@/hooks/useUser";
 
 
 export const LoginForm = () => {
-    const {register, handleSubmit, 
+    const {register, handleSubmit, setError,
         formState:{ 
-            isSubmitting
+            isSubmitting,
+            errors
         }
     } = useForm<ILogInFormInputs>();
     const [user, setUser] = useUser();
@@ -38,14 +39,13 @@ export const LoginForm = () => {
               });
               router.replace('/shows');
             }else{
-              setError("User data not complete.");
+              setError("root",{type:"validate", message: "User data not complete."});
             }
         },
         onError(err, key, config) {
-            setError(err.message);
+            setError("root", {type:"validate", message: err.message});
         },
     });
-    const [error, setError] = useState("");
     const onRegister = async (data: ILogInFormInputs) => {
         await trigger(data);
     };
@@ -65,7 +65,7 @@ export const LoginForm = () => {
           as={Flex}
           flexDir={"column"}
           gap={5}
-          isInvalid={error != ""}
+          isInvalid={errors.root && errors.root.message != ""}
         >
           <InputGroup>
             <InputLeftElement pointerEvents="none">
@@ -85,7 +85,7 @@ export const LoginForm = () => {
             placeholder="Password"
             _placeholder={{ color: "inherit" }}
           />
-          <FormErrorMessage>{error}</FormErrorMessage>
+          <FormErrorMessage>{errors.root?.message}</FormErrorMessage>
           <Button
             w={"50%"}
             isLoading={isSubmitting}
