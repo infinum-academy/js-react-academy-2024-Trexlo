@@ -1,9 +1,9 @@
 'use client';
 import { useUser } from "@/hooks/useUser";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 
 export default function LogOut() {
   const [user, setUser] = useUser();
   setUser(undefined)
-  redirect('/login');
+  redirect('/login', RedirectType.replace);
 }

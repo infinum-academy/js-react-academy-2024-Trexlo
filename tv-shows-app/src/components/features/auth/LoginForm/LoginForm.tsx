@@ -28,6 +28,7 @@ export const LoginForm = () => {
             const accessToken = data.headers.get('access-token');
             const uid = data.headers.get('uid');
             const expiry = data.headers.get('expiry');
+
             if(client && accessToken && uid && expiry){
               setUser({
                 accessToken: accessToken,
@@ -35,7 +36,7 @@ export const LoginForm = () => {
                 uid: uid,
                 expiry: expiry
               });
-              router.push('/shows');
+              router.replace('/shows');
             }else{
               setError("User data not complete.");
             }

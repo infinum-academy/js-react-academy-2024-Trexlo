@@ -18,10 +18,10 @@ export const AuthRedirect = ({to, condition}: IAuthRedirectProps) =>{
             router.push('/logout');
         }
         if(!user && condition === 'isLoggedOut'){
-            router.push(to);
+            router.replace(to);
         }
         if(user && condition === 'isLoggedIn'){
-            router.push(to);
+            router.replace(to);
         }
     }, [router, condition, to, user]);
 

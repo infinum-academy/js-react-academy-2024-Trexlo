@@ -15,7 +15,7 @@ export interface IReviewFormInputs{
 export const ReviewForm = ({addShowReview}: IReviewFormProps) => { 
     const [starRatingValue, setStarRatingValue] = useState(0);
     const [rating, setRating] = useState(0);
-    const {register, handleSubmit, reset,
+    const {register, handleSubmit, reset, setValue,
         formState:{
             isSubmitting
         }
@@ -24,7 +24,11 @@ export const ReviewForm = ({addShowReview}: IReviewFormProps) => {
 
     const resetForm = ()=>{
         setStarRatingValue(0);
-        reset();
+        setRating(0);
+        reset({
+            comment: "",
+            rating: undefined,
+        });
     }
 
     const formSubmitHandler = (data: IReviewFormInputs) => {
@@ -51,8 +55,9 @@ export const ReviewForm = ({addShowReview}: IReviewFormProps) => {
     const starRatingChange = (value: number | undefined, temporary: boolean) => {
         if(value){
             setStarRatingValue(value);
-            if(!temporary){
+            if(!temporary){                
                 setRating(value);
+                setValue('rating', value);
             }
         }else{
             setStarRatingValue(rating);
@@ -70,7 +75,6 @@ export const ReviewForm = ({addShowReview}: IReviewFormProps) => {
                         required
                     />
                     <StarRating
-                        register={register}
                         value={starRatingValue}
                         onChange={starRatingChange}
                         label="Rating:"

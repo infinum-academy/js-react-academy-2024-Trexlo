@@ -1,21 +1,17 @@
 import { Box, Flex, FormLabel, HStack, RadioGroup, useRadio, useRadioGroup, UseRadioProps } from "@chakra-ui/react"
 
 import { StarIcon } from '@chakra-ui/icons'
-import { UseFormRegister } from "react-hook-form";
-import { IReviewFormInputs } from "../ReviewForm/ReviewForm";
 
 interface IStarRatingProps {
-    register: UseFormRegister<IReviewFormInputs>;
     label: string | undefined;
     onChange: (value: number | undefined, temporary: boolean)=>void;
     value: number;
 }
 
-export const StarRating = ({label, onChange, value, register}: IStarRatingProps) => {
+export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
 
     const changeValue = (val: number) => {
         onChange(val, false);
-        register('rating', {value: val});
     }
 
     const onHoverHandler = (val: number, hovering:boolean)=>{
