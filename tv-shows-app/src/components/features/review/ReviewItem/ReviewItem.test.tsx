@@ -1,7 +1,8 @@
 import { IReview } from '@/typings/Review.type';
 import {render, screen} from '@testing-library/react'
-import { ReviewItem } from './ReviewItem';
+import { DeleteReviewItemButton } from '../DeleteReviewItemButton/DeleteReviewItemButton';
 import { useUser } from '../../../../hooks/useUser';
+import { ReviewItem } from './ReviewItem';
 
 jest.mock('../../../../hooks/useUser', () => ({
     useUser: () =>  [{
@@ -11,6 +12,12 @@ jest.mock('../../../../hooks/useUser', () => ({
         uid:"mail"
     }, jest.fn()]
 }));
+
+jest.mock('../DeleteReviewItemButton/DeleteReviewItemButton', () => {
+    return {
+        DeleteReviewItemButton: jest.fn().mockReturnValue(null),
+    };
+});
 
 describe('ReviewItem', () => {
     const mockReview:IReview = {
@@ -60,24 +67,9 @@ describe('ReviewItem', () => {
         expect(comment).toBeInTheDocument();
     });
 
-    it('should have delete button', async () => {
+    it('should have delete button component', async () => {
         render(<ReviewItem review={mockReview} />)
 
-        const button = await screen.findByText("Remove");
-
-        expect(button).toBeInTheDocument();
+        expect(DeleteReviewItemButton).toHaveBeenCalled();
     });
-
-    // it('should call removeReview on click once with correct data', () => {
-    //     const mockOnDelete = jest.fn();
-
-    //     render(<ReviewItem review={mockReview} removeReview={mockOnDelete}/>);
-
-    //     const button = screen.getByText("Remove");
-    //     button.click();
-
-    //     expect(mockOnDelete).toHaveBeenCalled();
-    //     expect(mockOnDelete).toHaveBeenCalledTimes(1);
-    //     expect(mockOnDelete).toHaveBeenCalledWith(mockReview, 'remove');
-    // });
 })  
