@@ -1,5 +1,5 @@
 import { IShow } from '@/typings/Show.type';
-import {render, screen} from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { ShowsList } from './ShowsList';
 import { ShowCard } from "../ShowCard/ShowCard";
 

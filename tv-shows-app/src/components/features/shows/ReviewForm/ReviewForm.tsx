@@ -1,4 +1,4 @@
-import { IReview, IReviewFormInputs } from "@/typings/Review.type";
+import { IReviewFormInputs } from "@/typings/Review.type";
 import { Button, Flex, FormControl, FormErrorMessage, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
 import { StarRating } from "../StarRating/StarRating";
@@ -9,11 +9,10 @@ import { mutate } from "swr";
 import { createReview } from "@/fetchers/show";
 
 interface IReviewFormProps{
-    addShowReview : (review: IReviewFormInputs, action: 'add' | 'remove') => void;
-    showId: number;
+        showId: number;
 }
 
-export const ReviewForm = ({addShowReview, showId}: IReviewFormProps) => { 
+export const ReviewForm = ({showId}: IReviewFormProps) => { 
 
     const { trigger } = useSWRMutation(apiPaths.reviews, createReview,
         {
@@ -26,8 +25,6 @@ export const ReviewForm = ({addShowReview, showId}: IReviewFormProps) => {
             }
         }
     );
-
-
 
     const [starRatingValue, setStarRatingValue] = useState(0);
     const [rating, setRating] = useState(0);
@@ -63,9 +60,6 @@ export const ReviewForm = ({addShowReview, showId}: IReviewFormProps) => {
             rating: data.rating,
         };
 
-        // addShowReview (newReview, 'add');
-        console.log(newReview);
-        
         await trigger(newReview);
         resetForm();
     } 
@@ -83,30 +77,40 @@ export const ReviewForm = ({addShowReview, showId}: IReviewFormProps) => {
     }
 
     return (
-        <form  onSubmit={handleSubmit(formSubmitHandler)}>
-            <FormControl isInvalid={errors.root && errors.root.message != ""}> 
-            <Flex flexDirection={"column"} gap={5}>
-                <FormControl isInvalid={errors.comment && errors.comment.message != ""}> 
-                    <Textarea
-                        {...register('comment')}
-                        backgroundColor={"white"}
-                        placeholder='Add comment'
-                        required
-                    />
-                    <FormErrorMessage>{errors.comment?.message}</FormErrorMessage>
-                </FormControl>
-                <FormControl isInvalid={errors.rating && errors.rating.message != ""}> 
-                    <StarRating
-                        value={starRatingValue}
-                        onChange={starRatingChange}
-                        label="Rating:"
-                    />
-                    <FormErrorMessage>{errors.rating?.message}</FormErrorMessage>
-                </FormControl>
-                    <FormErrorMessage>{errors.root?.message}</FormErrorMessage>
-                    <Button width={["100%","100%","fit-content"]} isLoading={isSubmitting} loadingText="Submitting" rounded={20} type="submit">Post</Button>
-                </Flex>
+      <form onSubmit={handleSubmit(formSubmitHandler)}>
+        <FormControl isInvalid={errors.root && errors.root.message != ""}>
+          <Flex flexDirection={"column"} gap={5}>
+            <FormControl
+              isInvalid={errors.comment && errors.comment.message != ""}
+            >
+              <Textarea
+                {...register("comment")}
+                backgroundColor={"white"}
+                placeholder="Add comment"
+                required
+              />
+              <FormErrorMessage>{errors.comment?.message}</FormErrorMessage>
             </FormControl>
-        </form>
+            <FormControl
+              isInvalid={errors.rating && errors.rating.message != ""}
+            >
+              <StarRating
+                value={starRatingValue}
+                onChange={starRatingChange}
+                label="Rating:"
+              />
+              <FormErrorMessage>{errors.rating?.message}</FormErrorMessage>
+            </FormControl>
+            <FormErrorMessage>{errors.root?.message}</FormErrorMessage>
+            <Button
+              width={["100%", "100%", "fit-content"]}
+              isLoading={isSubmitting}
+              loadingText="Submitting"
+              rounded={20}
+              type="submit"
+            >Post</Button>
+          </Flex>
+        </FormControl>
+      </form>
     );
 }

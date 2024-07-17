@@ -4,6 +4,7 @@ import { loginMutator } from '../../../../fetchers/mutators';
 import { act } from 'react';
 import { apiPaths } from '@/app/data/api-paths';
 import { ILogInFormInputs } from '@/typings/Auth.type';
+
 jest.mock("next/navigation", () => ({
     useRouter() {
       return {

@@ -5,12 +5,10 @@ import { registerMutator } from "@/fetchers/mutators";
 import { IRegisterFormInputs } from "@/typings/Auth.type";
 import { EmailIcon } from "@chakra-ui/icons";
 import { Button, Flex, FormControl, FormErrorMessage, FormHelperText, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useSWRMutation from "swr/mutation";
 import NextLink from "next/link";
 import { useRouter } from "next/navigation";
-
 
 export const RegistrationForm = () => {
     const {register, handleSubmit, setError, clearErrors,

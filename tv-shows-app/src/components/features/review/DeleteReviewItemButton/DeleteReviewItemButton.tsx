@@ -1,9 +1,7 @@
 import { apiPaths } from "@/app/data/api-paths";
 import { deleteReview } from "@/fetchers/show";
 import { CloseIcon } from "@chakra-ui/icons";
-import { Button, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
-import { color } from "framer-motion";
-import { title } from "process";
+import { Button, IconButton, Modal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
 

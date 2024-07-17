@@ -1,6 +1,7 @@
-import { ShowsTopListContainer } from "@/components/features/shows/ShowsListContainer/ShowsTopListContainer";
+import { apiPaths } from "@/app/data/api-paths";
+import { ShowsListContainer } from "@/components/features/shows/ShowsListContainer/ShowsListContainer";
 
 export default function TopShowsPage() {
-  return <ShowsTopListContainer/>
+  return <ShowsListContainer url={apiPaths.topShows}/>
 }
 

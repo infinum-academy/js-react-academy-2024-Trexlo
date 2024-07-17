@@ -1,12 +1,14 @@
 import { IReview } from '@/typings/Review.type';
-import {render, screen} from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { ReviewItem } from '../ReviewItem/ReviewItem';
 import { ReviewList } from './ReviewList';
+
 jest.mock('../ReviewItem/ReviewItem', () => {
     return {
         ReviewItem: jest.fn().mockReturnValue(null),
     };
 });
+
 describe('ReviewList', () => {
     const mockReviews:IReview[] = [
         {

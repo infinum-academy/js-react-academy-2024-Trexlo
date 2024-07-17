@@ -1,10 +1,6 @@
 import { IReview } from "@/typings/Review.type";
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
 import { StarRating } from "../../shows/StarRating/StarRating";
-import useSWRMutation from "swr/mutation";
-import { mutate } from "swr";
-import { apiPaths } from "@/app/data/api-paths";
-import { deleteReview } from "@/fetchers/show";
 import { useUser } from "@/hooks/useUser";
 import { useState } from "react";
 import { EditReviewForm } from "../../shows/EditReviewForm/EditReviewForm";
@@ -18,19 +14,20 @@ export const ReviewItem = ({review}: IReviewProps) => {
     const [user, setUser] = useUser();
     const [isEditing, setIsEditing] = useState<Boolean>(false);
 
-    return (<>
-         {
-            isEditing && 
-            <EditReviewForm onFinishEdit={()=>setIsEditing(false)} review={review} />
-         }
-         {
+    return (
+        <>
+        {
+        isEditing && 
+        <EditReviewForm onFinishEdit={()=>setIsEditing(false)} review={review} />
+        }
+        {
             !isEditing && 
             <Flex 
-             backgroundColor={"purple.900"} 
-             rounded={20} 
-             flexDirection={"column"} 
-             gap={3} 
-             padding={5}>
+                backgroundColor={"purple.900"} 
+                rounded={20} 
+                flexDirection={"column"} 
+                gap={3} 
+                padding={5}>
                 <Flex 
                     height={10} 
                     alignItems={"center"} 
@@ -41,16 +38,16 @@ export const ReviewItem = ({review}: IReviewProps) => {
                         objectFit={"cover"} 
                         alt="user image" 
                         src={review.user.image_url || "https://fakeimg.pl/100x100?text=:)"}
-                        ></Image>
+                        />
                     <Text>{review.user.email}</Text>
                 </Flex>
                 <Text>{review.comment}</Text>
                 <Text>{review.rating} / 5</Text>
-                <StarRating label={undefined} onChange={()=>{}} value={review.rating}></StarRating>
+                <StarRating label={undefined} onChange={()=>{}} value={review.rating} />
                 {(review.user.email == user?.uid)
                     &&
                     <Flex gap={3}>
-                        <DeleteReviewItemButton reviewId={review.id} showId={review.show_id.toString()}/>
+                        <DeleteReviewItemButton reviewId={review.id} showId={review.show_id.toString()} />
                         <Button
                             w={["100%", "100%", "fit-content"]}
                             backgroundColor={"white"}

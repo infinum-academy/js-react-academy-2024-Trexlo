@@ -1,13 +1,10 @@
 'use client';
-import { IReview, IReviewFormInputs } from "@/typings/Review.type";
 import { ReviewList } from "../../review/ReviewList/ReviewList";
-import { useEffect, useState } from "react";
 import { ReviewForm } from "../ReviewForm/ReviewForm";
 import { Flex, Spinner, Text } from "@chakra-ui/react";
 import useSWR from "swr";
 import { getReviews } from "@/fetchers/show";
 import { apiPaths } from "@/app/data/api-paths";
-import useSWRMutation from "swr/mutation";
 
 interface IShowReviewSectionProps{
     showId: string;
@@ -30,10 +27,10 @@ function loading(){
 
 export const ShowReviewSection = ({showId}:IShowReviewSectionProps) =>{
     if(!showId) return loading();
+    
     const { data, error, isLoading } = useSWR(apiPaths.showReviews(showId), getReviews);
 
 	const shows = data?.reviews || [] ;
-    console.log(data);
     
 	if (error) {
 		return <Text>An error occurred</Text>;
@@ -42,10 +39,11 @@ export const ShowReviewSection = ({showId}:IShowReviewSectionProps) =>{
 	if (isLoading || !data) {
         return loading();
 	}
+
     return (
         <Flex flexDir={"column"} gap={10}>
-            <ReviewForm addShowReview={()=>{}} showId={parseInt(showId)}></ReviewForm>
-            <ReviewList reviews={data.reviews}></ReviewList>
+            <ReviewForm showId={parseInt(showId)}></ReviewForm>
+            <ReviewList reviews={shows}></ReviewList>
         </Flex>
     );
 }

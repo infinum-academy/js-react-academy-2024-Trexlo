@@ -1,4 +1,3 @@
-import { apiPaths } from '@/app/data/api-paths';
 import { fetcher } from '@/fetchers/fetcher';
 import { IReview, IReviewFormInputs } from '@/typings/Review.type';
 import { IShow } from '@/typings/Show.type';

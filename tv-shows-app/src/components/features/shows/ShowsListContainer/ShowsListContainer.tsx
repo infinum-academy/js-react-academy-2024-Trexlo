@@ -3,10 +3,13 @@ import { Flex, Spinner, Text } from "@chakra-ui/react";
 import useSWR from 'swr';
 import { ShowsList } from "@/components/shared/shows/ShowsList/ShowsList";
 import { getShows } from "@/fetchers/show";
-import { apiPaths } from "@/app/data/api-paths";
 
-export const ShowsAllListContainer = () => {
-  const { data, error, isLoading } = useSWR(apiPaths.allShows, getShows);
+interface IShowsListContainerProps{
+  url: string;
+}
+
+export const ShowsListContainer = ({url}: IShowsListContainerProps) => {
+  const { data, error, isLoading } = useSWR(url, getShows);
 
 	const shows = data?.shows || [] ;
 
@@ -30,6 +33,6 @@ export const ShowsAllListContainer = () => {
 	}
 
   return (
-        <ShowsList shows={shows}/>
+    <ShowsList shows={shows}/>
   );
 }

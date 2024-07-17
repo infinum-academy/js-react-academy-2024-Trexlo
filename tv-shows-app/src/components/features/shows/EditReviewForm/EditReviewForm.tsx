@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import useSWRMutation from "swr/mutation";
 import { apiPaths } from "@/app/data/api-paths";
 import { mutate } from "swr";
-import { createReview, editReview } from "@/fetchers/show";
+import { editReview } from "@/fetchers/show";
 
 interface IEditReviewFormProps{
     review: IReview;
@@ -14,7 +14,6 @@ interface IEditReviewFormProps{
 }
 
 export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => { 
-
     const { trigger } = useSWRMutation(apiPaths.review(review.id), editReview,
         {
             onSuccess: () => {
@@ -61,9 +60,6 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
             rating: data.rating,
         };
 
-        // addShowReview (newReview, 'add');
-        console.log(newReview);
-        
         await trigger(newReview);
         onFinishEdit();
         resetForm();
@@ -84,14 +80,13 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
     return (
 
         <Flex 
-        
-             as={"form"}
+            as={"form"}
             onSubmit={handleSubmit(formSubmitHandler)}
-             backgroundColor={"purple.900"} 
-             rounded={20} 
-             flexDirection={"column"} 
-             gap={3} 
-             padding={5}>
+            backgroundColor={"purple.900"} 
+            rounded={20} 
+            flexDirection={"column"} 
+            gap={3} 
+            padding={5}>
             <Flex 
                 height={10} 
                 alignItems={"center"} 
@@ -129,6 +124,8 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
                         backgroundColor={"white"}
                         color={"indigo"}
                         rounded={20}
+                        isLoading={isSubmitting}
+                        loadingText="Editing"  
                         type="submit"
                     >Edit</Button>
                     <Button

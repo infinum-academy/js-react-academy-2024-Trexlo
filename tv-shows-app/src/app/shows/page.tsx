@@ -1,5 +1,6 @@
-import { ShowsAllListContainer } from "@/components/features/shows/ShowsListContainer/ShowsAllListContainer";
+import { ShowsListContainer } from "@/components/features/shows/ShowsListContainer/ShowsListContainer";
+import { apiPaths } from "../data/api-paths";
 
 export default function AllShowsPage() {
-  return <ShowsAllListContainer/>
+  return <ShowsListContainer url={apiPaths.allShows}/>
 }

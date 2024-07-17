@@ -1,5 +1,4 @@
 import { ILogInFormInputs, IRegisterFormInputs, IUser } from "@/typings/Auth.type";
-import { IReview, IReviewFormInputs } from "@/typings/Review.type";
 
 export async function mutator<ARGS, RESPONSE>(url:string, {arg}:{arg: ARGS}, init?: RequestInit){
     let data = {};
