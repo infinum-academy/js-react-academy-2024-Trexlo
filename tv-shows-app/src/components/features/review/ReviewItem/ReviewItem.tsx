@@ -7,14 +7,16 @@ import { apiPaths } from "@/app/data/api-paths";
 import { deleteReview } from "@/fetchers/show";
 import { useUser } from "@/hooks/useUser";
 import { useState } from "react";
+import { EditReviewForm } from "../../shows/EditReviewForm/EditReviewForm";
+
 interface IReviewProps {
     review: IReview;
     removeReview: (review: IReview, action:'add' | 'remove') => void;
 }
 
 export const ReviewItem = ({review, removeReview}: IReviewProps) => {
-
     const [user, setUser] = useUser();
+    const [isEditing, setIsEditing] = useState<Boolean>(false);
 
     const { trigger } = useSWRMutation(apiPaths.review(review.id), deleteReview,
         {
@@ -29,43 +31,56 @@ export const ReviewItem = ({review, removeReview}: IReviewProps) => {
        await trigger();
     }
 
-    
-
-    return (
+    return (<>
+         {
+            isEditing && 
+            <EditReviewForm onFinishEdit={()=>setIsEditing(false)} review={review} />
+         }
+         {
+            !isEditing && 
             <Flex 
              backgroundColor={"purple.900"} 
              rounded={20} 
              flexDirection={"column"} 
              gap={3} 
              padding={5}>
-            <Flex 
-                height={10} 
-                alignItems={"center"} 
-                gap={3}>
-                <Image 
-                    rounded={20} 
-                    height={"100%"} 
-                    objectFit={"cover"} 
-                    alt="user image" 
-                    src={review.user.image_url || "https://fakeimg.pl/100x100?text=:)"}
-                    ></Image>
-                <Text>{review.user.email}</Text>
-            </Flex>
-            <Text>{review.comment}</Text>
-            <Text>{review.rating} / 5</Text>
-            <StarRating label={undefined} onChange={()=>{}} value={review.rating}></StarRating>
-            {(review.user.email == user?.uid)
-                &&
-                <Flex gap={3}>
-                    <Button
-                        w={["100%", "100%", "fit-content"]}
-                        backgroundColor={"white"}
-                        color={"indigo"}
-                        rounded={20}
-                        onClick={() => onDelete()}
-                    >Remove</Button>
+                <Flex 
+                    height={10} 
+                    alignItems={"center"} 
+                    gap={3}>
+                    <Image 
+                        rounded={20} 
+                        height={"100%"} 
+                        objectFit={"cover"} 
+                        alt="user image" 
+                        src={review.user.image_url || "https://fakeimg.pl/100x100?text=:)"}
+                        ></Image>
+                    <Text>{review.user.email}</Text>
+                </Flex>
+                <Text>{review.comment}</Text>
+                <Text>{review.rating} / 5</Text>
+                <StarRating label={undefined} onChange={()=>{}} value={review.rating}></StarRating>
+                {(review.user.email == user?.uid)
+                    &&
+                    <Flex gap={3}>
+                        <Button
+                            w={["100%", "100%", "fit-content"]}
+                            backgroundColor={"white"}
+                            color={"indigo"}
+                            rounded={20}
+                            onClick={() => onDelete()}
+                        >Remove</Button>
+                        <Button
+                            w={["100%", "100%", "fit-content"]}
+                            backgroundColor={"white"}
+                            color={"indigo"}
+                            rounded={20}
+                            onClick={() => setIsEditing(true)}
+                        >Edit</Button>
                 </Flex>
             }
-        </Flex>
+            </Flex>
+        }
+        </>
     );
 }

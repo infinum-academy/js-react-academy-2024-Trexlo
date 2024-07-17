@@ -77,3 +77,16 @@ export function deleteReview(url: string){
 		}
 	});
 }
+
+export function editReview(url: string, {arg}:{arg:IReviewFormInputs}){
+	const user = getUserData();
+    return mutator<IReviewFormInputs, IReview>(url, {arg},  {
+		method: 'PATCH',
+		headers:{
+			'Content-type': 'application/json',
+			'client': user.client,
+			'access-token': user.accessToken,
+			'uid': user.uid,
+		}
+	});
+}
