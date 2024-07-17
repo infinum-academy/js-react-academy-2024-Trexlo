@@ -1,4 +1,4 @@
-import {fireEvent, render, screen} from '@testing-library/react'
+import {fireEvent, render, screen, waitFor} from '@testing-library/react'
 import { RegistrationForm } from './RegistrationForm';
 import { act } from 'react';
 
@@ -43,42 +43,47 @@ describe('RegistrationForm', () => {
         expect(button).toBeInTheDocument();
     });
 
-    it('should display error when password is too short',() => {
+    it('should display error when password is too short', async () => {
         act(() => render(<RegistrationForm />));
 
         const email = screen.getByPlaceholderText("Email");
-        fireEvent.input(email, {target: {value: 'test@test.com'}});
+        act(() => fireEvent.input(email, {target: {value: 'test@test.com'}}));
 
         const input = screen.getByPlaceholderText("Password");
-        fireEvent.input(input, {target: {value: '123'}});
+        act(() => fireEvent.input(input, {target: {value: '123'}}));
+
+        const repeatInput = screen.getByPlaceholderText("Confirm password");
+        act(() => fireEvent.input(repeatInput, {target: {value: '123'}}));
 
         const button = screen.getByText("SIGN UP");
-        act(() => button.dispatchEvent(new MouseEvent('click', {bubbles: true})));
-    
-        setTimeout(() => {
+        act(() => button.click());
+        
+        await waitFor(() => {
             const error = screen.getByText("Password must have at least 8 characters");
             expect(error).toBeInTheDocument();
-        }, 200);
+        }, {interval:50, timeout:500})
+
     });
 
-    it('should display error when passwords do not match', () => {
+    it('should display error when passwords do not match', async () => {
         render(<RegistrationForm />);
 
         const email = screen.getByPlaceholderText("Email");
-        fireEvent.change(email, {target: {value: 'test@test.com'}});
+        act(() => fireEvent.change(email, {target: {value: 'test@test.com'}}));
+
 
         const input = screen.getByPlaceholderText("Password");
-        fireEvent.input(input, {target: {value: '123456789'}});
+        act(() => fireEvent.input(input, {target: {value: '123456789'}}));
 
         const repeatInput = screen.getByPlaceholderText("Confirm password");
-        fireEvent.input(repeatInput, {target: {value: '123456789111'}});
+        act(() => fireEvent.input(repeatInput, {target: {value: '123456789111'}}));
 
         const button = screen.getByText("SIGN UP");
-        act(() => button.dispatchEvent(new MouseEvent('click', {bubbles: true})));
+        act(() => button.click());
         
-        setTimeout(() => {
+        await waitFor(() => {
             const error = screen.getByText("Passwords do not match");
             expect(error).toBeInTheDocument();
-        }, 200);
+        });
     });
 })  
