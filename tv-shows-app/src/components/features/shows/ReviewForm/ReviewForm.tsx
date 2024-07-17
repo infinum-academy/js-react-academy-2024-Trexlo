@@ -28,7 +28,7 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
 
     const [starRatingValue, setStarRatingValue] = useState(0);
     const [rating, setRating] = useState(0);
-    const {register, handleSubmit, reset, setValue, setError,
+    const {register, handleSubmit, reset, setValue, setError, clearErrors,
         formState:{
             isSubmitting,
             errors
@@ -53,6 +53,7 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
             }
             return;
         }
+        clearErrors(['comment', 'rating']);
 
         const newReview: IReviewFormInputs = {
             show_id: showId,
@@ -69,6 +70,7 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
             setStarRatingValue(value);
             if(!temporary){                
                 setRating(value);
+                clearErrors('rating');
                 setValue('rating', value);
             }
         }else{
