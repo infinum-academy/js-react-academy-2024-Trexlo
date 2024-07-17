@@ -16,7 +16,7 @@ jest.mock('swr', () => {
 	};
 });
 
-describe('DeleteTodoButton', () => {
+describe('DeleteReviewItemButton', () => {
 	it('should render button and open modal on click with yes and no buttons', async () => {
 		render(<DeleteReviewItemButton reviewId='1' showId='2' />);
 
