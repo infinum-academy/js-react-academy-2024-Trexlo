@@ -34,9 +34,9 @@ describe('ReviewList', () => {
     ];
 
     it('should call ReviewItem with appropriate props', ()=>{
-        render(<ReviewList reviews={mockReviews} removeReview={jest.fn()}/>)
+        render(<ReviewList reviews={mockReviews} />)
         mockReviews.forEach((review, index) => {
-            expect(ReviewItem).toHaveBeenCalledWith(review, expect.anything());
+            expect(ReviewItem).toHaveBeenCalledWith({review}, expect.anything());
         });
         expect(ReviewItem).toHaveBeenCalledTimes(mockReviews.length);
     })

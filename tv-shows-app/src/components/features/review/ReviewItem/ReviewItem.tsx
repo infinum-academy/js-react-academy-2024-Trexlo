@@ -8,28 +8,15 @@ import { deleteReview } from "@/fetchers/show";
 import { useUser } from "@/hooks/useUser";
 import { useState } from "react";
 import { EditReviewForm } from "../../shows/EditReviewForm/EditReviewForm";
+import { DeleteReviewItemButton } from "../DeleteReviewItemButton/DeleteReviewItemButton";
 
 interface IReviewProps {
     review: IReview;
-    removeReview: (review: IReview, action:'add' | 'remove') => void;
 }
 
-export const ReviewItem = ({review, removeReview}: IReviewProps) => {
+export const ReviewItem = ({review}: IReviewProps) => {
     const [user, setUser] = useUser();
     const [isEditing, setIsEditing] = useState<Boolean>(false);
-
-    const { trigger } = useSWRMutation(apiPaths.review(review.id), deleteReview,
-        {
-            onSuccess: () => {
-                mutate(apiPaths.showReviews(review.show_id.toString()));
-                mutate(apiPaths.show(review.show_id.toString()));
-            }
-        }
-    );
-
-    const onDelete = async () => {
-       await trigger();
-    }
 
     return (<>
          {
@@ -63,13 +50,7 @@ export const ReviewItem = ({review, removeReview}: IReviewProps) => {
                 {(review.user.email == user?.uid)
                     &&
                     <Flex gap={3}>
-                        <Button
-                            w={["100%", "100%", "fit-content"]}
-                            backgroundColor={"white"}
-                            color={"indigo"}
-                            rounded={20}
-                            onClick={() => onDelete()}
-                        >Remove</Button>
+                        <DeleteReviewItemButton reviewId={review.id} showId={review.show_id.toString()}/>
                         <Button
                             w={["100%", "100%", "fit-content"]}
                             backgroundColor={"white"}

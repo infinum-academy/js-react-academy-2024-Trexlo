@@ -26,7 +26,7 @@ describe('ReviewItem', () => {
     };
 
     it('should have correct user email', () => {
-        render(<ReviewItem review={mockReview} removeReview={()=>{}}/>)
+        render(<ReviewItem review={mockReview} />)
 
         const email = screen.getByText(mockReview.user.email);
 
@@ -35,7 +35,7 @@ describe('ReviewItem', () => {
     });
 
     it('should have correct rating', () => {
-        const {container} = render(<ReviewItem review={mockReview} removeReview={()=>{}}/>)
+        const {container} = render(<ReviewItem review={mockReview} />)
         
         const stars = container.querySelectorAll('svg');
 
@@ -53,7 +53,7 @@ describe('ReviewItem', () => {
     });
 
     it('should have correct comment', () => {
-        render(<ReviewItem review={mockReview} removeReview={()=>{}}/>)
+        render(<ReviewItem review={mockReview} />)
         
         const comment = screen.getByText(mockReview.comment);
 
@@ -61,7 +61,7 @@ describe('ReviewItem', () => {
     });
 
     it('should have delete button', async () => {
-        render(<ReviewItem review={mockReview} removeReview={()=>{}}/>)
+        render(<ReviewItem review={mockReview} />)
 
         const button = await screen.findByText("Remove");
 

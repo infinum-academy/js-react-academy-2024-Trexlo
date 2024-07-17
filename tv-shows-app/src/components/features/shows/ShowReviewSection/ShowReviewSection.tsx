@@ -10,7 +10,6 @@ import { apiPaths } from "@/app/data/api-paths";
 import useSWRMutation from "swr/mutation";
 
 interface IShowReviewSectionProps{
-    updateRating: (rating:number) => void;
     showId: string;
 }
 
@@ -29,61 +28,7 @@ function loading(){
       );
 }
 
-export const ShowReviewSection = ({updateRating, showId}:IShowReviewSectionProps) =>{
-    // const [reviews, setReviews] = useState([] as IReview[]);
-
-    // const loadReviewsFromLocalStorage = () => {
-    //     const reviewsString = localStorage.getItem('reviews');
-    //     if(!reviewsString){
-    //         return [];
-    //     }
-    //     return JSON.parse(reviewsString) as IReview[];
-    // }
-
-    // const calculateAverageReviews = (reviews: IReview[]) => {
-    //     return reviews.reduce((sum, r)=> r.rating + sum, 0)/reviews.length
-    // }
-
-    // useEffect(()=>{
-    //     const loadedReviews = loadReviewsFromLocalStorage();
-    //     setReviews(loadedReviews);
-    //     updateRating(calculateAverageReviews(loadedReviews));
-    // }, [updateRating]);
-
-    // const saveReviewsToLocalStorage = (reviews:IReview[])=>{
-    //     if(reviews.length != 0){
-    //         localStorage.setItem('reviews', JSON.stringify(reviews));
-    //     }else {
-    //         localStorage.removeItem('reviews');
-    //     }
-    // };
-
-    // const handleReviews = (review: IReviewFormInputs, action: 'add' | 'remove') => {
-    //     let newReviews:IReview[] = [];
-        
-    //     if(action == 'add'){
-    //         newReviews = [review, ...reviews];
-    //     }
-    //     if(action == 'remove'){
-    //         newReviews = reviews.filter(r => r != review);    
-    //     }
-
-    //     setReviews(newReviews);     
-    //     updateRating(calculateAverageReviews(newReviews));
-    //     saveReviewsToLocalStorage(newReviews);
-    // }
-
-	
-    // const handleReviews = (review: IReviewFormInputs, action: 'add' | 'remove') => {
-        
-    //     if(action == 'add'){
-    //         newReviews = [review, ...reviews];
-    //     }
-    //     if(action == 'remove'){
-    //         newReviews = reviews.filter(r => r != review);    
-    //     }
-    // }
-
+export const ShowReviewSection = ({showId}:IShowReviewSectionProps) =>{
     if(!showId) return loading();
     const { data, error, isLoading } = useSWR(apiPaths.showReviews(showId), getReviews);
 
@@ -100,7 +45,7 @@ export const ShowReviewSection = ({updateRating, showId}:IShowReviewSectionProps
     return (
         <Flex flexDir={"column"} gap={10}>
             <ReviewForm addShowReview={()=>{}} showId={parseInt(showId)}></ReviewForm>
-            <ReviewList reviews={data.reviews} removeReview={()=>{}}></ReviewList>
+            <ReviewList reviews={data.reviews}></ReviewList>
         </Flex>
     );
 }
