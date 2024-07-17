@@ -2,10 +2,11 @@
 import { Flex, Spinner, Text } from "@chakra-ui/react";
 import useSWR from 'swr';
 import { ShowsList } from "@/components/shared/shows/ShowsList/ShowsList";
-import { getTopShows } from "@/fetchers/show";
+import { getShows } from "@/fetchers/show";
+import { apiPaths } from "@/app/data/api-paths";
 
 export const ShowsTopListContainer = () => {
-  const { data, error, isLoading } = useSWR('/shows/top-rated', () => getTopShows());
+  const { data, error, isLoading } = useSWR(apiPaths.topShows, getShows);
 
 	const shows = data?.shows || [] ;
 

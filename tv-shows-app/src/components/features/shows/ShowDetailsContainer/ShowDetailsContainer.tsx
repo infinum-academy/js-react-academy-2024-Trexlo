@@ -7,10 +7,11 @@ import { useCallback, useState } from "react";
 import useSWR from 'swr';
 import { getShow } from "@/fetchers/show";
 import { useParams } from "next/navigation";
+import { apiPaths } from "@/app/data/api-paths";
 
 export const ShowDetailsContainer = () => {
     const params = useParams();
-    const { data, error, isLoading } = useSWR(`/shows/${params.id}`, () => getShow(params.id as string));
+    const { data, error, isLoading } = useSWR(apiPaths.show(params.id as string), getShow);
 
 	const show = (data) ? data.show : {} as IShow;
     const [showDetails, setShowDetails] = useState(show);
@@ -41,7 +42,7 @@ export const ShowDetailsContainer = () => {
                 marginTop={3}
             >Reviews</Heading>
             <Skeleton isLoaded={!isLoading}>
-                <ShowReviewSection updateRating={updateRating}></ShowReviewSection>
+                <ShowReviewSection updateRating={updateRating} showId={show.id}></ShowReviewSection>
             </Skeleton>
         </Flex>
   );
