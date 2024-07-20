@@ -26,17 +26,21 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
     );
 
     const [starRatingValue, setStarRatingValue] = useState(0);
-    const [rating, setRating] = useState(0);
-    const {register, handleSubmit, reset, setValue, setError, clearErrors,
+    const {register, handleSubmit, reset, setValue, setError, clearErrors, getValues,
         formState:{
             isSubmitting,
             errors
         }
-    } = useForm<IReviewFormInputs>();
+    } = useForm<IReviewFormInputs>({
+      defaultValues:{
+        comment:"",
+        rating:0,
+        show_id:showId
+      }
+    });
 
     const resetForm = ()=>{
         setStarRatingValue(0);
-        setRating(0);
         reset({
             comment: "",
             rating: undefined,
@@ -68,12 +72,11 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
         if(value){
             setStarRatingValue(value);
             if(!temporary){                
-                setRating(value);
                 clearErrors('rating');
                 setValue('rating', value);
             }
         }else{
-            setStarRatingValue(rating);
+            setStarRatingValue(getValues('rating'));
         }
     }
 
