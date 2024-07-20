@@ -1,11 +1,15 @@
 "use client"    
 import { navigationItems } from "@/app/data/navigation-items";
+import { useUser } from "@/hooks/useUser";
 import { Button, Flex, Heading } from "@chakra-ui/react"
 import NextLink from 'next/link';
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const SidebarNavigation = () => {
     const pathname = usePathname();
+    const router = useRouter();
+    const [user, setUser] = useUser();    
     
     return (
         <Flex alignItems={"stretch"} 
@@ -41,8 +45,11 @@ export const SidebarNavigation = () => {
               <Button 
                 ml={["auto","auto","initial"]} 
                 mt={["initial","initial","auto"]} 
-                as={NextLink} href={'/logout'} 
                 variant={"link"}
+                onClick={()=>{
+                  setUser(undefined)
+                  router.replace('/login');
+                }}
               >Log out</Button>
             </Flex>
         </Flex>
