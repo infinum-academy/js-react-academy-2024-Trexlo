@@ -12,9 +12,9 @@ export const ShowDetailsContainer = () => {
     const params = useParams();
     const { data, error, isLoading } = useSWR(`/shows/${params.id}`, () => getShow(params.id as string));
 
-	const show = data || {} as IShow;
+    const show = data?.show ?? {} as IShow;
     const [showDetails, setShowDetails] = useState(show);
-
+    
     const updateRating = useCallback((rating:number) => {
         setShowDetails((prevDetails) => ({
         ...prevDetails,

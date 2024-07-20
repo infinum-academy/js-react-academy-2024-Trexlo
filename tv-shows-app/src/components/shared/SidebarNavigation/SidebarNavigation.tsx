@@ -18,6 +18,7 @@ export const SidebarNavigation = () => {
             <Flex color={"white"} 
                   alignItems={"center"} 
                   h={["100px","100px","100vh"]} 
+                  w={["100%", "100%", "auto"]} 
                   zIndex={2} bgColor={"#1f004d"} 
                   gap={3} 
                   position={"fixed"} 

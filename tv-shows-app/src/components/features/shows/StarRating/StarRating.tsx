@@ -34,7 +34,7 @@ export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
             {
                 label &&
                 <RadioGroup 
-                    value={value.toString()} 
+                    value={value.toString()}  
                     onFocus={() => changeValue(value || 1)}
                     >
                     <HStack>
