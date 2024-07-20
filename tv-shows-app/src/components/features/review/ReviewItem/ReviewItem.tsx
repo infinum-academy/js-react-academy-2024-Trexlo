@@ -39,7 +39,7 @@ export const ReviewItem = ({review}: IReviewProps) => {
                         objectFit={"cover"} 
                         alt="user image" 
                         src={review.user.image_url || "https://fakeimg.pl/100x100?text=:)"}
-                        />
+                    />
                     <Text>{review.user.email}</Text>
                 </Flex>
                 <Text>{review.comment}</Text>
