@@ -20,7 +20,9 @@ export const ShowDetailsContainer = () => {
   
     return (
         <Flex 
-            w={["100%", "100%", "65vw"]} 
+            w={["95%", "95%", "100%"]}
+            padding={["0", "0", "31px"]} 
+            margin={"auto"}
             gap={3} 
             flexDirection={"column"}
             >

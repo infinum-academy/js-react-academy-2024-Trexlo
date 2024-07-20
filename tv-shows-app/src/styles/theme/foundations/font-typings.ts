@@ -9,26 +9,26 @@ export const fontWeights = {
 export const textStyles = {
     headline:{
       fontWeight: fontWeights.bold,
-      fontSize: "40pt"
+      fontSize: "40px"
     },
     title:{
       regular:{
         fontWeight: fontWeights.normal,
-        fontSize: "24pt"
+        fontSize: "24px"
       },
       bold:{
           fontWeight: fontWeights.bold,
-          fontSize: "24pt"
+          fontSize: "24px"
       },
     },
     body:{
       regular:{
         fontWeight: fontWeights.normal,
-        fontSize: "20pt"
+        fontSize: "20px"
       },
       bold:{
           fontWeight: fontWeights.bold,
-          fontSize: "20pt"
+          fontSize: "20px"
       },
     },
     subtitle:{
