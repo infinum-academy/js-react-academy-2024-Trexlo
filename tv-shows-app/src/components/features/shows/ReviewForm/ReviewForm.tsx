@@ -43,7 +43,7 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
         setStarRatingValue(0);
         reset({
             comment: "",
-            rating: undefined,
+            rating: 0,
         });
     }
     const formSubmitHandler = async (data: IReviewFormInputs) => {
