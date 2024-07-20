@@ -102,7 +102,6 @@ export const RegistrationForm = () => {
           </FormControl>
           <FormErrorMessage>{errors.root?.message}</FormErrorMessage>
           <Button
-            w={"50%"}
             isLoading={isSubmitting}
             loadingText="Signing up"  
             type="submit"

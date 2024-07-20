@@ -55,7 +55,6 @@ export const LoginForm = () => {
         as={"form"}
         width={"100%"}
         height={"100%"}
-        padding={5}
         flexDir={"column"}
         onSubmit={handleSubmit(onRegister)}
       >
@@ -84,7 +83,6 @@ export const LoginForm = () => {
           />
           <FormErrorMessage>{errors.root?.message}</FormErrorMessage>
           <Button
-            w={"50%"}
             isLoading={isSubmitting}
             loadingText="Logging in"
             type="submit"

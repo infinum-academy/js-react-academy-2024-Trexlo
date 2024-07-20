@@ -18,7 +18,7 @@ export default function AuthLayout({
         alignItems={"center"}
         color={"white"}
         background={"purple"}
-        padding={5}
+        padding={"56px"}
         rounded={20}
       > 
         <Heading>TV Shows APP</Heading>
