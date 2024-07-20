@@ -17,7 +17,7 @@ export default function AuthLayout({
         flexDir={"column"}
         alignItems={"center"}
         color={"white"}
-        background={"purple.800"}
+        background={"purple"}
         padding={5}
         rounded={20}
       > 
