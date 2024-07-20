@@ -64,41 +64,38 @@ export const RegistrationForm = () => {
           gap={5}
           isInvalid={errors.root && errors.root.message != ""}
         >
-          <InputGroup>
+          <InputGroup variant={"authInput"}>
             <InputLeftElement pointerEvents="none">
-              <EmailIcon color="white" />
+              <EmailIcon/>
             </InputLeftElement>
             <Input
               type="email"
               isRequired={true}
               {...register("email")}
               placeholder="Email"
-              _placeholder={{ color: "inherit" }}
             />
           </InputGroup>
           <FormControl isInvalid={
                (errors.password && errors.password.message != "")
             || (errors.repeatPassword && errors.repeatPassword.message != "")
           }>
-            <InputGroup flexDir={"column"}>
+            <InputGroup variant={"authInput"} flexDir={"column"}>
               <PasswordInput
                 type="password"
                 isRequired={true}
                 isInvalid={errors.password && errors.password.message != ""}
                 {...register("password")}
                 placeholder="Password"
-                _placeholder={{ color: "inherit" }}
               />
               <FormHelperText marginTop={0} mb={2} color={"whitesmoke"}>At least 8 characters</FormHelperText>
             </InputGroup>
-            <InputGroup>
+            <InputGroup variant={"authInput"}>
               <PasswordInput
                 type="password"
                 isRequired={true}
                 isInvalid={errors.repeatPassword && errors.repeatPassword.message != ""}
                 {...register("repeatPassword")}
                 placeholder="Confirm password"
-                _placeholder={{ color: "inherit" }}
               />
             </InputGroup>
             <FormErrorMessage>{errors.password?.message} {errors.repeatPassword?.message}</FormErrorMessage>
