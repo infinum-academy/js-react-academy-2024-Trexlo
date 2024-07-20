@@ -1,12 +1,13 @@
 "use client"    
 import { navigationItems } from "@/app/data/navigation-items";
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Heading, useDisclosure } from "@chakra-ui/react"
+import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, useDisclosure } from "@chakra-ui/react"
 import NextLink from 'next/link';
 import { usePathname } from "next/navigation";
 
 export const SidebarNavigationMobile = () => {
     const pathname = usePathname();
     const { isOpen, onOpen, onClose } = useDisclosure();
+    
     return (<>
       <Button colorScheme='blue' onClick={onOpen}>
         Open
