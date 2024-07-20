@@ -31,10 +31,10 @@ export const LoginForm = () => {
 
             if(client && accessToken && uid && expiry){
               setUser({
-                accessToken: accessToken,
-                client: client,
-                uid: uid,
-                expiry: expiry
+                accessToken,
+                client,
+                uid,
+                expiry
               });
               router.replace('/shows');
             }else{
