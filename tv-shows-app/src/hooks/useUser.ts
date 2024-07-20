@@ -4,16 +4,11 @@ import { useState } from "react";
 export const useUser = () => {
     const [user, setUser] = useState(() => {    
         if(typeof window !== "undefined"){
-            const client = sessionStorage.getItem("client");
-            const accessToken = sessionStorage.getItem("access-token");
-            const uid = sessionStorage.getItem("uid");
-            const expiry = sessionStorage.getItem("expiry");
-            if(client && accessToken && uid && expiry){
-                return {
-                    accessToken,
-                    client,
-                    expiry,
-                    uid
+            const userString =sessionStorage.getItem('user');
+            if(userString){
+                const parsedUser = JSON.parse(userString) as IAuthUser;
+                if(parsedUser.client && parsedUser.accessToken && parsedUser.uid && parsedUser.expiry){
+                    return parsedUser;
                 }
             }
         }
@@ -22,15 +17,9 @@ export const useUser = () => {
     
     const setUserValue = (userValues:IAuthUser | undefined) => {
         if(!userValues){
-            sessionStorage.removeItem('client');
-            sessionStorage.removeItem('access-token');
-            sessionStorage.removeItem('uid');
-            sessionStorage.removeItem('expiry');
+            sessionStorage.removeItem('user');
         }else{
-            sessionStorage.setItem("client", userValues.client)
-            sessionStorage.setItem("access-token", userValues.accessToken)
-            sessionStorage.setItem("uid", userValues.uid)
-            sessionStorage.setItem("expiry", userValues.expiry)
+            sessionStorage.setItem('user', JSON.stringify(userValues))
         }
         setUser(userValues);
     }

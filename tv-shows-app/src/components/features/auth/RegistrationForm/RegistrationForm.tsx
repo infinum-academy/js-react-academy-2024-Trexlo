@@ -26,6 +26,7 @@ export const RegistrationForm = () => {
         onError(err, key, config) {
             setError("root",{type: "validate", message: err.message});
         },
+        throwOnError: false
     });
 
     const onRegister = async (data: IRegisterFormInputs) => {

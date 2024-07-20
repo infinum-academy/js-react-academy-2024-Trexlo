@@ -44,8 +44,9 @@ export const LoginForm = () => {
         onError(err, key, config) {
             setError("root", {type:"validate", message: err.message});
         },
+        throwOnError: false
     });
-    const onRegister = async (data: ILogInFormInputs) => {
+    const onLogin = async (data: ILogInFormInputs) => {
         await trigger(data);
     };
 
@@ -57,7 +58,7 @@ export const LoginForm = () => {
         height={"100%"}
         padding={5}
         flexDir={"column"}
-        onSubmit={handleSubmit(onRegister)}
+        onSubmit={handleSubmit(onLogin)}
       >
         <FormControl
           alignItems={"center"}
