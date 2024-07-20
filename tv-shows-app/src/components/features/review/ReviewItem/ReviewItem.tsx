@@ -23,7 +23,7 @@ export const ReviewItem = ({review}: IReviewProps) => {
         {
             !isEditing && 
             <Flex 
-                backgroundColor={"purple.900"} 
+                backgroundColor={"purple"} 
                 rounded={20} 
                 flexDirection={"column"} 
                 gap={3} 
@@ -51,7 +51,7 @@ export const ReviewItem = ({review}: IReviewProps) => {
                         <Button
                             w={["100%", "100%", "fit-content"]}
                             backgroundColor={"white"}
-                            color={"indigo"}
+                            color={"purple"}
                             rounded={20}
                             onClick={() => setIsEditing(true)}
                         >Edit</Button>

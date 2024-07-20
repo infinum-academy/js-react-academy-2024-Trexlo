@@ -66,23 +66,21 @@ export const LoginForm = () => {
           gap={5}
           isInvalid={errors.root && errors.root.message != ""}
         >
-          <InputGroup>
+          <InputGroup variant="authInput">
             <InputLeftElement pointerEvents="none">
-              <EmailIcon color="white" />
+              <EmailIcon/>
             </InputLeftElement>
             <Input
               type="email"
               isRequired={true}
               {...register("email")}
               placeholder="Email"
-              _placeholder={{ color: "inherit" }}
             />
           </InputGroup>
           <PasswordInput
             isRequired={true}
             {...register("password")}
             placeholder="Password"
-            _placeholder={{ color: "inherit" }}
           />
           <FormErrorMessage>{errors.root?.message}</FormErrorMessage>
           <Button

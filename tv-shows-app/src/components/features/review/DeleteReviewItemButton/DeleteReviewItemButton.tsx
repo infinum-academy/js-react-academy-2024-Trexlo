@@ -31,7 +31,7 @@ export const DeleteReviewItemButton = ({reviewId, showId}: IDeleteReviewItemButt
             <Button
                 w={["100%", "100%", "fit-content"]}
                 backgroundColor={"white"}
-                color={"indigo"}
+                color={"purple"}
                 rounded={20}
                 onClick={onOpen}
             >Remove</Button>

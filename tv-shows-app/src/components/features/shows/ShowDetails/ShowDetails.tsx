@@ -8,7 +8,7 @@ interface IShowDetailsProps{
 
 export const ShowDetails = ({show}: IShowDetailsProps,) =>{
     return (
-        <Card mt={5} overflow={"hidden"} rounded={20} backgroundColor={"white"} color={"indigo"}>
+        <Card mt={5} overflow={"hidden"} rounded={20} backgroundColor={"white"} color={"purple"}>
             <Image alt="Show image" h={400} objectFit={"cover"} src={show.image_url || "https://fakeimg.pl/600x400?text=Show+Image"}></Image>
             <CardBody>
                 <Stack mt='4' spacing='4'>

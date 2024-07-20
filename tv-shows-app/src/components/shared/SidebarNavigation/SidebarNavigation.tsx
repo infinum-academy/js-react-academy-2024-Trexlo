@@ -19,7 +19,7 @@ export const SidebarNavigation = () => {
                   alignItems={"center"} 
                   h={["100px","100px","100vh"]} 
                   w={["100%", "100%", "auto"]} 
-                  zIndex={2} bgColor={"#1f004d"} 
+                  zIndex={2} bgColor={"darkPurple"} 
                   gap={3} 
                   position={"fixed"} 
                   padding={5} 

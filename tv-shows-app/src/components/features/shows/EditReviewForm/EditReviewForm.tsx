@@ -82,7 +82,7 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
         <Flex 
             as={"form"}
             onSubmit={handleSubmit(formSubmitHandler)}
-            backgroundColor={"purple.900"} 
+            backgroundColor={"purple"} 
             rounded={20} 
             flexDirection={"column"} 
             gap={3} 
@@ -105,7 +105,7 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
                 <Textarea
                     {...register('comment')}
                     backgroundColor={"white"}
-                    color={"indigo"}
+                    color={"purple"}
                     placeholder='Add comment'
                     defaultValue={review.comment}
                     required
@@ -122,7 +122,7 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
                     <Button
                         w={["100%", "100%", "fit-content"]}
                         backgroundColor={"white"}
-                        color={"indigo"}
+                        color={"purple"}
                         rounded={20}
                         isLoading={isSubmitting}
                         loadingText="Editing"  
@@ -131,7 +131,7 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
                     <Button
                         w={["100%", "100%", "fit-content"]}
                         backgroundColor={"white"}
-                        color={"indigo"}
+                        color={"purple"}
                         rounded={20}
                         onClick={() => onFinishEdit()}
                     >Cancel</Button>
