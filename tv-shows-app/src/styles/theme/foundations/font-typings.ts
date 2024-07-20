@@ -34,21 +34,21 @@ export const textStyles = {
     subtitle:{
       regular:{
         fontWeight: fontWeights.normal,
-        fontSize: "18pt"
+        fontSize: "20px"
       },
       bold:{
           fontWeight: fontWeights.bold,
-          fontSize: "18pt"
+          fontSize: "20px"
       },
     },
     smallCaption:{
       regular:{
         fontWeight: fontWeights.normal,
-        fontSize: "16pt"
+        fontSize: "16px"
       },
       bold:{
           fontWeight: fontWeights.bold,
-          fontSize: "16pt"
+          fontSize: "16px"
       },
     },
     button:{

@@ -7,12 +7,14 @@ import { radii } from "./foundations/radius";
 import Input from "./components/input";
 import Button from "./components/button";
 import { styles } from "./styles";
+import Card from "./components/card";
 
 const theme = extendTheme({
     styles,
     components:{
         Input,
-        Button
+        Button,
+        Card
     },
     colors,
     fonts,

@@ -1,3 +1,4 @@
 export const radii = {
-    authInputRadius: "9999px"
+    authInputRadius: "9999px",
+    cardRadius: "24px",
 }
