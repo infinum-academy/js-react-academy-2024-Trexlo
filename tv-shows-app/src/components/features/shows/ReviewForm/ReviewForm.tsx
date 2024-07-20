@@ -13,7 +13,6 @@ interface IReviewFormProps{
 }
 
 export const ReviewForm = ({showId}: IReviewFormProps) => { 
-
     const { trigger } = useSWRMutation(apiPaths.reviews, createReview,
         {
             onSuccess: () => {
