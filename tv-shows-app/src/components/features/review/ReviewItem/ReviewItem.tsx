@@ -27,7 +27,8 @@ export const ReviewItem = ({review}: IReviewProps) => {
                 rounded={20} 
                 flexDirection={"column"} 
                 gap={3} 
-                padding={5}>
+                padding={5}
+            >
                 <Flex 
                     height={10} 
                     alignItems={"center"} 
