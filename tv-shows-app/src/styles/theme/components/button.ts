@@ -9,6 +9,24 @@ const Button = defineStyleConfig({
         bg: "white",
         color: "purple",
         textStyle: "button"
+    },
+    variants:{
+        navigationButton:{
+            height: "44px",
+            width: "140px",
+            borderRadius: "full",
+            bg: "darkPurple",
+            color: "white",
+            textStyle: "title.regular"
+        },
+        navigationButtonActive:{
+            height: "44px",
+            width: "140px",
+            borderRadius: "full",
+            bg: "purple",
+            color: "white",
+            textStyle: "title.bold"
+        },
     }
 });
 
