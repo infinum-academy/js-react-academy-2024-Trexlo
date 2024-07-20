@@ -11,7 +11,7 @@ interface IReviewProps {
 }
 
 export const ReviewItem = ({review}: IReviewProps) => {
-    const [user, setUser] = useUser();
+    const [user] = useUser();
     const [isEditing, setIsEditing] = useState<Boolean>(false);
 
     return (
