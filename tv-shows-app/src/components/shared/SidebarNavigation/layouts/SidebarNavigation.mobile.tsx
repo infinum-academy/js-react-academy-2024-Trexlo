@@ -2,12 +2,15 @@
 import { navigationItems } from "@/app/data/navigation-items";
 import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Icon, IconButton, Image, useDisclosure } from "@chakra-ui/react"
 import NextLink from 'next/link';
-import { usePathname } from "next/navigation";
-import Logo from "../../../../assets/icons/logo.svg";
+import { usePathname, useRouter } from "next/navigation";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { useUser } from "@/hooks/useUser";
+
 export const SidebarNavigationMobile = () => {
     const pathname = usePathname();
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const router = useRouter();
+    const [user, setUser] = useUser();   
 
     return (<>
 
@@ -48,8 +51,11 @@ export const SidebarNavigationMobile = () => {
           </DrawerBody>
           <DrawerFooter placeContent={"start"}>
             <Button 
-                as={NextLink} href={'/logout'} 
                 variant={"navigationButtonActive"}
+                onClick={()=>{
+                  setUser(undefined)
+                  router.replace('/login');
+                }}
               >Log out</Button>
           </DrawerFooter>
         </DrawerContent>

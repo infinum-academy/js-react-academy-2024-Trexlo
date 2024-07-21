@@ -1,12 +1,15 @@
 "use client"    
 import { navigationItems } from "@/app/data/navigation-items";
-import { Button, Flex, Heading } from "@chakra-ui/react"
+import { useUser } from "@/hooks/useUser";
+import { Button, Flex, Heading, Image } from "@chakra-ui/react"
 import NextLink from 'next/link';
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export const SidebarNavigationDesktop = () => {
     const pathname = usePathname();
-    
+    const router = useRouter();
+    const [user, setUser] = useUser();    
+
     return (
             <Flex 
                   alignItems={"left"} 
@@ -25,7 +28,10 @@ export const SidebarNavigationDesktop = () => {
               <Heading 
                 display={["none","none", "block"]}
                 size={"md"}  
-              >TV shows APP</Heading>
+                mb={10}
+              >
+                <Image src="/images/logo.svg"/>
+              </Heading>
                 {
                   navigationItems.map((link, index) =>
                     <Button 
@@ -38,8 +44,11 @@ export const SidebarNavigationDesktop = () => {
                 }
               <Button 
                 mt={"auto"} 
-                as={NextLink} href={'/logout'} 
                 variant={"navigationButton"}
+                onClick={()=>{
+                  setUser(undefined)
+                  router.replace('/login');
+                }}
               >Log out</Button>
             </Flex>
     )

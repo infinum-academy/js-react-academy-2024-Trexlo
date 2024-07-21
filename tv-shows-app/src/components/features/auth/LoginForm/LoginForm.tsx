@@ -52,10 +52,10 @@ export const LoginForm = () => {
 
     return (
       <Flex
+        m={"auto"}
         color={"white"}
         as={"form"}
         width={"100%"}
-        height={"100%"}
         flexDir={"column"}
         onSubmit={handleSubmit(onLogin)}
       >

@@ -50,12 +50,11 @@ export const RegistrationForm = () => {
 
     return (
       <Flex
+        m={"auto"}
         color={"white"}
         as={"form"}
-        alignItems={"center"}
+        width={"100%"}
         flexDir={"column"}
-        padding={5}
-        gap={3}
         onSubmit={handleSubmit(onRegister)}
       >
         <FormControl
@@ -107,8 +106,8 @@ export const RegistrationForm = () => {
             loadingText="Signing up"  
             type="submit"
           >SIGN UP</Button>
+          <Text>Already have an account? <Text as={NextLink} href={"/login"} fontWeight={"bold"}>Log in</Text></Text>
         </FormControl>
-        <Text>Already have an account? <Text as={NextLink} href={"/login"} fontWeight={"bold"}>Log in</Text></Text>
       </Flex>
     );
 }

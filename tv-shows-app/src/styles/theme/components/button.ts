@@ -1,4 +1,11 @@
 import { defineStyleConfig } from "@chakra-ui/react";
+import { textStyles } from "../foundations/font-typings";
+
+const navigationButtonBase = {
+    height: "44px",
+    width: "140px",
+    borderRadius: "full",
+}
 
 const Button = defineStyleConfig({
     baseStyle:{
@@ -8,24 +15,20 @@ const Button = defineStyleConfig({
         borderRadius: "full",
         bg: "white",
         color: "purple",
-        textStyle: "button"
+        ...textStyles.button
     },
     variants:{
         navigationButton:{
-            height: "44px",
-            width: "140px",
-            borderRadius: "full",
+            ...navigationButtonBase,
             bg: "darkPurple",
             color: "white",
-            textStyle: "title.regular"
+            ...textStyles.title.regular,
         },
         navigationButtonActive:{
-            height: "44px",
-            width: "140px",
-            borderRadius: "full",
+            ...navigationButtonBase,
             bg: "purple",
             color: "white",
-            textStyle: "title.bold"
+            ...textStyles.title.bold,
         },
     }
 });

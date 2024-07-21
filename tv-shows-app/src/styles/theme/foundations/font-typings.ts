@@ -53,10 +53,10 @@ export const textStyles = {
     },
     button:{
         fontWeight: fontWeights.bold,
-        fontSize: "14pt"
+        fontSize: "14px"
     },
     note:{
         fontWeight: fontWeights.normal,
-        fontSize: "12pt"
+        fontSize: "12px"
     }
 }
