@@ -6,7 +6,6 @@ import { ILogInFormInputs } from "@/typings/Auth.type";
 import { EmailIcon } from "@chakra-ui/icons";
 import { Button, Flex, FormControl, FormErrorMessage, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useSWRMutation from "swr/mutation";
 import NextLink from "next/link";
@@ -32,10 +31,10 @@ export const LoginForm = () => {
 
             if(client && accessToken && uid && expiry){
               setUser({
-                accessToken: accessToken,
-                client: client,
-                uid: uid,
-                expiry: expiry
+                accessToken,
+                client,
+                uid,
+                expiry
               });
               router.replace('/shows');
             }else{

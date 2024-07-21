@@ -3,7 +3,7 @@ import { ReviewForm } from './ReviewForm';
 
 describe('ReviewForm', () => {
     it('should have rendered comment input', () => {
-        render(<ReviewForm addShowReview={()=>{}}/>);
+        render(<ReviewForm showId={1}/>);
 
         const input = screen.getByPlaceholderText("Add comment");
 
@@ -11,7 +11,7 @@ describe('ReviewForm', () => {
     });
 
     it('should have rendered rating input', () => {
-        render(<ReviewForm addShowReview={()=>{}}/>)
+        render(<ReviewForm showId={1}/>)
 
         const group = screen.getByRole('radiogroup');
         const input = screen.getAllByRole('radio');
@@ -22,7 +22,7 @@ describe('ReviewForm', () => {
     });
 
     it('should have rendered button', () => {
-        render(<ReviewForm addShowReview={()=>{}}/>)
+        render(<ReviewForm showId={1}/>)
 
         const button = screen.getByText("Post");
 

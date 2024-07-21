@@ -1,62 +1,49 @@
 'use client';
-import { IReview } from "@/typings/Review.type";
 import { ReviewList } from "../../review/ReviewList/ReviewList";
-import { useEffect, useState } from "react";
 import { ReviewForm } from "../ReviewForm/ReviewForm";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
+import useSWR from "swr";
+import { getReviews } from "@/fetchers/show";
+import { apiPaths } from "@/app/data/api-paths";
 
 interface IShowReviewSectionProps{
-    updateRating: (rating:number) => void;
+    showId: string;
 }
 
-export const ShowReviewSection = ({updateRating}:IShowReviewSectionProps) =>{
-    const [reviews, setReviews] = useState([] as IReview[]);
+function loading(){
+    return (
+        <Flex justifyItems={"center"} width={"100%"}>
+          <Spinner
+            thickness='4px'
+            speed='0.65s'
+            emptyColor='gray.200'
+            color='blue.500'
+            size='xl'
+            margin={"auto"}
+          />
+        </Flex>
+      );
+}
 
-    const loadReviewsFromLocalStorage = () => {
-        const reviewsString = localStorage.getItem('reviews');
-        if(!reviewsString){
-            return [];
-        }
-        return JSON.parse(reviewsString) as IReview[];
-    }
+export const ShowReviewSection = ({showId}:IShowReviewSectionProps) =>{
+    if(!showId) return loading();
+    
+    const { data, error, isLoading } = useSWR(apiPaths.showReviews(showId), getReviews);
 
-    const calculateAverageReviews = (reviews: IReview[]) => {
-        return reviews.reduce((sum, r)=> r.rating + sum, 0)/reviews.length
-    }
+	const shows = data?.reviews || [] ;
+    
+	if (error) {
+		return <Text>An error occurred</Text>;
+	}
 
-    useEffect(()=>{
-        const loadedReviews = loadReviewsFromLocalStorage();
-        setReviews(loadedReviews);
-        updateRating(calculateAverageReviews(loadedReviews));
-    }, [updateRating]);
-
-    const saveReviewsToLocalStorage = (reviews:IReview[])=>{
-        if(reviews.length != 0){
-            localStorage.setItem('reviews', JSON.stringify(reviews));
-        }else {
-            localStorage.removeItem('reviews');
-        }
-    };
-
-    const handleReviews = (review: IReview, action: 'add' | 'remove') => {
-        let newReviews:IReview[] = [];
-        
-        if(action == 'add'){
-            newReviews = [review, ...reviews];
-        }
-        if(action == 'remove'){
-            newReviews = reviews.filter(r => r != review);    
-        }
-
-        setReviews(newReviews);     
-        updateRating(calculateAverageReviews(newReviews));
-        saveReviewsToLocalStorage(newReviews);
-    }
+	if (isLoading || !data) {
+        return loading();
+	}
 
     return (
         <Flex flexDir={"column"} gap={10}>
-            <ReviewForm addShowReview={handleReviews}></ReviewForm>
-            <ReviewList reviews={reviews} removeReview={handleReviews}></ReviewList>
+            <ReviewForm showId={parseInt(showId)}></ReviewForm>
+            <ReviewList reviews={shows}></ReviewList>
         </Flex>
     );
 }

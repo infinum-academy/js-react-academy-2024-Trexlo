@@ -1,7 +1,8 @@
-import { apiPaths } from '@/app/data/api-paths';
 import { fetcher } from '@/fetchers/fetcher';
 import { IAuthUser } from '@/typings/Auth.type';
+import { IReview, IReviewFormInputs } from '@/typings/Review.type';
 import { IShow } from '@/typings/Show.type';
+import { mutator } from './mutators';
 
 interface IShowListsResponse {
 	shows: Array<IShow>;
@@ -18,9 +19,9 @@ function getUserData(){
 	}
 }
 
-export function getAllShows() {
+export function getShows(url: string) {
 	const user = getUserData();
-	return fetcher<IShowListsResponse>(apiPaths.allShows, {
+	return fetcher<IShowListsResponse>(url, {
 		headers:{
 			'client': user.client,
 			'access-token': user.accessToken,
@@ -29,9 +30,9 @@ export function getAllShows() {
 	});
 }
 
-export function getTopShows() {
+export function getShow(url: string) {
 	const user = getUserData();
-	return fetcher<IShowListsResponse>(apiPaths.topShows, {
+	return fetcher<{show: IShow}>(url, {
 		headers:{
 			'client': user.client,
 			'access-token': user.accessToken,
@@ -40,10 +41,48 @@ export function getTopShows() {
 	});
 }
 
-export function getShow(id: string) {
+export function getReviews(url: string) {
 	const user = getUserData();
-	return fetcher<{show: IShow}>(apiPaths.show(id), {
+	return fetcher<{reviews: IReview[], meta:any}>(url, {
 		headers:{
+			'client': user.client,
+			'access-token': user.accessToken,
+			'uid': user.uid,
+		}
+	});
+}
+
+export function createReview(url: string, {arg}:{arg:IReviewFormInputs}){
+	const user = getUserData();
+    return mutator<IReviewFormInputs, IReview>(url, {arg}, {
+		headers:{
+			'Content-type': 'application/json',
+			'client': user.client,
+			'access-token': user.accessToken,
+			'uid': user.uid,
+		}
+	});
+}
+
+export function deleteReview(url: string){
+	const user = getUserData();
+    return mutator<undefined, undefined>(url, {arg:undefined}, {
+		method: 'DELETE',
+		headers:{
+			'Content-type': 'application/json',
+			'client': user.client,
+			'access-token': user.accessToken,
+			'uid': user.uid,
+		}
+	});
+}
+
+export function editReview(url: string, {arg}:{arg:IReviewFormInputs}){
+	const user = getUserData();
+    return mutator<IReviewFormInputs, IReview>(url, {arg},  {
+		method: 'PATCH',
+		headers:{
+			'Content-type': 'application/json',
 			'client': user.client,
 			'access-token': user.accessToken,
 			'uid': user.uid,

@@ -1,13 +1,17 @@
-import { ILogInFormInputs, IRegisterFormInputs, IRegisterOrLogInResponse } from "@/typings/Auth.type";
+import { ILogInFormInputs, IRegisterFormInputs, IUser } from "@/typings/Auth.type";
 
-export async function mutator<ARGS, RESPONSE>(url:string, {arg}:{arg: ARGS}){
+export async function mutator<ARGS, RESPONSE>(url:string, {arg}:{arg: ARGS}, init?: RequestInit){
+    let data = {};
+    
     const response = await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(arg)
+        body: JSON.stringify(arg),
+        ...init
     });
+    const noContent = response.status === 204;
     if(!response.ok){
         const errorResponse = (await response.json())
         if(errorResponse){
@@ -18,13 +22,17 @@ export async function mutator<ARGS, RESPONSE>(url:string, {arg}:{arg: ARGS}){
         }
         throw new Error(`Failed to mutate on ${url}`);
     }
-    return {headers: response.headers, data: await response.json() as RESPONSE};
+    if (!noContent) {
+        data = await response.json();
+    }
+    
+    return {headers: response.headers, data: data as RESPONSE};
 }
 
-export async function registerMutator(url:string, {arg}:{arg:IRegisterFormInputs}){
-    return mutator<IRegisterFormInputs, IRegisterOrLogInResponse>(url, {arg});
+export function registerMutator(url:string, {arg}:{arg:IRegisterFormInputs}){
+    return mutator<IRegisterFormInputs, IUser>(url, {arg});
 }
 
-export async function loginMutator(url:string, {arg}:{arg:ILogInFormInputs}){
-    return mutator<ILogInFormInputs, IRegisterOrLogInResponse>(url, {arg});
+export function loginMutator(url:string, {arg}:{arg:ILogInFormInputs}){
+    return mutator<ILogInFormInputs, IUser>(url, {arg});
 }
