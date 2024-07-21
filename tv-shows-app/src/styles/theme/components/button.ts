@@ -4,7 +4,6 @@ import { textStyles } from "../foundations/font-typings";
 const navigationButtonBase = {
     height: "44px",
     width: "140px",
-    borderRadius: "full",
 }
 
 const Button = defineStyleConfig({
@@ -15,9 +14,12 @@ const Button = defineStyleConfig({
         borderRadius: "full",
         bg: "white",
         color: "purple",
-        ...textStyles.button
+        ...textStyles.button,
     },
     variants:{
+        authButton:{
+            ...textStyles.button,
+        },
         navigationButton:{
             ...navigationButtonBase,
             bg: "darkPurple",

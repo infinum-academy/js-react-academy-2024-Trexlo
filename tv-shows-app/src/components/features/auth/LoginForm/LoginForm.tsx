@@ -87,6 +87,7 @@ export const LoginForm = () => {
             isLoading={isSubmitting}
             loadingText="Logging in"
             type="submit"
+            variant={"authButton"}
           >LOG IN</Button>
           <Text>{"Don't"} have an account? <Text as={NextLink} href={"/register"} fontWeight={"bold"}>Register</Text></Text>
         </FormControl>
