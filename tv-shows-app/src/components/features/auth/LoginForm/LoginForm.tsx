@@ -31,10 +31,10 @@ export const LoginForm = () => {
 
             if(client && accessToken && uid && expiry){
               setUser({
-                accessToken: accessToken,
-                client: client,
-                uid: uid,
-                expiry: expiry
+                accessToken,
+                client,
+                uid,
+                expiry
               });
               router.replace('/shows');
             }else{
@@ -44,8 +44,9 @@ export const LoginForm = () => {
         onError(err, key, config) {
             setError("root", {type:"validate", message: err.message});
         },
+        throwOnError: false
     });
-    const onRegister = async (data: ILogInFormInputs) => {
+    const onLogin = async (data: ILogInFormInputs) => {
         await trigger(data);
     };
 
@@ -56,7 +57,7 @@ export const LoginForm = () => {
         width={"100%"}
         height={"100%"}
         flexDir={"column"}
-        onSubmit={handleSubmit(onRegister)}
+        onSubmit={handleSubmit(onLogin)}
       >
         <FormControl
           alignItems={"center"}

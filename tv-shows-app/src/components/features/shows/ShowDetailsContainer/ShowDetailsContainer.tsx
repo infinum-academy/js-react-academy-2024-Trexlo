@@ -12,7 +12,7 @@ export const ShowDetailsContainer = () => {
     const params = useParams();
     const { data, error, isLoading } = useSWR(apiPaths.show(params.id as string), getShow);
 
-	const show = (data) ? data.show : {} as IShow;
+    const show = data?.show ?? {} as IShow;
 
     if (error) {
         return <Text>An error occurred</Text>;

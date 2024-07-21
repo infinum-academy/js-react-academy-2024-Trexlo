@@ -27,20 +27,24 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
     );
 
     const [starRatingValue, setStarRatingValue] = useState(review.rating);
-    const [rating, setRating] = useState(review.rating);
-    const {register, handleSubmit, reset, setValue, setError,
+    const {register, handleSubmit, reset, setValue, setError, getValues,
         formState:{
             isSubmitting,
-            errors
+            errors,
         }
-    } = useForm<IReviewFormInputs>();
+    } = useForm<IReviewFormInputs>({
+        defaultValues:{
+            comment: review.comment,
+            rating: review.rating,
+            show_id: review.show_id
+        }
+    });
 
     const resetForm = ()=>{
         setStarRatingValue(0);
-        setRating(0);
         reset({
             comment: "",
-            rating: undefined,
+            rating: 0,
         });
     }
     const formSubmitHandler = async (data: IReviewFormInputs) => {
@@ -60,7 +64,9 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
             rating: data.rating,
         };
 
-        await trigger(newReview);
+        if(newReview.comment != review.comment || newReview.rating != review.rating){
+            await trigger(newReview);
+        }
         onFinishEdit();
         resetForm();
     } 
@@ -69,11 +75,10 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
         if(value){
             setStarRatingValue(value);
             if(!temporary){                
-                setRating(value);
                 setValue('rating', value);
             }
         }else{
-            setStarRatingValue(rating);
+            setStarRatingValue(getValues('rating'));
         }
     }
 
@@ -136,34 +141,6 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
                         onClick={() => onFinishEdit()}
                     >Cancel</Button>
                 </Flex>
-            
         </Flex>
-
-
-        // <form  onSubmit={handleSubmit(formSubmitHandler)}>
-        //     <FormControl isInvalid={errors.root && errors.root.message != ""}> 
-        //     <Flex flexDirection={"column"} gap={5}>
-        //         <FormControl isInvalid={errors.comment && errors.comment.message != ""}> 
-        //             <Textarea
-        //                 {...register('comment')}
-        //                 backgroundColor={"white"}
-        //                 placeholder='Add comment'
-        //                 required
-        //             />
-        //             <FormErrorMessage>{errors.comment?.message}</FormErrorMessage>
-        //         </FormControl>
-        //         <FormControl isInvalid={errors.rating && errors.rating.message != ""}> 
-        //             <StarRating
-        //                 value={starRatingValue}
-        //                 onChange={starRatingChange}
-        //                 label="Rating:"
-        //             />
-        //             <FormErrorMessage>{errors.rating?.message}</FormErrorMessage>
-        //         </FormControl>
-        //             <FormErrorMessage>{errors.root?.message}</FormErrorMessage>
-        //             <Button width={["100%","100%","fit-content"]} isLoading={isSubmitting} loadingText="Submitting" rounded={20} type="submit">Post</Button>
-        //         </Flex>
-        //     </FormControl>
-        // </form>
     );
 }

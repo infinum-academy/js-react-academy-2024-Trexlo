@@ -1,4 +1,5 @@
 import { fetcher } from '@/fetchers/fetcher';
+import { IAuthUser } from '@/typings/Auth.type';
 import { IReview, IReviewFormInputs } from '@/typings/Review.type';
 import { IShow } from '@/typings/Show.type';
 import { mutator } from './mutators';
@@ -8,14 +9,13 @@ interface IShowListsResponse {
 }
 
 function getUserData(){
-	const client = sessionStorage.getItem('client');
-	const accessToken = sessionStorage.getItem('access-token');
-	const uid = sessionStorage.getItem('uid');
-	if(!client || !accessToken || !uid) throw new Error("Not logged in");
+	const userString = sessionStorage.getItem('user'); 
+	if(!userString) throw new Error("Not logged in");
+	const user = JSON.parse(userString) as IAuthUser;
 	return {
-		client,
-		accessToken,
-		uid,
+		client: user.client,
+		accessToken: user.accessToken,
+		uid: user.uid,
 	}
 }
 

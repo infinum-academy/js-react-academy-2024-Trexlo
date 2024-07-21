@@ -11,7 +11,7 @@ interface IReviewProps {
 }
 
 export const ReviewItem = ({review}: IReviewProps) => {
-    const [user, setUser] = useUser();
+    const [user] = useUser();
     const [isEditing, setIsEditing] = useState<Boolean>(false);
 
     return (
@@ -27,7 +27,8 @@ export const ReviewItem = ({review}: IReviewProps) => {
                 rounded={20} 
                 flexDirection={"column"} 
                 gap={3} 
-                padding={5}>
+                padding={5}
+            >
                 <Flex 
                     height={10} 
                     alignItems={"center"} 
@@ -38,7 +39,7 @@ export const ReviewItem = ({review}: IReviewProps) => {
                         objectFit={"cover"} 
                         alt="user image" 
                         src={review.user.image_url || "https://fakeimg.pl/100x100?text=:)"}
-                        />
+                    />
                     <Text>{review.user.email}</Text>
                 </Flex>
                 <Text>{review.comment}</Text>
