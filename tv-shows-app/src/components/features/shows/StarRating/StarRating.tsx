@@ -1,24 +1,28 @@
 import { Box, Flex, FormLabel, HStack, RadioGroup, useRadio, useRadioGroup, UseRadioProps } from "@chakra-ui/react"
 
 import { StarIcon } from '@chakra-ui/icons'
+import { useState } from "react";
 
 interface IStarRatingProps {
     label: string | undefined;
-    onChange: (value: number | undefined, temporary: boolean)=>void;
+    onChange: (nextValue:string) => void;
+    onBlur: () => void;
     value: number;
 }
 
-export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
+export const StarRating = ({label, onChange, value, onBlur}: IStarRatingProps) => {
+    const [starRatingValue, setStarRatingValue] = useState(value);
 
     const changeValue = (val: number) => {
-        onChange(val, false);
+        console.log(val);
+        onChange(val.toString());
     }
 
     const onHoverHandler = (val: number, hovering:boolean)=>{
         if(hovering){
-            onChange(val, true);
+            setStarRatingValue(val);
         }else {
-            onChange(undefined, true);
+            setStarRatingValue(0);
         }
     }
     
@@ -34,8 +38,10 @@ export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
             {
                 label &&
                 <RadioGroup 
+                    onBlur={onBlur}
                     value={value.toString()}  
                     onFocus={() => changeValue(value || 1)}
+                    onChange={onChange}
                     >
                     <HStack>
                     <FormLabel margin={0} color={"white"}>{label}</FormLabel>
@@ -48,7 +54,7 @@ export const StarRating = ({label, onChange, value}: IStarRatingProps) => {
                             value={(index+1).toString()}
                             onHoverHandler={onHoverHandler}
                             changeValue={changeValue}
-                            currentValue={value}
+                            currentValue={starRatingValue || value}
                           />
                         );
                     })}
