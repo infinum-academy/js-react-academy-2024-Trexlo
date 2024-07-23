@@ -14,7 +14,6 @@ export const StarRating = ({label, onChange, value, onBlur}: IStarRatingProps) =
     const [starRatingValue, setStarRatingValue] = useState(value);
 
     const changeValue = (val: number) => {
-        console.log(val);
         onChange(val.toString());
     }
 
