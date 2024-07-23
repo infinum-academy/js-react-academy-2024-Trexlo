@@ -29,7 +29,7 @@ export const ShowPickerStep = () => {
 	}
 	
 	return (
-		 <SimpleGrid h={"500px"} columns={2} spacing={2}>
+		 <SimpleGrid h={"500px"} columns={[1,1,2]} spacing={2}>
 			{
 				shows.map((show, index) => {
 					const isPicked = pickedShows.find(s => s === show);
@@ -38,7 +38,7 @@ export const ShowPickerStep = () => {
 										shows[currentStep] = show;
 										setPickedShows([...shows]);
 									}}>
-								<Image alt="Show image" height={"100%"} width={"100%"} objectFit={"cover"} src={show.image_url || "https://fakeimg.pl/600x400?text=Show+Image"}></Image>
+								<Image display={["none", "none", "block"]} alt="Show image" height={"100%"} width={"100%"} objectFit={"cover"} src={show.image_url || "https://fakeimg.pl/600x400?text=Show+Image"}></Image>
 								<CardFooter justifyContent={"center"}>
 									<Text>{show.title}</Text>
 								</CardFooter>
