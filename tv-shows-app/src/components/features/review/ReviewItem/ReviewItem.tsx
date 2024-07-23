@@ -40,7 +40,7 @@ export const ReviewItem = ({review}: IReviewProps) => {
                         alt="user image" 
                         src={review.user.image_url || "https://fakeimg.pl/100x100?text=:)"}
                     />
-                    <Text>{review.user.email}</Text>
+                    <Text wordBreak={"break-all"}>{review.user.email}</Text>
                 </Flex>
                 <Text>{review.comment}</Text>
                 <Text>{review.rating} / 5</Text>

@@ -15,7 +15,7 @@ export const SidebarNavigationDesktop = () => {
                   alignItems={"left"} 
                   justifyContent={"center"} 
                   minW={"fit-content"} 
-                  w={["100%", "100%", "30vh"]} 
+                  w={["100%", "100%", "fit-content"]} 
                   h={["100px","100px","100vh"]} 
                   position={"sticky"}
                   top={0}

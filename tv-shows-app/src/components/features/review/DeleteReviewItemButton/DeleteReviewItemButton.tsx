@@ -41,8 +41,8 @@ export const DeleteReviewItemButton = ({reviewId, showId}: IDeleteReviewItemButt
 					<ModalHeader>Are you sure you want to delete the review?</ModalHeader>
                     <ModalCloseButton as={IconButton} icon={<CloseIcon />} />
 					<ModalFooter gap={3}>
-						<Button onClick={onClose} _hover={{bgColor:"red.500"}}>No</Button>
-						<Button onClick={onDelete}  _hover={{bgColor:"green.400"}} >Yes</Button>
+						<Button onClick={onClose} variant={"modalButtonSecondary"}>No</Button>
+						<Button onClick={onDelete} variant={"modalButtonPrimary"}>Yes</Button>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>

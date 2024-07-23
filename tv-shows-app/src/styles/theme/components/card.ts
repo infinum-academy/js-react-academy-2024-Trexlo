@@ -23,14 +23,14 @@ const Card = helpers.defineMultiStyleConfig({
   variants: {
     smallCard: {
         container:{
-          width:"240px",
-          height:"375px",
+          aspectRatio:240/375,
+          width:"100%",
         },
         header:{
-          height:"300px",
+          height:300 * 100 / 375+"%",
         },
         body:{
-          padding:"18px 0 0 18px",
+          padding:`${1800/240}% 0 0 ${1800/240}%`,
           textStyle:"subtitle.bold",
           lineHeight:1,
           display:"flex",
@@ -40,8 +40,8 @@ const Card = helpers.defineMultiStyleConfig({
     },
     smallCardMobile: {
       container:{
-        width:"90vw",
-        height:"90vh",
+        width:"100%",
+        height:"100%",
       },
       header:{
         height:"90%",

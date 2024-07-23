@@ -1,11 +1,20 @@
-import { defineStyleConfig } from "@chakra-ui/react";
+import { border, defineStyleConfig } from "@chakra-ui/react";
 import { textStyles } from "../foundations/font-typings";
 
 const navigationButtonBase = {
     height: "44px",
     width: "140px",
 }
-
+const buttonPrimaryColors = {
+    background:"purple",
+    color:"white",
+}
+const buttonSecondaryColors = {
+    color:"purple",
+    background:"white",
+    border:"2px solid",
+    borderColor:"purple"
+}
 const Button = defineStyleConfig({
     baseStyle:{
         height: "52px",
@@ -20,6 +29,18 @@ const Button = defineStyleConfig({
         authButton:{
             ...textStyles.button,
         },
+        modalButtonPrimary:{
+            ...buttonPrimaryColors,
+            _hover: {
+                ...buttonSecondaryColors,
+            }
+        },
+        modalButtonSecondary:{
+            ...buttonSecondaryColors,
+            _hover: {
+                ...buttonPrimaryColors,
+            }
+        },
         navigationButton:{
             ...navigationButtonBase,
             bg: "darkPurple",
@@ -28,11 +49,10 @@ const Button = defineStyleConfig({
         },
         navigationButtonActive:{
             ...navigationButtonBase,
-            bg: "purple",
-            color: "white",
+            ...buttonPrimaryColors,
             ...textStyles.title.bold,
         },
-    }
+    },
 });
 
 export default Button;
