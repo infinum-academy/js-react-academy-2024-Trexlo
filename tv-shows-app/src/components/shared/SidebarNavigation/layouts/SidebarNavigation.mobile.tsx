@@ -5,6 +5,7 @@ import NextLink from 'next/link';
 import { usePathname, useRouter } from "next/navigation";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useUser } from "@/hooks/useUser";
+import { ShowPicker } from "@/components/features/shows/ShowPicker/ShowPicker";
 
 export const SidebarNavigationMobile = () => {
     const pathname = usePathname();
@@ -47,7 +48,7 @@ export const SidebarNavigationMobile = () => {
                     >{link.content}</Button>
                   )
                 }
-
+                <ShowPicker />
           </DrawerBody>
           <DrawerFooter placeContent={"start"}>
             <Button 

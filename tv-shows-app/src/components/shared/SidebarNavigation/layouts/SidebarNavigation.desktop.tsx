@@ -1,5 +1,6 @@
 "use client"    
 import { navigationItems } from "@/app/data/navigation-items";
+import { ShowPicker } from "@/components/features/shows/ShowPicker/ShowPicker";
 import { useUser } from "@/hooks/useUser";
 import { Button, Flex, Heading, Image } from "@chakra-ui/react"
 import NextLink from 'next/link';
@@ -42,6 +43,7 @@ export const SidebarNavigationDesktop = () => {
                     >{link.content}</Button>
                   )
                 }
+                <ShowPicker />
               <Button 
                 mt={"auto"} 
                 variant={"navigationButton"}
