@@ -8,4 +8,5 @@ export const apiPaths = {
   reviews: `${api}/reviews`,
   review: (id:string) => `${api}/reviews/${id}`,
   showReviews: (id:string) => `${api}/shows/${id}/reviews`,
+  user: `${api}/users/me`,
 }
