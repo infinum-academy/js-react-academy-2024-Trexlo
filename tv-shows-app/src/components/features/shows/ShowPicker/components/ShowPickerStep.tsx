@@ -38,7 +38,6 @@ export const ShowPickerStep = () => {
 		}
 	}
 	
-	
 	return (
 		 <SimpleGrid h={"500px"} columns={[1,1,2]} spacing={2}>
 			{

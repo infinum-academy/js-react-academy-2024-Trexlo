@@ -7,10 +7,18 @@ interface IShowPickerButtonProps{
 }
 
 export const ShowPickerButtons = ({onClose}: IShowPickerButtonProps) => {
-	const { currentStep, setCurrentStep, maxSteps, currentRound, pickedShows, setCurrentRound, setMaxSteps, maxRounds, setMaxRounds } = useContext(ShowPickerContext);
-    console.log(pickedShows[currentRound]);
-    console.log(pickedShows[currentRound].length!=maxSteps)
-    console.log(maxSteps);
+	const {
+        currentStep,
+        setCurrentStep,
+        maxSteps,
+        currentRound,
+        pickedShows,
+        setCurrentRound,
+        setMaxSteps,
+        maxRounds,
+        setMaxRounds,
+        setPickedShows,
+    } = useContext(ShowPickerContext);
     
 	return (
 		<Flex width="100%" justifyContent="space-between">
@@ -43,14 +51,31 @@ export const ShowPickerButtons = ({onClose}: IShowPickerButtonProps) => {
                 && 
                 <>
                     <Button onClick={() => setCurrentStep(currentStep > 0 ? (currentStep - 1) : currentStep)}>Previous</Button>
-                    <Button w={"100%"} onClick={()=>{setMaxSteps(maxSteps/2); setCurrentStep(0); setCurrentRound(currentRound+1);}}>Next Round</Button>
+                    <Button 
+                        w={"100%"} 
+                        onClick={()=>{
+                            setMaxSteps(maxSteps/2); 
+                            setCurrentStep(0); 
+                            setCurrentRound(currentRound+1);
+                        }}
+                    >Next Round</Button>
                 </> 
             }
             {
                 currentStep == maxSteps && currentRound == maxRounds
                 && 
                 <>
-                    <Button w={"100%"} onClick={()=>{onClose(); setCurrentStep(0); setCurrentRound(0); setMaxSteps(4); setMaxRounds(2)}}>Close</Button>
+                    <Button 
+                        w={"100%"} 
+                        onClick={()=>{
+                            onClose(); 
+                            setCurrentStep(0); 
+                            setCurrentRound(0); 
+                            setMaxSteps(4); 
+                            setMaxRounds(2);
+                            setPickedShows([[],[],[],[]])
+                        }}
+                    >Close</Button>
                 </> 
             }
 		</Flex>
