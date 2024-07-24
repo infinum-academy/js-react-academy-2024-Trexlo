@@ -8,9 +8,14 @@ interface IShowPickerContext {
 	currentStep: number;
 	setCurrentStep: (step: number) => void;
     showsList: Array<IShow>;
-    pickedShows: Array<IShow>;
-	setPickedShows: (shows: Array<IShow>) => void;
+    pickedShows: Array<Array<IShow>>;
+	setPickedShows: (shows: Array<Array<IShow>>) => void;
+	currentRound: number;
+	setCurrentRound: (step: number) => void;
     maxSteps: number;
+	setMaxSteps: (step: number) => void;
+    maxRounds: number;
+	setMaxRounds: (step: number) => void;
 }
 
 export const ShowPickerContext = createContext<IShowPickerContext>({} as IShowPickerContext);
@@ -21,7 +26,10 @@ interface IShowPickerContextProviderProps {
 
 export const ShowPickerContextProvider = ({ children }: IShowPickerContextProviderProps) => {
 	const [currentStep, setCurrentStep] = useState(0);
-	const [pickedShows, setPickedShows] = useState<Array<IShow>>([]);
+	const [maxSteps, setMaxSteps] = useState(4);
+	const [maxRounds, setMaxRounds] = useState(2);
+	const [currentRound, setCurrentRound] = useState(0);
+	const [pickedShows, setPickedShows] = useState<Array<Array<IShow>>>([[],[],[],[]]);
 	const { data } = useSWR(apiPaths.allShows, getShows);
 
     var showsList = data?.shows ?? [];
@@ -35,8 +43,13 @@ export const ShowPickerContextProvider = ({ children }: IShowPickerContextProvid
                 setCurrentStep,
 				showsList,
 				pickedShows,
+				currentRound,
+				setCurrentRound,
                 setPickedShows,
-                maxSteps:4,
+                maxSteps,
+				setMaxSteps,
+                maxRounds,
+				setMaxRounds
 			}}
 		>
 			{children}

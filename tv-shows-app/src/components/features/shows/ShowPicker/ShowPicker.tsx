@@ -9,11 +9,11 @@ export const ShowPicker = () => {
 
 	return (
 		<>
-			<Button onClick={onOpen} variant="navigationButton">Pick your show</Button>
+			<Button onClick={onOpen} variant={["navigationButtonActive","navigationButtonActive","navigationButton"]}>Pick your show</Button>
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
 				<ModalContent>
-					<ModalHeader>Planner</ModalHeader>
+					<ModalHeader>Show Picker</ModalHeader>
 					<ModalBody>
 						<ShowPickerStepper />
 					</ModalBody>

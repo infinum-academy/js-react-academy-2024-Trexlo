@@ -7,22 +7,50 @@ interface IShowPickerButtonProps{
 }
 
 export const ShowPickerButtons = ({onClose}: IShowPickerButtonProps) => {
-	const { currentStep, setCurrentStep, maxSteps } = useContext(ShowPickerContext);
+	const { currentStep, setCurrentStep, maxSteps, currentRound, pickedShows, setCurrentRound, setMaxSteps, maxRounds, setMaxRounds } = useContext(ShowPickerContext);
+    console.log(pickedShows[currentRound]);
+    console.log(pickedShows[currentRound].length!=maxSteps)
+    console.log(maxSteps);
+    
 	return (
 		<Flex width="100%" justifyContent="space-between">
             {
                 currentStep != maxSteps
                 && 
                 <>
-                    <Button onClick={() => setCurrentStep(currentStep > 0 ? (currentStep - 1) : currentStep)}>Previous</Button>
-                    <Button onClick={() => setCurrentStep(currentStep < maxSteps ? (currentStep + 1) : currentStep)}>Next</Button>
+                    <Button
+                        isDisabled={!currentRound && !currentStep}
+                        onClick={() => {
+                            if(currentStep > 0){
+                                setCurrentStep(currentStep - 1);
+                            }else if(currentRound > 0){
+                                setMaxSteps(maxSteps*2)
+                                setCurrentRound(currentRound-1)
+                            };
+                        }
+                    }>Previous</Button>
+                    <Button 
+                        isDisabled={
+                            currentStep == maxSteps-1 && 
+                            (pickedShows[currentRound].findIndex(s=> s == undefined)!=-1 || pickedShows[currentRound].length!=maxSteps)
+                        }
+                        onClick={() => setCurrentStep(currentStep < maxSteps ? (currentStep + 1) : currentStep)}
+                    >Next</Button>
                 </> 
             }
             {
-                currentStep == maxSteps
+                currentStep == maxSteps && currentRound != maxRounds
                 && 
                 <>
-                    <Button w={"100%"} onClick={()=>{onClose(); setCurrentStep(0);}}>Close</Button>
+                    <Button onClick={() => setCurrentStep(currentStep > 0 ? (currentStep - 1) : currentStep)}>Previous</Button>
+                    <Button w={"100%"} onClick={()=>{setMaxSteps(maxSteps/2); setCurrentStep(0); setCurrentRound(currentRound+1);}}>Next Round</Button>
+                </> 
+            }
+            {
+                currentStep == maxSteps && currentRound == maxRounds
+                && 
+                <>
+                    <Button w={"100%"} onClick={()=>{onClose(); setCurrentStep(0); setCurrentRound(0); setMaxSteps(4); setMaxRounds(2)}}>Close</Button>
                 </> 
             }
 		</Flex>
