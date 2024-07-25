@@ -50,10 +50,6 @@ export const ReviewItem = ({review}: IReviewProps) => {
                     <Flex gap={3}>
                         <DeleteReviewItemButton reviewId={review.id} showId={review.show_id.toString()} />
                         <Button
-                            w={["100%", "100%", "fit-content"]}
-                            backgroundColor={"white"}
-                            color={"purple"}
-                            rounded={20}
                             onClick={() => setIsEditing(true)}
                         >Edit</Button>
                 </Flex>

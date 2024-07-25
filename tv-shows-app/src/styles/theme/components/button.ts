@@ -26,7 +26,7 @@ const Button = defineStyleConfig({
         ...textStyles.button,
     },
     variants:{
-        authButton:{
+        baseButton:{
             ...textStyles.button,
         },
         modalButtonPrimary:{
@@ -53,6 +53,9 @@ const Button = defineStyleConfig({
             ...textStyles.title.bold,
         },
     },
+    defaultProps:{
+        variant:"baseButton"
+    }
 });
 
 export default Button;

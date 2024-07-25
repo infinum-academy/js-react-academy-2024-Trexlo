@@ -29,10 +29,6 @@ export const DeleteReviewItemButton = ({reviewId, showId}: IDeleteReviewItemButt
     return (
         <>
             <Button
-                w={["100%", "100%", "fit-content"]}
-                backgroundColor={"white"}
-                color={"purple"}
-                rounded={20}
                 onClick={onOpen}
             >Remove</Button>
             <Modal isOpen={isOpen} onClose={onClose}>

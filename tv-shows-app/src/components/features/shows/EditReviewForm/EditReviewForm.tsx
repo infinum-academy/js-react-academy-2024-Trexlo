@@ -125,19 +125,11 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
             />
                 <Flex gap={3}>
                     <Button
-                        w={["100%", "100%", "fit-content"]}
-                        backgroundColor={"white"}
-                        color={"purple"}
-                        rounded={20}
                         isLoading={isSubmitting}
                         loadingText="Editing"  
                         type="submit"
                     >Edit</Button>
                     <Button
-                        w={["100%", "100%", "fit-content"]}
-                        backgroundColor={"white"}
-                        color={"purple"}
-                        rounded={20}
                         onClick={() => onFinishEdit()}
                     >Cancel</Button>
                 </Flex>
