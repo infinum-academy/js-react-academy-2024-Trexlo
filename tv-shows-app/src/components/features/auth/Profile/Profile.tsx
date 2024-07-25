@@ -36,7 +36,7 @@ export const Profile = () => {
     return (
         <Flex 
             w={"100%"}
-            h={"100vh"}
+            h={["100%","100%","100vh"]}
             justifyContent={["start", "start", "center"]}
             alignItems={"center"}
             direction={"column"}
@@ -49,7 +49,8 @@ export const Profile = () => {
                 justifyContent={"center"}
                 alignItems={"center"}
                 aspectRatio={[1,1,6/4]}
-                width={["90%","90%","600px"]}
+                height={["100%","100%","400px"]}
+                padding={"50px"}
                 rounded={20}
                 bg={"purple"}
                 border={"2px dashed"}

@@ -43,6 +43,7 @@ export const SidebarNavigationMobile = () => {
                       key={index} 
                       as={NextLink} 
                       href={link.url} 
+                      onClick={onClose}
                       variant={(pathname == link.url)?"navigationButton":"navigationButtonActive"}
                     >{link.content}</Button>
                   )

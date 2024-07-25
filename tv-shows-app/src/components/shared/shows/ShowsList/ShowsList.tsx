@@ -9,7 +9,7 @@ interface IShowsListProps {
 export const ShowsList = ({shows}: IShowsListProps) => {
 
     return(
-        <SimpleGrid padding={3} minChildWidth={['100%','100%','225px']} width={"100%"} spacing={3}>
+        <SimpleGrid padding={3} minChildWidth={['100%','100%','225px']} width={"100%"} spacing={3} height={"100%"}>
             {
                 shows.map((show, index) => 
                     <ShowCard key={index} show={show}></ShowCard>
