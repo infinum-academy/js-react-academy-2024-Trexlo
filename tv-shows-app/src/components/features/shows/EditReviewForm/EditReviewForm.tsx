@@ -31,6 +31,7 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
         formState:{
             isSubmitting,
             errors,
+            isDirty
         }
     } = useForm<IReviewFormInputs>({
         defaultValues:{
@@ -75,7 +76,7 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
         if(value){
             setStarRatingValue(value);
             if(!temporary){                
-                setValue('rating', value);
+                setValue('rating', value, {shouldDirty:true});
             }
         }else{
             setStarRatingValue(getValues('rating'));
@@ -127,7 +128,8 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
                     <Button
                         isLoading={isSubmitting}
                         loadingText="Editing"  
-                        type="submit"
+                        type="submit"           
+                        isDisabled={!isDirty}
                     >Edit</Button>
                     <Button
                         onClick={() => onFinishEdit()}

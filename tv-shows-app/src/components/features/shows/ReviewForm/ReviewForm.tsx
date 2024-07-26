@@ -29,6 +29,7 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
     const {register, handleSubmit, reset, setValue, setError, clearErrors, getValues,
         formState:{
             isSubmitting,
+            isDirty,
             errors
         }
     } = useForm<IReviewFormInputs>({
@@ -73,7 +74,7 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
             setStarRatingValue(value);
             if(!temporary){                
                 clearErrors('rating');
-                setValue('rating', value);
+                setValue('rating', value, {shouldDirty:true});
             }
         }else{
             setStarRatingValue(getValues('rating'));
@@ -111,6 +112,7 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
               isLoading={isSubmitting}
               loadingText="Submitting"
               type="submit"
+              isDisabled={!isDirty}
             >Post</Button>
           </Flex>
         </FormControl>
