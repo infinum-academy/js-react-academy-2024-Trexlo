@@ -1,5 +1,5 @@
 import { fetcher } from '@/fetchers/fetcher';
-import { IAuthUser, IUser } from '@/typings/Auth.type';
+import { IAuthUser, IProfileInputs, IUser } from '@/typings/Auth.type';
 import { IReview, IReviewFormInputs } from '@/typings/Review.type';
 import { IShow } from '@/typings/Show.type';
 import { mutator } from './mutators';
@@ -27,6 +27,20 @@ export function getUser(url: string){
 			'access-token': user.accessToken,
 			'uid': user.uid,
 		}
+	});
+}
+
+export function setUserImage(url: string, {arg}:{arg:IProfileInputs}){
+	const user = getUserData();
+    return mutator<IProfileInputs, IReview>(url, {arg}, {
+		method:"PUT",
+		headers:{
+			"Content-Type": "multipart/form-data",
+			'client': user.client,
+			'access-token': user.accessToken,
+			'uid': user.uid,
+		},
+		body:arg.image,
 	});
 }
 

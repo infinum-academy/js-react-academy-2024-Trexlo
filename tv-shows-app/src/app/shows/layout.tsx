@@ -12,8 +12,8 @@ export default function AuthLayout({
   return (
     <>
       <AuthRedirect condition="isLoggedOut" to="/login"/>
-      <Flex flexDirection={["column","column", "row"]}>
-      <SidebarNavigation/>
+      <Flex flexDirection={["column","column", "row"]} minH={"100vh"}>
+        <SidebarNavigation/>
         {children}
       </Flex>
     </>
