@@ -61,7 +61,7 @@ export const RegistrationForm = () => {
           as={Flex}
           flexDir={"column"}
           alignItems={"center"}
-          gap={5}
+          gap={["36px"]}
           isInvalid={errors.root && errors.root.message != ""}
         >
           <InputGroup variant={"authInput"}>
@@ -75,10 +75,16 @@ export const RegistrationForm = () => {
               placeholder="Email"
             />
           </InputGroup>
-          <FormControl isInvalid={
-               (errors.password && errors.password.message != "")
-            || (errors.repeatPassword && errors.repeatPassword.message != "")
-          }>
+          <FormControl 
+              as={Flex}
+              flexDir={"column"}
+              alignItems={"center"}
+              isInvalid={
+                  (errors.password && errors.password.message != "")
+               || (errors.repeatPassword && errors.repeatPassword.message != "")
+              }
+              gap={"11px"}
+          >
             <InputGroup variant={"authInput"} flexDir={"column"}>
               <PasswordInput
                 type="password"
@@ -87,7 +93,7 @@ export const RegistrationForm = () => {
                 {...register("password")}
                 placeholder="Password"
               />
-              <FormHelperText marginTop={0} mb={2} color={"whitesmoke"}>At least 8 characters</FormHelperText>
+              <FormHelperText pl={4} color={"whitesmoke"}>At least 8 characters</FormHelperText>
             </InputGroup>
             <InputGroup variant={"authInput"}>
               <PasswordInput

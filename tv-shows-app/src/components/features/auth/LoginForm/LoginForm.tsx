@@ -63,8 +63,8 @@ export const LoginForm = () => {
           alignItems={"center"}
           as={Flex}
           flexDir={"column"}
-          gap={5}
           isInvalid={errors.root && errors.root.message != ""}
+          gap={["22px","22px","36px"]}
         >
           <InputGroup variant="authInput">
             <InputLeftElement pointerEvents="none">
@@ -83,7 +83,7 @@ export const LoginForm = () => {
             placeholder="Password"
           />
           <FormErrorMessage>{errors.root?.message}</FormErrorMessage>
-          <Button
+          <Button 
             isLoading={isSubmitting}
             loadingText="Logging in"
             type="submit"

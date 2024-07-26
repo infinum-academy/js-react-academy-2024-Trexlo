@@ -41,7 +41,7 @@ export const ShowReviewSection = ({showId}:IShowReviewSectionProps) =>{
 	}
 
     return (
-        <Flex flexDir={"column"} gap={10}>
+        <Flex flexDir={"column"} gap={"61px"}>
             <ReviewForm showId={parseInt(showId)}></ReviewForm>
             <ReviewList reviews={shows}></ReviewList>
         </Flex>
