@@ -1,5 +1,5 @@
 import { IReview } from "@/typings/Review.type";
-import { Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Avatar, Button, Flex, Image, Menu, MenuButton, MenuDivider, MenuList, Text } from "@chakra-ui/react";
 import { StarRating } from "../../shows/StarRating/StarRating";
 import { useUser } from "@/hooks/useUser";
 import { useState } from "react";
@@ -17,47 +17,61 @@ export const ReviewItem = ({review}: IReviewProps) => {
     return (
         <>
         {
-        isEditing && 
-        <EditReviewForm onFinishEdit={()=>setIsEditing(false)} review={review} />
+            isEditing && 
+            <EditReviewForm onFinishEdit={()=>setIsEditing(false)} review={review} />
         }
         {
             !isEditing && 
-            <Flex 
+            <Flex
                 backgroundColor={"purple"} 
                 rounded={20} 
-                flexDirection={"column"} 
                 gap={3} 
+                alignItems={"center"} 
                 padding={5}
             >
                 <Flex 
-                    height={10} 
-                    alignItems={"center"} 
-                    gap={3}>
-                    <Image 
-                        rounded={20} 
-                        height={"100%"} 
-                        objectFit={"cover"} 
-                        alt="user image" 
-                        src={review.user.image_url || "https://fakeimg.pl/100x100?text=:)"}
-                    />
-                    <Text wordBreak={"break-all"}>{review.user.email}</Text>
+                    height={"fit-content"} 
+                    alignItems={["start","start","center"]} 
+                    gap={3}
+                    flexDirection={["column","column","row"]} 
+                    width={"100%"}
+                >
+                    <Flex 
+                        minW={"350px"}
+                        h={"100%"}
+                        alignItems={"center"} 
+                        flexDirection={["row"]}
+                        gap={3}
+                    >
+                        <Avatar 
+                            objectFit={"cover"} 
+                            src={review.user.image_url || "https://fakeimg.pl/100x100?text=:)"}
+                        />
+                        <Flex flexDirection={"column"}>
+                            <Text textStyle={"smallCaption.bold"} wordBreak={"break-all"}>{review.user.email}</Text>
+                            <Flex alignItems={"center"} gap={2}>
+                                <Text>{review.rating} / 5</Text>
+                                <StarRating label={undefined} onChange={()=>{}} value={review.rating} />
+                            </Flex>
+                        </Flex>
+                    </Flex>
+                    <Text flexGrow={1} >{review.comment}</Text>
                 </Flex>
-                <Text>{review.comment}</Text>
-                <Text>{review.rating} / 5</Text>
-                <StarRating label={undefined} onChange={()=>{}} value={review.rating} />
-                {(review.user.email == user?.uid)
+                {   (review.user.email == user?.uid)
                     &&
-                    <Flex gap={3}>
-                        <DeleteReviewItemButton reviewId={review.id} showId={review.show_id.toString()} />
-                        <Button
-                            w={["100%", "100%", "fit-content"]}
-                            backgroundColor={"white"}
-                            color={"purple"}
-                            rounded={20}
-                            onClick={() => setIsEditing(true)}
-                        >Edit</Button>
-                </Flex>
-            }
+                    <Menu size={"sm"}>
+                        <MenuButton w={"24px"} h={"24px"}>
+                            <Image src="/images/more.svg"/>
+                        </MenuButton>
+                        <MenuList rounded={"cardRadius"} >
+                            <Button
+                                onClick={() => setIsEditing(true)}
+                            >Edit</Button>
+                            <MenuDivider width={"100%"}/>
+                            <DeleteReviewItemButton reviewId={review.id} showId={review.show_id.toString()} />
+                        </MenuList>
+                    </Menu>
+                }
             </Flex>
         }
         </>

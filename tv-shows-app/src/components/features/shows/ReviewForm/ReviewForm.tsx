@@ -27,6 +27,7 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
     const {register, handleSubmit, reset, setError, clearErrors, control, setValue,
         formState:{
             isSubmitting,
+            isDirty,
             errors
         }
     } = useForm<IReviewFormInputs>({
@@ -69,7 +70,7 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
     return (
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <FormControl isInvalid={errors.root && errors.root.message != ""}>
-          <Flex flexDirection={"column"} gap={5}>
+          <Flex flexDirection={"row"} flexWrap={"wrap"} justifyContent={"space-between"} gap={5}>
             <FormControl
               isInvalid={errors.comment && errors.comment.message != ""}
             >
@@ -82,6 +83,7 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
               <FormErrorMessage>{errors.comment?.message}</FormErrorMessage>
             </FormControl>
             <FormControl
+              width={"fit-content"}
               isInvalid={errors.rating && errors.rating.message != ""}
             >
               <Controller
@@ -101,11 +103,10 @@ export const ReviewForm = ({showId}: IReviewFormProps) => {
             </FormControl>
             <FormErrorMessage>{errors.root?.message}</FormErrorMessage>
             <Button
-              width={["100%", "100%", "fit-content"]}
               isLoading={isSubmitting}
               loadingText="Submitting"
-              rounded={20}
               type="submit"
+              isDisabled={!isDirty}
             >Post</Button>
           </Flex>
         </FormControl>

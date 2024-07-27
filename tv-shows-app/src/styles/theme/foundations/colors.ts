@@ -4,5 +4,5 @@ export const colors = {
     darkPurple:"#1B004C",
     error:"#FF2498",
     white:"#FFFFFF",
-    black:"000000"
+    black:"#000000"
 }

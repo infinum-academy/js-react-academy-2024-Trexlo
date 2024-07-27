@@ -13,7 +13,7 @@ export default function AuthLayout({
       <AuthRedirect condition="isLoggedIn" to="/shows"/>
       <Flex 
         width={["100%", "100%", "500px"]}
-        height={["100vh", "100vh", "500px"]}
+        height={["100vh", "100vh", "fit-content"]}
         margin={"auto"}
         flexDir={"column"}
         alignItems={"center"}
@@ -21,6 +21,7 @@ export default function AuthLayout({
         background={"purple"}
         padding={"56px"}
         rounded={[0, 0, 20]}
+        boxShadow={"0 0 9px 0 black"}
       > 
         <Heading mb={10}>
           <Image src="/images/logo.svg"/>

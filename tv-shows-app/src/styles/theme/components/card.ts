@@ -92,6 +92,38 @@ const Card = helpers.defineMultiStyleConfig({
         gap:"17px"
       }
     },
+    profileCard: {
+      container:{
+        width:"100%",
+        flexGrow:1,
+        bg:"darkPurple",
+        alignItems:"center",
+        justifyContent:"center",
+      },
+      header:{
+        textAlign:"center",
+        height:"fit-content",
+      },
+      footer:{
+        margin:5,
+        mt:"39px",
+        width:["75%", "75%", "600px"],
+        aspectRatio:[1,1,6/4],
+        rounded:20,
+        bg:"purple",
+        alignItems:"center",
+        justifyContent:"center",
+        padding:5,
+        display:"flex",
+        flexDir:"column",
+        border:"2px dashed",
+        borderColor:"darkPurple",
+        _hover:{
+          border:"2px solid",
+          borderColor:"lightPurple",
+        }
+      }
+    },
   },
 });
 

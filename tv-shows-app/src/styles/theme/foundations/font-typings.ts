@@ -13,8 +13,8 @@ export const textStyles = {
     },
     title:{
       regular:{
-        fontWeight: fontWeights.normal,
-        fontSize: "24px"
+          fontWeight: fontWeights.normal,
+          fontSize: "24px"
       },
       bold:{
           fontWeight: fontWeights.bold,

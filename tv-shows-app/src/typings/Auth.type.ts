@@ -7,6 +7,9 @@ export interface ILogInFormInputs {
     email: string;
     password: string;
 }
+export interface IProfileInputs{
+    image: string;
+}
 export interface IUser {
     email: string;
     id: string;

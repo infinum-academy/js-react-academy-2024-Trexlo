@@ -1,8 +1,9 @@
 'use client';
-import { Flex, Spinner, Text } from "@chakra-ui/react";
+import { Card, Flex, SimpleGrid, Skeleton, Spinner, Text } from "@chakra-ui/react";
 import useSWR from 'swr';
 import { ShowsList } from "@/components/shared/shows/ShowsList/ShowsList";
 import { getShows } from "@/fetchers/show";
+import { ShowCard } from "@/components/shared/shows/ShowCard/ShowCard";
 
 interface IShowsListContainerProps{
   url: string;
@@ -19,16 +20,15 @@ export const ShowsListContainer = ({url}: IShowsListContainerProps) => {
 
 	if (isLoading || !data) {
 		return (
-          <Flex justifyItems={"center"} width={"100%"}>
-            <Spinner
-              thickness='4px'
-              speed='0.65s'
-              emptyColor='gray.200'
-              color='blue.500'
-              size='xl'
-              margin={"auto"}
-            />
-          </Flex>
+      <SimpleGrid padding={3} minChildWidth={['100%','100%','225px']} width={"100%"} spacing={3} height={"100%"}>
+        {      
+          [...Array(10)].map((val, index) => {
+            return  <Skeleton key={index} rounded={"cardRadius"}>
+                      <Card variant={"smallCard"}></Card>
+                    </Skeleton>
+          })
+        }
+      </SimpleGrid>
     );
 	}
 
