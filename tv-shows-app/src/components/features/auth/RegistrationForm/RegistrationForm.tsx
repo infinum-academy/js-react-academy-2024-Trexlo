@@ -50,69 +50,70 @@ export const RegistrationForm = () => {
 
     return (
       <Flex
+        m={"auto"}
         color={"white"}
         as={"form"}
-        alignItems={"center"}
+        width={"100%"}
         flexDir={"column"}
-        padding={5}
-        gap={3}
         onSubmit={handleSubmit(onRegister)}
       >
         <FormControl
           as={Flex}
           flexDir={"column"}
           alignItems={"center"}
-          gap={5}
+          gap={["36px"]}
           isInvalid={errors.root && errors.root.message != ""}
         >
-          <InputGroup>
+          <InputGroup variant={"authInput"}>
             <InputLeftElement pointerEvents="none">
-              <EmailIcon color="white" />
+              <EmailIcon/>
             </InputLeftElement>
             <Input
               type="email"
               isRequired={true}
               {...register("email")}
               placeholder="Email"
-              _placeholder={{ color: "inherit" }}
             />
           </InputGroup>
-          <FormControl isInvalid={
-               (errors.password && errors.password.message != "")
-            || (errors.repeatPassword && errors.repeatPassword.message != "")
-          }>
-            <InputGroup flexDir={"column"}>
+          <FormControl 
+              as={Flex}
+              flexDir={"column"}
+              alignItems={"center"}
+              isInvalid={
+                  (errors.password && errors.password.message != "")
+               || (errors.repeatPassword && errors.repeatPassword.message != "")
+              }
+              gap={"11px"}
+          >
+            <InputGroup variant={"authInput"} flexDir={"column"}>
               <PasswordInput
                 type="password"
                 isRequired={true}
                 isInvalid={errors.password && errors.password.message != ""}
                 {...register("password")}
                 placeholder="Password"
-                _placeholder={{ color: "inherit" }}
               />
-              <FormHelperText marginTop={0} mb={2} color={"whitesmoke"}>At least 8 characters</FormHelperText>
+              <FormHelperText pl={4} color={"whitesmoke"}>At least 8 characters</FormHelperText>
             </InputGroup>
-            <InputGroup>
+            <InputGroup variant={"authInput"}>
               <PasswordInput
                 type="password"
                 isRequired={true}
                 isInvalid={errors.repeatPassword && errors.repeatPassword.message != ""}
                 {...register("repeatPassword")}
                 placeholder="Confirm password"
-                _placeholder={{ color: "inherit" }}
               />
             </InputGroup>
             <FormErrorMessage>{errors.password?.message} {errors.repeatPassword?.message}</FormErrorMessage>
           </FormControl>
           <FormErrorMessage>{errors.root?.message}</FormErrorMessage>
           <Button
-            w={"50%"}
             isLoading={isSubmitting}
             loadingText="Signing up"  
             type="submit"
           >SIGN UP</Button>
+          <Text>Already have an account? <Text as={NextLink} href={"/login"} fontWeight={"bold"}>Log in</Text></Text>
         </FormControl>
-        <Text>Already have an account? <Text as={NextLink} href={"/login"} fontWeight={"bold"}>Log in</Text></Text>
       </Flex>
     );
 }

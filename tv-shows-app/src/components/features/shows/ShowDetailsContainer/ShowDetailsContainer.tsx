@@ -1,7 +1,7 @@
 'use client';
 import { ShowDetails } from "@/components/features/shows/ShowDetails/ShowDetails";
 import { IShow } from "@/typings/Show.type";
-import { Flex, Heading, Skeleton, Text } from "@chakra-ui/react";
+import { Flex, Skeleton, Text } from "@chakra-ui/react";
 import { ShowReviewSection } from "@/components/features/shows/ShowReviewSection/ShowReviewSection";
 import useSWR from 'swr';
 import { getShow } from "@/fetchers/show";
@@ -20,21 +20,26 @@ export const ShowDetailsContainer = () => {
   
     return (
         <Flex 
-            w={["100%", "100%", "65vw"]} 
+            w={["95%", "95%", "100%"]}
+            padding={["0", "0", "31px"]} 
+            margin={"auto"}
+            ml={["auto", "auto", "auto", "125px"]}
             gap={3} 
             flexDirection={"column"}
             >
             <Skeleton isLoaded={!isLoading}>
                 <ShowDetails show = {show}></ShowDetails>
             </Skeleton>
-            <Heading 
-                size={"md"} 
-                color={"white"} 
-                marginTop={3}
-            >Reviews</Heading>
-            <Skeleton isLoaded={!isLoading}>
-                <ShowReviewSection showId={show.id}></ShowReviewSection>
-            </Skeleton>
+            <Flex marginTop={"86px"} direction={"row"}>
+                <Text
+                    textStyle={"title.regular"}
+                    width={"175px"}
+                    color={"white"} 
+                >Reviews</Text>
+                <Skeleton isLoaded={!isLoading} flexGrow={1}>
+                    <ShowReviewSection showId={show.id}></ShowReviewSection>
+                </Skeleton>     
+            </Flex>
         </Flex>
   );
 }

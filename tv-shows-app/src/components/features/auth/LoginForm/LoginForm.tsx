@@ -52,11 +52,10 @@ export const LoginForm = () => {
 
     return (
       <Flex
+        m={"auto"}
         color={"white"}
         as={"form"}
         width={"100%"}
-        height={"100%"}
-        padding={5}
         flexDir={"column"}
         onSubmit={handleSubmit(onLogin)}
       >
@@ -64,30 +63,27 @@ export const LoginForm = () => {
           alignItems={"center"}
           as={Flex}
           flexDir={"column"}
-          gap={5}
           isInvalid={errors.root && errors.root.message != ""}
+          gap={["22px","22px","36px"]}
         >
-          <InputGroup>
+          <InputGroup variant="authInput">
             <InputLeftElement pointerEvents="none">
-              <EmailIcon color="white" />
+              <EmailIcon/>
             </InputLeftElement>
             <Input
               type="email"
               isRequired={true}
               {...register("email")}
               placeholder="Email"
-              _placeholder={{ color: "inherit" }}
             />
           </InputGroup>
           <PasswordInput
             isRequired={true}
             {...register("password")}
             placeholder="Password"
-            _placeholder={{ color: "inherit" }}
           />
           <FormErrorMessage>{errors.root?.message}</FormErrorMessage>
-          <Button
-            w={"50%"}
+          <Button 
             isLoading={isSubmitting}
             loadingText="Logging in"
             type="submit"

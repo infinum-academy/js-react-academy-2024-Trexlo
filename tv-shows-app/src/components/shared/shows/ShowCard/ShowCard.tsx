@@ -1,6 +1,6 @@
 import { IShow } from "@/typings/Show.type";
 import { StarIcon } from "@chakra-ui/icons";
-import { Card, CardBody, Flex, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import { Card, CardBody, CardFooter, CardHeader, Flex, Heading, Image, Stack, Text } from "@chakra-ui/react";
 import NextLink from 'next/link';
 interface IShowCardProps {
     show: IShow
@@ -9,17 +9,17 @@ interface IShowCardProps {
 export const ShowCard = ({show}: IShowCardProps) => {
 
     return(
-        <Card as={NextLink} href={`/shows/${show.id}`} width={300} overflow={"hidden"} rounded={20} backgroundColor={"white"} color={"indigo"}>
-            <Image alt="Show image" src={show.image_url || "https://fakeimg.pl/600x400?text=Show+Image"}></Image>
-            <CardBody display={"flex"}>
-                <Stack alignSelf={"end"} mt='0' spacing='2'>
-                    <Heading size={"md"}>{show.title}</Heading>
-                    <Flex gap={1} alignItems={"center"}>
-                        <StarIcon color={"indigo"}/>
-                        <Text>{(show.average_rating && (show.average_rating.toFixed(1) + " / 5")) || "No ratings"}</Text>
-                    </Flex>
-                </Stack>
-            </CardBody>
+        <Card as={NextLink} href={`/shows/${show.id}`} variant={{base: "smallCardMobile", sm:"smallCardMobile", md:"smallCard"}}>
+            <CardHeader>
+                <Image alt="Show image" height={"100%"} width={"100%"} objectFit={"cover"} src={show.image_url || "https://fakeimg.pl/600x400?text=Show+Image"}></Image>
+            </CardHeader>
+            <CardBody>
+                <Text>{show.title}</Text>
+                <Flex textStyle={"smallCaption.regular"} alignItems={"center"} gap={"4px"}>
+                    <StarIcon/>
+                    <Text>{(show.average_rating && (show.average_rating.toFixed(1) + " / 5")) || "No ratings"}</Text>
+                </Flex>
+             </CardBody>
         </Card>
     )
 }

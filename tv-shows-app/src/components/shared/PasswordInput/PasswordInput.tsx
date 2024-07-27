@@ -8,7 +8,7 @@ export const PasswordInput = forwardRef(function PasswordInput(props: InputProps
     const handleClick = () => setShow(!show);
     
     return (
-      <InputGroup size='md'>
+      <InputGroup variant="authInput" size='md'>
         <InputLeftElement pointerEvents='none'>
             <LockIcon color='white' />
         </InputLeftElement>

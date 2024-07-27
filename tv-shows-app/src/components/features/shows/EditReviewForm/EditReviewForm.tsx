@@ -31,6 +31,7 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
         formState:{
             isSubmitting,
             errors,
+            isDirty
         }
     } = useForm<IReviewFormInputs>({
         defaultValues:{
@@ -75,7 +76,7 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
         if(value){
             setStarRatingValue(value);
             if(!temporary){                
-                setValue('rating', value);
+                setValue('rating', value, {shouldDirty:true});
             }
         }else{
             setStarRatingValue(getValues('rating'));
@@ -87,7 +88,7 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
         <Flex 
             as={"form"}
             onSubmit={handleSubmit(formSubmitHandler)}
-            backgroundColor={"purple.900"} 
+            backgroundColor={"purple"} 
             rounded={20} 
             flexDirection={"column"} 
             gap={3} 
@@ -110,7 +111,7 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
                 <Textarea
                     {...register('comment')}
                     backgroundColor={"white"}
-                    color={"indigo"}
+                    color={"purple"}
                     placeholder='Add comment'
                     defaultValue={review.comment}
                     required
@@ -125,19 +126,12 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
             />
                 <Flex gap={3}>
                     <Button
-                        w={["100%", "100%", "fit-content"]}
-                        backgroundColor={"white"}
-                        color={"indigo"}
-                        rounded={20}
                         isLoading={isSubmitting}
                         loadingText="Editing"  
-                        type="submit"
+                        type="submit"           
+                        isDisabled={!isDirty}
                     >Edit</Button>
                     <Button
-                        w={["100%", "100%", "fit-content"]}
-                        backgroundColor={"white"}
-                        color={"indigo"}
-                        rounded={20}
                         onClick={() => onFinishEdit()}
                     >Cancel</Button>
                 </Flex>

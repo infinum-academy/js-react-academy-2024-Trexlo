@@ -9,6 +9,6 @@ export const navigationItems: ISidebarElement[] = [
   },
   {
     content: "My profile",
-    url: "/account",
+    url: "/shows/profile",
   },
 ];
