@@ -18,6 +18,17 @@ export const ShowsList = ({shows}: IShowsListProps) => {
                 )
             }
             </SimpleGrid>
+            <IconButton
+                variant={"roundButton"}
+                onClick={()=>window.scrollTo(0, 0)}
+                position={"fixed"}
+                bottom={"50px"}
+                right={0}
+                ml={"auto"}
+                mr={"15px"}
+                aria-label="to top"
+                icon={<ArrowUpIcon />}
+            />
         </>
     )
 }
