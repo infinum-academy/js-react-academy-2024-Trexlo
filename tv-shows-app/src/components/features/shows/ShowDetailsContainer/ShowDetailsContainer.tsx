@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import { getShow } from "@/fetchers/show";
 import { useParams } from "next/navigation";
 import { apiPaths } from "@/app/data/api-paths";
+import { ReviewPaginationContextProvider } from "../ShowReviewSection/components/ReviewPaginationContext";
 
 export const ShowDetailsContainer = () => {
     const params = useParams();
@@ -37,7 +38,9 @@ export const ShowDetailsContainer = () => {
                     color={"white"} 
                 >Reviews</Text>
                 <Skeleton isLoaded={!isLoading} flexGrow={1}>
-                    <ShowReviewSection showId={show.id}></ShowReviewSection>
+                    <ReviewPaginationContextProvider showId={show.id}>
+                        <ShowReviewSection showId={show.id}></ShowReviewSection>
+                    </ReviewPaginationContextProvider>
                 </Skeleton>     
             </Flex>
         </Flex>

@@ -6,6 +6,8 @@ import useSWRMutation from "swr/mutation";
 import { apiPaths } from "@/app/data/api-paths";
 import { mutate } from "swr";
 import { editReview } from "@/fetchers/show";
+import { useContext } from "react";
+import { ReviewPaginationContext } from "../ShowReviewSection/components/ReviewPaginationContext";
 
 interface IEditReviewFormProps{
     review: IReview;
@@ -13,10 +15,11 @@ interface IEditReviewFormProps{
 }
 
 export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => { 
+    const { pagination } = useContext(ReviewPaginationContext);
     const { trigger } = useSWRMutation(apiPaths.review(review.id), editReview,
         {
             onSuccess: () => {
-                mutate(apiPaths.showReviews(review.show_id.toString()));
+                mutate(apiPaths.showReviews(review.show_id.toString(), pagination.page, pagination.items));
                 mutate(apiPaths.show(review.show_id.toString()));
             },
             onError: (err) => {

@@ -4,6 +4,8 @@ import { CloseIcon } from "@chakra-ui/icons";
 import { Button, IconButton, Modal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
+import { ReviewPaginationContext } from "../../shows/ShowReviewSection/components/ReviewPaginationContext";
+import { useContext } from "react";
 
 interface IDeleteReviewItemButtonProps {
     reviewId : string;
@@ -11,11 +13,12 @@ interface IDeleteReviewItemButtonProps {
 }
 
 export const DeleteReviewItemButton = ({reviewId, showId}: IDeleteReviewItemButtonProps) => {
+    const { pagination } = useContext(ReviewPaginationContext);
 	const { isOpen, onOpen, onClose } = useDisclosure();
     const { trigger } = useSWRMutation(apiPaths.review(reviewId), deleteReview,
         {
             onSuccess: () => {
-                mutate(apiPaths.showReviews(showId));
+                mutate(apiPaths.showReviews(showId, pagination.page, pagination.items));
                 mutate(apiPaths.show(showId));
                 onClose();
             }

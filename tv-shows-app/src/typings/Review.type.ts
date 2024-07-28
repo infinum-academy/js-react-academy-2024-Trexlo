@@ -12,3 +12,9 @@ export interface IReviewFormInputs{
     rating: number;
     show_id: number;
 }
+export interface IPagination{
+    count: number,
+    page: number,
+    items: number,
+    pages: number
+}
