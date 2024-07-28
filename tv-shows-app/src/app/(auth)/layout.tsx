@@ -23,7 +23,7 @@ export default function AuthLayout({
         rounded={[0, 0, 20]}
         boxShadow={"0 0 9px 0 black"}
       > 
-        <Heading mb={10}>
+        <Heading mb={"57px"} mt={"auto"}>
           <Image src="/images/logo.svg"/>
         </Heading>
         {children}

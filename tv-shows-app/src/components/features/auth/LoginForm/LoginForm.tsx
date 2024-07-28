@@ -16,9 +16,15 @@ export const LoginForm = () => {
     const {register, handleSubmit, setError,
         formState:{ 
             isSubmitting,
-            errors
+            errors,
+            isDirty,
         }
-    } = useForm<ILogInFormInputs>();
+    } = useForm<ILogInFormInputs>({
+      defaultValues:{
+        email:"",
+        password:"",
+      }
+    });
     const [user, setUser] = useUser();
     const router = useRouter();
     const {trigger} = useSWRMutation(apiPaths.login, loginMutator, {
@@ -52,7 +58,7 @@ export const LoginForm = () => {
 
     return (
       <Flex
-        m={"auto"}
+        mb={"auto"}
         color={"white"}
         as={"form"}
         width={"100%"}
@@ -87,6 +93,7 @@ export const LoginForm = () => {
             isLoading={isSubmitting}
             loadingText="Logging in"
             type="submit"
+            isDisabled={!isDirty}
           >LOG IN</Button>
           <Text>{"Don't"} have an account? <Text as={NextLink} href={"/register"} fontWeight={"bold"}>Register</Text></Text>
         </FormControl>

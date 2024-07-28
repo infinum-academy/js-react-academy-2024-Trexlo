@@ -15,8 +15,15 @@ export const RegistrationForm = () => {
         formState:{
             isSubmitting,
             errors,
+            isDirty,
         }
-    } = useForm<IRegisterFormInputs>();
+    } = useForm<IRegisterFormInputs>({
+      defaultValues:{
+        email:"",
+        password:"",
+        repeatPassword:"",
+      }
+    });
     const router = useRouter();
     
     const {trigger} = useSWRMutation(apiPaths.registration, registerMutator, {
@@ -50,7 +57,7 @@ export const RegistrationForm = () => {
 
     return (
       <Flex
-        m={"auto"}
+        mb={"auto"}
         color={"white"}
         as={"form"}
         width={"100%"}
@@ -111,6 +118,7 @@ export const RegistrationForm = () => {
             isLoading={isSubmitting}
             loadingText="Signing up"  
             type="submit"
+            isDisabled={!isDirty}
           >SIGN UP</Button>
           <Text>Already have an account? <Text as={NextLink} href={"/login"} fontWeight={"bold"}>Log in</Text></Text>
         </FormControl>

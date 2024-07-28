@@ -26,7 +26,8 @@ export const ShowPickerButtons = ({onClose}: IShowPickerButtonProps) => {
                 currentStep != maxSteps
                 && 
                 <>
-                    <Button
+                    <Button                        
+                        variant={"modalButtonSecondary"}
                         isDisabled={!currentRound && !currentStep}
                         onClick={() => {
                             if(currentStep > 0){
@@ -37,7 +38,8 @@ export const ShowPickerButtons = ({onClose}: IShowPickerButtonProps) => {
                             };
                         }
                     }>Previous</Button>
-                    <Button 
+                    <Button                         
+                        variant={"modalButtonSecondary"}
                         isDisabled={
                             currentStep == maxSteps-1 && 
                             (pickedShows[currentRound].findIndex(s=> s == undefined)!=-1 || pickedShows[currentRound].length!=maxSteps)
@@ -50,8 +52,12 @@ export const ShowPickerButtons = ({onClose}: IShowPickerButtonProps) => {
                 currentStep == maxSteps && currentRound != maxRounds
                 && 
                 <>
-                    <Button onClick={() => setCurrentStep(currentStep > 0 ? (currentStep - 1) : currentStep)}>Previous</Button>
                     <Button 
+                        variant={"modalButtonSecondary"} 
+                        onClick={() => setCurrentStep(currentStep > 0 ? (currentStep - 1) : currentStep)}
+                    >Previous</Button>
+                    <Button 
+                        variant={"modalButtonSecondary"}
                         w={"100%"} 
                         onClick={()=>{
                             setMaxSteps(maxSteps/2); 
@@ -66,6 +72,7 @@ export const ShowPickerButtons = ({onClose}: IShowPickerButtonProps) => {
                 && 
                 <>
                     <Button 
+                        variant={"modalButtonSecondary"}
                         w={"100%"} 
                         onClick={()=>{
                             onClose(); 
