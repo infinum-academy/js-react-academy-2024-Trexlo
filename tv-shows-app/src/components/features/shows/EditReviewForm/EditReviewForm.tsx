@@ -1,8 +1,7 @@
 import { IReview, IReviewFormInputs } from "@/typings/Review.type";
 import { Button, Flex, FormControl, FormErrorMessage, Image, Text, Textarea } from "@chakra-ui/react";
-import { useState } from "react";
 import { StarRating } from "../StarRating/StarRating";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import useSWRMutation from "swr/mutation";
 import { apiPaths } from "@/app/data/api-paths";
 import { mutate } from "swr";
@@ -26,8 +25,7 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
         }
     );
 
-    const [starRatingValue, setStarRatingValue] = useState(review.rating);
-    const {register, handleSubmit, reset, setValue, setError, getValues,
+    const {register, handleSubmit, reset, setError, control,
         formState:{
             isSubmitting,
             errors,
@@ -42,7 +40,6 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
     });
 
     const resetForm = ()=>{
-        setStarRatingValue(0);
         reset({
             comment: "",
             rating: 0,
@@ -71,17 +68,6 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
         onFinishEdit();
         resetForm();
     } 
-
-    const starRatingChange = (value: number | undefined, temporary: boolean) => {
-        if(value){
-            setStarRatingValue(value);
-            if(!temporary){                
-                setValue('rating', value, {shouldDirty:true});
-            }
-        }else{
-            setStarRatingValue(getValues('rating'));
-        }
-    }
 
     return (
 
@@ -118,11 +104,20 @@ export const EditReviewForm = ({review, onFinishEdit}: IEditReviewFormProps) => 
                 />
                 <FormErrorMessage>{errors.comment?.message}</FormErrorMessage>
             </FormControl>
-            <Text>{starRatingValue} / 5</Text>
-            <StarRating
-                value={starRatingValue}
-                onChange={starRatingChange}
-                label="Rating:"
+            <Controller
+                control={control}
+                name="rating"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                    <>
+                        <Text>{value} / 5</Text>
+                        <StarRating
+                            value={value}
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            label="Rating:"
+                        />
+                    </>
+                )}
             />
                 <Flex gap={3}>
                     <Button

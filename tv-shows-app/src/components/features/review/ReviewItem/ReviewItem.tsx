@@ -51,7 +51,7 @@ export const ReviewItem = ({review}: IReviewProps) => {
                             <Text textStyle={"smallCaption.bold"} wordBreak={"break-all"}>{review.user.email}</Text>
                             <Flex alignItems={"center"} gap={2}>
                                 <Text>{review.rating} / 5</Text>
-                                <StarRating label={undefined} onChange={()=>{}} value={review.rating} />
+                                <StarRating label={undefined} onChange={()=>{}} onBlur={()=>{}} value={review.rating} />
                             </Flex>
                         </Flex>
                     </Flex>
