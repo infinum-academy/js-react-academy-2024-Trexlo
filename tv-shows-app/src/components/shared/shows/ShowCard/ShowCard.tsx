@@ -1,6 +1,6 @@
 import { IShow } from "@/typings/Show.type";
 import { StarIcon } from "@chakra-ui/icons";
-import { Card, CardBody, CardFooter, CardHeader, Flex, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import { Card, CardBody, CardHeader, Flex, Image, Text } from "@chakra-ui/react";
 import NextLink from 'next/link';
 interface IShowCardProps {
     show: IShow

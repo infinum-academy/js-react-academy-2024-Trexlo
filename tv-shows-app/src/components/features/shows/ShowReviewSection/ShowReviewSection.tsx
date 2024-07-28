@@ -1,13 +1,9 @@
 'use client';
 import { ReviewList } from "../../review/ReviewList/ReviewList";
 import { ReviewForm } from "../ReviewForm/ReviewForm";
-import { Button, Flex, IconButton, Spinner, Text } from "@chakra-ui/react";
-import useSWR from "swr";
-import { getReviews } from "@/fetchers/show";
-import { apiPaths } from "@/app/data/api-paths";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import { useContext, useState } from "react";
-import { IPagination } from "@/typings/Review.type";
+import { useContext } from "react";
 import { ReviewPaginationContext } from "./components/ReviewPaginationContext";
 
 const numberOfReviews = 5;

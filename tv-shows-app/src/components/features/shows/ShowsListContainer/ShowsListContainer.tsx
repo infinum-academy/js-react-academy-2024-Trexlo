@@ -1,9 +1,8 @@
 'use client';
-import { Card, Flex, SimpleGrid, Skeleton, Spinner, Text } from "@chakra-ui/react";
+import { Card, SimpleGrid, Skeleton, Text } from "@chakra-ui/react";
 import useSWR from 'swr';
 import { ShowsList } from "@/components/shared/shows/ShowsList/ShowsList";
 import { getShows } from "@/fetchers/show";
-import { ShowCard } from "@/components/shared/shows/ShowCard/ShowCard";
 
 interface IShowsListContainerProps{
   url: string;

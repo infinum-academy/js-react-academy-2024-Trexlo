@@ -1,7 +1,6 @@
 import { apiPaths } from "@/app/data/api-paths";
-import { getReviews, getShows } from "@/fetchers/show";
+import { getReviews } from "@/fetchers/show";
 import { IPagination, IReview } from "@/typings/Review.type";
-import { IShow } from "@/typings/Show.type";
 import Error from "next/error";
 import { createContext, ReactNode, useState } from "react";
 import useSWR from "swr";

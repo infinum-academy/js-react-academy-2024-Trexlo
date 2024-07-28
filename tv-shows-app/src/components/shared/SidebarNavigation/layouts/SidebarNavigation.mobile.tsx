@@ -1,6 +1,6 @@
 "use client"    
 import { navigationItems } from "@/app/data/navigation-items";
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Icon, IconButton, Image, useDisclosure } from "@chakra-ui/react"
+import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Image, useDisclosure } from "@chakra-ui/react"
 import NextLink from 'next/link';
 import { usePathname, useRouter } from "next/navigation";
 import { HamburgerIcon } from "@chakra-ui/icons";
