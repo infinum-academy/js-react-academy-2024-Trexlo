@@ -8,7 +8,7 @@ interface IReviewListProps{
 
 export const ReviewList = ({reviews}: IReviewListProps) => {
     return (
-        <Flex flexDirection={"column"} gap={3} marginBottom={3} color={"white"}>
+        <Flex flexDirection={"column"} gap={"24px"} marginBottom={"24px"} color={"white"}>
             {reviews.map((review, index) =>
                 <ReviewItem
                     key={index}

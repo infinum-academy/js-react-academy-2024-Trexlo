@@ -14,15 +14,15 @@ export const ShowsListContainer = ({url}: IShowsListContainerProps) => {
 
 	const shows = data?.shows || [] ;
 
-	if (error) {
-		return <Text>An error occurred</Text>;
+	if (error && error.message != "Not logged in") {
+		return <Text color={"white"}>An error occurred</Text>;
 	}
 
 	if (isLoading || !data) {
 		return (
-      <SimpleGrid padding={3} minChildWidth={['100%','100%','225px']} width={"100%"} spacing={3} height={"100%"}>
+      <SimpleGrid padding={"31px"} minChildWidth={['100%','100%','225px']} width={"100%"} spacing={"31px"} height={"100%"}>
         {      
-          [...Array(10)].map((val, index) => {
+          [...Array(20)].map((val, index) => {
             return  <Skeleton key={index} rounded={"cardRadius"}>
                       <Card variant={"smallCard"}></Card>
                     </Skeleton>
