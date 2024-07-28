@@ -33,11 +33,11 @@ export const ReviewItem = ({review}: IReviewProps) => {
                     height={"fit-content"} 
                     alignItems={["start"]} 
                     gap={3}
-                    flexDirection={["column","column","row"]} 
+                    flexDirection={["column","column","column","row"]} 
                     width={"100%"}
                 >
                     <Flex 
-                        minW={"300px"}
+                        minW={["100%","100%","100%","300px"]}
                         h={"100%"}
                         alignItems={"center"} 
                         flexDirection={["row"]}

@@ -1,12 +1,10 @@
 'use client';
 import { ReviewList } from "../../review/ReviewList/ReviewList";
 import { ReviewForm } from "../ReviewForm/ReviewForm";
-import { Flex, Spinner, Text } from "@chakra-ui/react";
+import { Flex, Skeleton, Text } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { useContext } from "react";
 import { ReviewPaginationContext } from "./components/ReviewPaginationContext";
-
-const numberOfReviews = 5;
 
 interface IShowReviewSectionProps{
     showId: string;
@@ -14,17 +12,25 @@ interface IShowReviewSectionProps{
 
 function loading(){
     return (
-        <Flex justifyItems={"center"} width={"100%"}>
-          <Spinner
-            thickness='4px'
-            speed='0.65s'
-            emptyColor='gray.200'
-            color='blue.500'
-            size='xl'
-            margin={"auto"}
-          />
-        </Flex>
-      );
+      <Flex
+        justifyItems={"center"}
+        flexDirection={"column"}
+        width={"100%"}
+        gap={"24px"}
+      >
+        {[...Array(5)].map((val, index) => (
+          <Skeleton
+            key={index}
+            rounded={20}
+            gap={3}
+            w={"100%"}
+            height={"100px"}
+            alignItems={"center"}
+            padding={["24px", "24px", "30px 40px"]}
+          ></Skeleton>
+        ))}
+      </Flex>
+    );
 }
 
 export const ShowReviewSection = ({showId}:IShowReviewSectionProps) =>{
@@ -35,14 +41,17 @@ export const ShowReviewSection = ({showId}:IShowReviewSectionProps) =>{
 		return <Text>An error occurred</Text>;
 	}
 
-	if (isLoading || !reviews || !pagination) {
-        return loading();
-	}
 
     return (
         <Flex flexDir={"column"} gap={"61px"}>
             <ReviewForm showId={parseInt(showId)}></ReviewForm>
-            <ReviewList reviews={reviews}></ReviewList>
+            {
+                (isLoading || !reviews || !pagination) && loading()
+                
+            }
+            {
+                !(isLoading || !reviews || !pagination) && <ReviewList reviews={reviews}></ReviewList>
+            }
             <Flex 
                 alignItems={"center"} 
                 justifyContent={"center"} 
