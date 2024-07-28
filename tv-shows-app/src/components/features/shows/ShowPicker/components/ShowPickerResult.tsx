@@ -10,7 +10,7 @@ export const ShowPickerResult = () => {
 		return(
 			<>
 			<Heading>Round {currentRound+1} winners</Heading>
-			<SimpleGrid h={"500px"}  columns={[1,1,2]} spacing={2}>
+			<SimpleGrid h={["100%","100%","500px"]}  columns={[1,1,2]} spacing={2}>
 			{
 				pickedShows[currentRound].map((show, index) => {
 					return  <Card key={index} w={"100%"} h={"100%"}>

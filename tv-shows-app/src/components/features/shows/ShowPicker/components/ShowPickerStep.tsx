@@ -39,7 +39,7 @@ export const ShowPickerStep = () => {
 	}
 	
 	return (
-		 <SimpleGrid h={"500px"} columns={[1,1,2]} spacing={2}>
+		 <SimpleGrid h={["100%","100%","500px"]} columns={[1,1,2]} spacing={2}>
 			{
 				shows.map((show, index) => {
 					const isPicked = pickedShows[currentRound].find(s => s === show);
