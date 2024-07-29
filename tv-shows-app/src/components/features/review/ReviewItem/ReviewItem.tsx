@@ -27,23 +27,25 @@ export const ReviewItem = ({review}: IReviewProps) => {
                 rounded={20} 
                 gap={3} 
                 alignItems={"center"} 
-                padding={5}
+                padding={["24px", "24px", "30px 40px"]}
             >
                 <Flex 
                     height={"fit-content"} 
-                    alignItems={["start","start","center"]} 
+                    alignItems={["start"]} 
                     gap={3}
-                    flexDirection={["column","column","row"]} 
+                    flexDirection={["column","column","column","row"]} 
                     width={"100%"}
                 >
                     <Flex 
-                        minW={"350px"}
+                        minW={["100%","100%","100%","300px"]}
                         h={"100%"}
                         alignItems={"center"} 
                         flexDirection={["row"]}
                         gap={3}
                     >
                         <Avatar 
+                            w={"40px"}
+                            h={"40px"}
                             objectFit={"cover"} 
                             src={review.user.image_url || "https://fakeimg.pl/100x100?text=:)"}
                         />

@@ -6,16 +6,19 @@ import useSWRMutation from "swr/mutation";
 import { apiPaths } from "@/app/data/api-paths";
 import { mutate } from "swr";
 import { createReview } from "@/fetchers/show";
+import { ReviewPaginationContext } from "../ShowReviewSection/components/ReviewPaginationContext";
+import { useContext } from "react";
 
 interface IReviewFormProps{
         showId: number;
 }
 
 export const ReviewForm = ({showId}: IReviewFormProps) => { 
+    const { pagination } = useContext(ReviewPaginationContext);
     const { trigger } = useSWRMutation(apiPaths.reviews, createReview,
         {
             onSuccess: () => {
-                mutate(apiPaths.showReviews(showId.toString()));
+                mutate(apiPaths.showReviews(showId.toString(), pagination.page, pagination.items));
                 mutate(apiPaths.show(showId.toString()));
             },
             onError: (err) => {

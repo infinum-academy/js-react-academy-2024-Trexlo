@@ -1,7 +1,7 @@
 import { IShow } from "@/typings/Show.type";
 import { StarIcon } from "@chakra-ui/icons";
-import { Card, CardBody, CardHeader, Flex, Stack } from '@chakra-ui/react'
-import { Heading, Image, Text } from "@chakra-ui/react";
+import { Card, CardBody, CardHeader, Flex } from '@chakra-ui/react'
+import { Image, Text } from "@chakra-ui/react";
 
 interface IShowDetailsProps{
     show:IShow;

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { ShowPickerContext } from './ShowPickerContextProvider';
 import { Card,CardFooter, Image, SimpleGrid, Text } from '@chakra-ui/react';
 import { IShow } from '@/typings/Show.type';
@@ -48,7 +48,7 @@ export const ShowPickerStep = () => {
 										shows[currentRound][currentStep] = show;
 										setPickedShows([...shows]);
 									}}>
-								<Image display={["none", "none", "block"]} alt="Show image" height={"100%"} width={"100%"} objectFit={"cover"} src={show.image_url || "https://fakeimg.pl/600x400?text=Show+Image"}></Image>
+								<Image display={["none", "none", "block"]} alt="Show image" height={"75%"} width={"100%"} objectFit={"cover"} src={show.image_url || "https://fakeimg.pl/600x400?text=Show+Image"}></Image>
 								<CardFooter justifyContent={"center"}>
 									<Text>{show.title}</Text>
 								</CardFooter>

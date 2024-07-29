@@ -77,13 +77,13 @@ const Card = helpers.defineMultiStyleConfig({
     detailsCardMobile: {
       container:{
         width:"100%",
-        height:"90vh",
+        height:"540px",
       },
       header:{
         height:"70%",
       },
       body:{
-        padding:"24px 24px 0 24px",
+        padding:"24px",
         textStyle:"subtitle.bold",
         alignItems:"start",
         lineHeight:1,

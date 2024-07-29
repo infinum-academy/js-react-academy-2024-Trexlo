@@ -64,7 +64,7 @@ export const StarRating = ({label, onChange, value, onBlur}: IStarRatingProps) =
                 !label && value && 
                 <>
                     {[1,2,3,4,5].map(starValue => 
-                        <StarIcon key={starValue} color={(value>=starValue)?"yellow":"white"}></StarIcon>
+                        <StarIcon key={starValue} color={(value>=starValue)?"white":"purple"}></StarIcon>
                     )}
                 </>
             }

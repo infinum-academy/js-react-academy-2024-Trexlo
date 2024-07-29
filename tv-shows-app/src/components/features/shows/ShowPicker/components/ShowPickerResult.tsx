@@ -17,7 +17,7 @@ export const ShowPickerResult = () => {
 								<Image 
 									display={["none", "none", "block"]} 
 									alt="Show image" 
-									height={"100%"} 
+									height={"75%"}
 									width={"100%"} 
 									objectFit={"cover"} 
 									src={show.image_url || "https://fakeimg.pl/600x400?text=Show+Image"}

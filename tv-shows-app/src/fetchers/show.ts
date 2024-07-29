@@ -1,6 +1,6 @@
 import { fetcher } from '@/fetchers/fetcher';
 import { IAuthUser, IProfileInputs, IUser } from '@/typings/Auth.type';
-import { IReview, IReviewFormInputs } from '@/typings/Review.type';
+import { IPagination, IReview, IReviewFormInputs } from '@/typings/Review.type';
 import { IShow } from '@/typings/Show.type';
 import { mutator } from './mutators';
 
@@ -68,7 +68,7 @@ export function getShow(url: string) {
 
 export function getReviews(url: string) {
 	const user = getUserData();
-	return fetcher<{reviews: IReview[], meta:any}>(url, {
+	return fetcher<{reviews: IReview[], meta:{pagination:IPagination}}>(url, {
 		headers:{
 			'client': user.client,
 			'access-token': user.accessToken,

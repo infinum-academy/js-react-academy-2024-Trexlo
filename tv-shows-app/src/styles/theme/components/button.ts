@@ -23,6 +23,7 @@ const Button = defineStyleConfig({
         borderRadius: "full",
         bg: "white",
         color: "purple",
+        lineHeight: "normal",
         ...textStyles.button,
     },
     variants:{
@@ -52,6 +53,13 @@ const Button = defineStyleConfig({
             ...buttonPrimaryColors,
             ...textStyles.title.bold,
         },
+        roundButton:{
+            w: "56px", 
+            h: "56px", 
+            ...buttonPrimaryColors,
+            isRound: true,
+            fontSize: "24px",
+        }
     },
     defaultProps:{
         variant:"baseButton"

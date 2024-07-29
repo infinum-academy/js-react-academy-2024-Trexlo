@@ -18,7 +18,6 @@ export const Profile = () => {
     } = useForm<IProfileInputs>();
      const {trigger} = useSWRMutation(apiPaths.registration, setUserImage, {
         onSuccess: (data)=>{
-            console.log(data);      
             mutate(apiPaths.user)
         },
         onError(err, key, config) {
